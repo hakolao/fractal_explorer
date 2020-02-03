@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 17:00:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/03 17:37:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdio.h>
 # include <math.h>
 # include "../lib/libft/libft.h"
-# include "../lib/libmatrix/libmatrix.h"
 
 /*
 ** Key codes for event listening
