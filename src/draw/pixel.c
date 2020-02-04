@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:18:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/04 12:46:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:49:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int				lerp_rgb(int start, int end, double gradient_mul)
 	int	g_diff;
 	int	b_diff;
 
+	if (gradient_mul == 0.0)
+		return (start);
 	r_diff = RED(start) - RED(end);
 	g_diff = GREEN(start) - GREEN(end);
 	b_diff = BLUE(start) - BLUE(end);

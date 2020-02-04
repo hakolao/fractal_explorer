@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/04 16:09:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:50:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ int					set_color_palette(t_scene *scene, t_rgb *palette,
 			return (FALSE);
 	i = 0;
 	j = 0;
-	lim = scene->max_iter / palette_size;
+	lim = scene->max_iter / (palette_size - 1);
 	while (i < scene->max_iter)
 	{
 		mul = (double)(i % lim) / lim;
 		scene->color_palette[i] = lerp_rgb(
 			COLOR(palette[j].r, palette[j].g, palette[j].b, 0),
 			COLOR(palette[j + 1].r, palette[j + 1].g, palette[j + 1].b, 0),
-			mul == 0.0 ? 1 : mul);
+			i != 0 && mul == 0.0 ? 1.0 : mul);
 		if (i % lim == 0 && i != 0)
 			j++;
 		i++;
