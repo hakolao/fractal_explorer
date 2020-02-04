@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 17:37:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/04 15:28:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ASPECT_RATIO WIDTH / HEIGHT
+# define MAX_ITER 1000
 
 /*
 ** Scene contains all data the application needs inside its loop
@@ -94,12 +95,13 @@ typedef struct		s_scene
 	int				mouse_x;
 	int				mouse_y;
 	int				show_guide;
-	int				show_coords;
 	int				redraw;
 	int				col_r;
 	int				col_g;
 	int				col_b;
 	int				col_a;
+	int				max_iter;
+	int				*color_palette;
 }					t_scene;
 
 /*
@@ -121,6 +123,8 @@ char				*mouse_guide(t_scene *scene);
 ** Draw
 */
 int					draw(t_scene *scene);
+void				plot_pixel(t_scene *scene, int x, int y, int color);
+int					lerp_rgb(int start, int end, double gradient_mul);
 
 /*
 ** Events
@@ -140,5 +144,10 @@ int					handle_exit_event(void);
 */
 int					log_err(char *str, char *strerror);
 int					log_perr(char *str);
+
+/*
+** Fractals
+*/
+void				draw_mandelbrot(t_scene *scene);
 
 #endif

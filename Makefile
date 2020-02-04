@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/03 17:38:15 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/04 12:44:41 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SOURCES = main.c \
 			events/mouse.c \
 			events/loop.c \
 			events/exit.c \
+			fractals/mandelbrot.c \
 			ui/ui.c \
 			ui/guide.c
 			
@@ -47,6 +48,7 @@ $(DIR_OBJ):
 	@mkdir -p temp/draw
 	@mkdir -p temp/ui
 	@mkdir -p temp/events
+	@mkdir -p temp/fractals
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c $(HEADERS)/$(NAME).h
 	@$(CC) $(FLAGS) -I $(HEADERS) -c -o $@ $<

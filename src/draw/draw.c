@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 16:58:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/04 12:54:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ int					draw(t_scene *scene)
 {
 	mlx_clear_window(scene->mlx, scene->mlx_wdw);
 	clear_frame(scene);
-	// Draw what you gotta draw here between
+	draw_mandelbrot(scene);
 	mlx_put_image_to_window(scene->mlx, scene->mlx_wdw, scene->frame, 0, 0);
-	draw_ui(scene);
+	// draw_ui(scene);
 	scene->redraw = FALSE;
 	return (1);
 }

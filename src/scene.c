@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 16:55:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/04 16:09:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,40 @@ int					scene_render_params(t_scene *scene,
 			mlx_get_data_addr(scene->frame, &scene->pixel_bits,
 			&scene->line_bytes, &scene->pixel_endian)))
 		return (FALSE);
-	scene->redraw = FALSE;
+	scene->redraw = TRUE;
 	scene->col_r = 0;
 	scene->col_g = 0;
 	scene->col_b = 0;
 	scene->col_a = 0;
+	return (TRUE);
+}
+
+int					set_color_palette(t_scene *scene, t_rgb *palette,
+					int palette_size)
+{
+	int		i;
+	int		j;
+	int		lim;
+	double	mul;
+
+	
+	if (!(scene->color_palette =
+		malloc(sizeof(*scene->color_palette) * scene->max_iter)))
+			return (FALSE);
+	i = 0;
+	j = 0;
+	lim = scene->max_iter / palette_size;
+	while (i < scene->max_iter)
+	{
+		mul = (double)(i % lim) / lim;
+		scene->color_palette[i] = lerp_rgb(
+			COLOR(palette[j].r, palette[j].g, palette[j].b, 0),
+			COLOR(palette[j + 1].r, palette[j + 1].g, palette[j + 1].b, 0),
+			mul == 0.0 ? 1 : mul);
+		if (i % lim == 0 && i != 0)
+			j++;
+		i++;
+	}
 	return (TRUE);
 }
 
@@ -52,6 +81,11 @@ t_scene				*new_scene(void *mlx, void *mlx_wdw)
 	scene->mouse_x = FALSE;
 	scene->mouse_y = FALSE;
 	scene->show_guide = FALSE;
-	scene->show_coords = FALSE;
+	scene->max_iter = MAX_ITER;
+	if (!set_color_palette(scene, (t_rgb[6]){{.r = 255, .g = 0, .b = 0},
+		{.r = 255, .g = 255, .b = 0}, {.r = 0, .g = 255, .b = 0},
+		{.r = 0, .g = 255, .b = 255}, {.r = 0, .g = 0, .b = 255},
+		{.r = 255, .g = 0, .b = 255}}, 6))
+		return (NULL);
 	return (scene);
 }

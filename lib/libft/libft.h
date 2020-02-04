@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/02 17:02:20 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/04 14:53:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,21 @@ typedef struct	s_rgb
 	int			g;
 	int			b;
 }				t_rgb;
+
+typedef struct	t_pixel
+{
+	int			x;
+	int			y;
+}				t_pixel;
+
+typedef struct	s_pixels
+{
+	int			x_start;
+	int			x_end;
+	int			y_start;
+	int			y_end;
+}				t_pixels;
+
 
 int				ft_isalnum(int c);
 int				ft_isalpha(int c);
@@ -120,5 +135,7 @@ double			ft_max_double(double *arr, size_t size);
 int				ft_max_int(int *arr, size_t size);
 double			ft_min_double(double *arr, size_t size);
 int				ft_min_int(int *arr, size_t size);
+void			ft_pixel_foreach(t_pixels limits, void *params,
+				void (*f)(t_pixel pixel, void *params));
 
 #endif
