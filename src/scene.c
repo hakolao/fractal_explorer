@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/04 16:50:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/05 17:53:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,52 @@ int					set_color_palette(t_scene *scene, t_rgb *palette,
 	return (TRUE);
 }
 
+static t_pixel_bounds		*pixel_bounds(int x_start, int x_end, int y_start, int y_end)
+{
+	t_pixel_bounds	*bounds;
+
+	if (!(bounds = malloc(sizeof(*bounds))))
+		return (NULL);
+	bounds->x_start = x_start;
+	bounds->x_end = x_end;
+	bounds->y_start = y_start;
+	bounds->y_end = y_end;
+	return (bounds);
+}
+
+static t_fractal_params		**thread_fractal_params(t_scene *scene)
+{
+	t_fractal_params		**fractal_params;
+	t_thread_pixel			**pixels;
+	int						size;
+	int						i;
+	int						j;
+
+	size = WIDTH * HEIGHT / THREADS;
+	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)))
+		return (NULL);
+	i = 0;
+	while (i < THREADS)
+	{
+		if (!(fractal_params[i] = malloc(sizeof(**fractal_params) * size)))
+			return (NULL);
+		fractal_params[i]->max_iter = scene->max_iter;
+		if (!(fractal_params[i]->pixel_bounds = pixel_bounds(0, WIDTH,
+			i * (HEIGHT / THREADS), (i + 1) * (HEIGHT / THREADS))) ||
+			!(pixels =
+				malloc(sizeof(*pixels) * size)))
+			return (NULL);
+		j = 0;
+		while (j < size)
+			if (!(pixels[j++] = malloc(sizeof(**pixels))))
+				return (NULL);
+		fractal_params[i]->size = size;
+		fractal_params[i]->pixels = pixels;
+		i++;
+	}
+	return (fractal_params);
+}
+
 /*
 ** Creates a new scene containing all needed information. Set's
 ** camera's position based on map's size
@@ -86,6 +132,8 @@ t_scene				*new_scene(void *mlx, void *mlx_wdw)
 		{.r = 255, .g = 255, .b = 0}, {.r = 0, .g = 255, .b = 0},
 		{.r = 0, .g = 255, .b = 255}, {.r = 0, .g = 0, .b = 255},
 		{.r = 255, .g = 0, .b = 255}}, 6))
+		return (NULL);
+	if (!(scene->fractal_params = thread_fractal_params(scene)))
 		return (NULL);
 	return (scene);
 }

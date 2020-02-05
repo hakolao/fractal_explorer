@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/04 14:53:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/05 16:28:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,27 @@ typedef struct	s_rgb
 	int			b;
 }				t_rgb;
 
-typedef struct	t_pixel
+typedef struct	s_pixel
 {
 	int			x;
 	int			y;
+	int			color;
 }				t_pixel;
 
-typedef struct	s_pixels
+typedef struct	s_thread_pixel
+{
+	int			x;
+	int			y;
+	int			color_index;
+}				t_thread_pixel;
+
+typedef struct	s_pixel_bounds
 {
 	int			x_start;
 	int			x_end;
 	int			y_start;
 	int			y_end;
-}				t_pixels;
+}				t_pixel_bounds;
 
 
 int				ft_isalnum(int c);
@@ -135,7 +143,7 @@ double			ft_max_double(double *arr, size_t size);
 int				ft_max_int(int *arr, size_t size);
 double			ft_min_double(double *arr, size_t size);
 int				ft_min_int(int *arr, size_t size);
-void			ft_pixel_foreach(t_pixels limits, void *params,
-				void (*f)(t_pixel pixel, void *params));
+void			ft_pixel_foreach(t_pixel_bounds *limits,
+				void *params, void (*f)(int pixel_i, int x, int y, void *params));
 
 #endif

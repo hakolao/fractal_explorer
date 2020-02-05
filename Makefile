@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/04 12:44:41 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/05 12:22:12 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ HEADERS = incl
 FLAGS = -Wall -Wextra -Werror -O2
 LIBMLXFLAGS = -I$(LIBMLX) -L$(LIBMLX) -lmlx -framework OpenGL -framework Appkit
 LIBFTFLAGS = -L$(LIBFT) -lft
+THREADFLAGS = -lpthread
 SOURCES = main.c \
 			scene.c \
 			log.c \
@@ -41,7 +42,7 @@ all: $(DIR_OBJ) $(NAME)
 $(NAME): $(OBJS)
 	@make -C $(LIBFT)
 	@make -C $(LIBMLX)
-	$(CC) $(FLAGS) $(LIBFTFLAGS) $(LIBMLXFLAGS) -o $@ $^
+	$(CC) $(FLAGS) $(LIBFTFLAGS) $(LIBMLXFLAGS) $(THREADFLAGS) -o $@ $^
 
 $(DIR_OBJ):
 	@mkdir -p temp

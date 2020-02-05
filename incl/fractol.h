@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/04 15:28:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/05 18:08:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <mlx.h>
 # include <stdio.h>
 # include <math.h>
+# include <pthread.h>
 # include "../lib/libft/libft.h"
 
 /*
@@ -76,32 +77,42 @@
 # define HEIGHT 1080
 # define ASPECT_RATIO WIDTH / HEIGHT
 # define MAX_ITER 1000
+# define THREADS 8
+
+typedef struct		s_fractal_params
+{
+	t_pixel_bounds		*pixel_bounds;
+	t_thread_pixel		**pixels;
+	int					size;
+	int					max_iter;
+}					t_fractal_params;
 
 /*
 ** Scene contains all data the application needs inside its loop
 */
 typedef struct		s_scene
 {
-	void			*mlx;
-	void			*mlx_wdw;
-	void			*frame;
-	char			*frame_buf;
-	int				pixel_bits;
-	int				line_bytes;
-	int				pixel_endian;
-	int				mouse_right_pressed;
-	int				mouse_left_pressed;
-	int				shift_pressed;
-	int				mouse_x;
-	int				mouse_y;
-	int				show_guide;
-	int				redraw;
-	int				col_r;
-	int				col_g;
-	int				col_b;
-	int				col_a;
-	int				max_iter;
-	int				*color_palette;
+	void				*mlx;
+	void				*mlx_wdw;
+	void				*frame;
+	char				*frame_buf;
+	int					pixel_bits;
+	int					line_bytes;
+	int					pixel_endian;
+	int					mouse_right_pressed;
+	int					mouse_left_pressed;
+	int					shift_pressed;
+	int					mouse_x;
+	int					mouse_y;
+	int					show_guide;
+	int					redraw;
+	int					col_r;
+	int					col_g;
+	int					col_b;
+	int					col_a;
+	int					max_iter;
+	int					*color_palette;
+	t_fractal_params	**fractal_params;
 }					t_scene;
 
 /*
