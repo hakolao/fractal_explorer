@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 16:18:39 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 17:38:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_pixel			**thread_pixels(int size)
 	return (pixels);
 }
 
-int						set_color_palette(t_fractal_params *params,
+static int				palette(t_fractal_params *params,
 						t_rgb *palette, int palette_size)
 {
 	int		i;
@@ -73,7 +73,8 @@ t_fractal_params		**thread_fractal_params(t_scene *scene)
 	t_fractal_params		**fractal_params;
 	int						i;
 
-	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)))
+	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)) ||
+		(HEIGHT % THREADS != 0 && log_err("HEIGHT % THREADS != 0", "Headers")))
 		return (NULL);
 	i = 0;
 	while (i < THREADS)
@@ -88,9 +89,8 @@ t_fractal_params		**thread_fractal_params(t_scene *scene)
 		if (!(fractal_params[i]->pixel_bounds = pixel_bounds(0, WIDTH,
 			i * (HEIGHT / THREADS), (i + 1) * (HEIGHT / THREADS))) ||
 			!(fractal_params[i]->pixels = thread_pixels(PIXELS)) ||
-			!set_color_palette(fractal_params[i], (t_rgb[6]){{255, 0, 0},
-				{255, 255, 0}, {0, 255, 0}, {0, 255, 255}, {0, 0, 255},
-				{255, 0, 255}}, 6))
+			!palette(fractal_params[i], (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
+			{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}}, 6))
 			return (NULL);
 		i++;
 	}

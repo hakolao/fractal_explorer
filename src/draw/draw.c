@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 15:55:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 18:45:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,19 @@ static void			clear_frame(t_scene *scene)
 	}
 }
 
+t_fractal_artist	artist_draw(enum fractal type)
+{
+	return ((t_fractal_artist[2]){
+		draw_mandelbrot,
+		draw_mandelbrot
+	}[type]);
+}
+
 int					draw(t_scene *scene)
 {
 	mlx_clear_window(scene->mlx, scene->mlx_wdw);
 	clear_frame(scene);
-	draw_mandelbrot(scene);
+	artist_draw(scene->artist)(scene);
 	mlx_put_image_to_window(scene->mlx, scene->mlx_wdw, scene->frame, 0, 0);
 	draw_ui(scene);
 	scene->redraw = FALSE;

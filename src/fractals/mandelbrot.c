@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:46:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 16:22:56 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 18:44:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
 	return (x0_y0);
 }
 
-static void		mandelbrot(int pixel_i, int px, int py, void *args)
+static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
 	double				xy[2];
 	double				*x0_y0;
@@ -69,7 +69,7 @@ static void		mandelbrot_work(void *args)
 	t_fractal_params *params;
 
 	params = (t_fractal_params*)args;
-	ft_pixel_foreach(params->pixel_bounds, args, mandelbrot);
+	ft_pixel_foreach(params->pixel_bounds, args, mandelbrot_pixel);
 }
 
 void			draw_mandelbrot(t_scene *scene)

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 16:57:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 18:00:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,11 @@ int				log_err(char *str, char *strerror)
 int				log_perr(char *str)
 {
 	perror(str);
+	return (1);
+}
+
+int				log_guide(void)
+{
+	ft_putstr("Allowed arguments: [mandelbrot, julia]");
 	return (1);
 }
