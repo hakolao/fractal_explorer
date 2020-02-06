@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 18:46:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 18:48:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,9 @@ typedef struct		s_scene
 	int					col_b;
 	int					col_a;
 	int					max_iter;
-	enum fractal		artist;
+	enum e_fractal		artist;
 	t_fractal_params	**fractal_params;
 }					t_scene;
-
-typedef	struct		s_mlx_fractal
-{
-	void			*mlx;
-	void			*mlx_wdw;
-	enum fractal	artist;
-}					t_mlx_fractal;
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 
@@ -155,7 +148,7 @@ void				plot_pixel(t_scene *scene, int x, int y, int color);
 int					lerp_rgb(int start, int end, double gradient_mul);
 void				plot_threaded_pixels(t_scene *scene);
 void				set_pixel(t_pixel *pixel, int x, int y, int color);
-t_fractal_artist	artist_draw(enum fractal type);
+t_fractal_artist	artist_draw(enum e_fractal type);
 
 /*
 ** Events
