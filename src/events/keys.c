@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 17:04:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 12:16:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int				handle_key_press(int key, void *param)
 	scene->redraw = TRUE;
 	if (key == KEY_ESC)
 		exit(0);
+	if (key == KEY_G)
+		scene->show_guide = !scene->show_guide;
 	return (0);
 }
 

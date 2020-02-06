@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/05 18:08:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 12:14:39 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,7 @@ t_scene				*new_scene(void *mlx, void *mlx_wdw);
 void				draw_paragraph(t_scene *scene, char *text, int xpos,
 					int ypos);
 void				draw_ui(t_scene *scene);
-char				*key_guide(t_scene *scene);
-char				*mouse_guide(t_scene *scene);
+char				*guide(t_scene *scene);
 
 /*
 ** Draw

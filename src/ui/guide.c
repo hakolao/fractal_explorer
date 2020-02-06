@@ -6,33 +6,20 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/03 17:09:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 12:14:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-char			*key_guide(t_scene *scene)
+char			*guide(t_scene *scene)
 {
 	char	*guide;
 
 	if ((scene->show_guide && (guide = ft_strdup("USAGE Keys:\n"
 			"----------\nESC: Exit\nG: Toggle guide\n"
-			"LOLOLOLOL")) == NULL) ||
-		(!scene->show_guide && (guide = ft_strdup("USAGE Keys:\n"
-			"----------\nESC: Exit\n"
-			"G: Toggle guide")) == NULL))
-		return (NULL);
-	return (guide);
-}
-
-char			*mouse_guide(t_scene *scene)
-{
-	char	*guide;
-
-	if ((scene->show_guide && (guide = ft_strdup("USAGE Mouse:\n"
-			"----------\n"
-			"LOLOLOLOL")) == NULL) ||
+			"Scroll: Zoom in/out\n"
+			"Mouse button 1: Drag to move")) == NULL) ||
 		(!scene->show_guide && (guide = ft_strdup("")) == NULL))
 		return (NULL);
 	return (guide);

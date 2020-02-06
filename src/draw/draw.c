@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/05 14:56:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 12:16:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int					draw(t_scene *scene)
 	clear_frame(scene);
 	draw_mandelbrot(scene);
 	mlx_put_image_to_window(scene->mlx, scene->mlx_wdw, scene->frame, 0, 0);
-	// draw_ui(scene);
+	draw_ui(scene);
 	scene->redraw = FALSE;
 	return (1);
 }
