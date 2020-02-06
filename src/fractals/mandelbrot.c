@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:46:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 13:58:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:33:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void		plot_mandelbrot(int pixel_i, int px, int py, void *args)
+static void		mandelbrot(int pixel_i, int px, int py, void *args)
 {
 	double				x;
 	double				y;
@@ -64,54 +64,17 @@ static void		plot_mandelbrot(int pixel_i, int px, int py, void *args)
 	params->pixels[pixel_i]->y = py;
 }
 
-static void		*plot_mandelbrot_thread(void *args)
+static void		mandelbrot_work(void *args)
 {
 	t_fractal_params *params;
 
 	params = (t_fractal_params*)args;
-
-	ft_pixel_foreach(params->pixel_bounds, args,
-		plot_mandelbrot);
-	return (NULL);
-}
-
-static void		plot_threaded_pixels(t_scene *scene)
-{
-	int				i;
-	int				j;
-	t_pixel			*pixel;
-
-	i = 0;
-	while (i < THREADS)
-	{
-		j = 0;
-		while (j < scene->fractal_params[i]->size)
-		{
-			pixel = scene->fractal_params[i]->pixels[j];
-			plot_pixel(scene, pixel->x, pixel->y, pixel->color);
-			j++;
-		}
-		i++;
-	}
+	ft_pixel_foreach(params->pixel_bounds, args, mandelbrot);
 }
 
 void			draw_mandelbrot(t_scene *scene)
 {
-	pthread_t				threads[THREADS];
-	int						size;
-	int						i;
-
-	size = WIDTH * HEIGHT / THREADS;
-	i = 0;
-	while (i < THREADS)
-	{
-		if (pthread_create(&threads[i], NULL, plot_mandelbrot_thread, 
-			scene->fractal_params[i]) != 0)
-			log_perr("Something went wrong in thread creation.");
-		i++;
-	}
-	i = 0;
-	while (i < THREADS)
-		pthread_join(threads[i++], NULL);
+	work_parallel(THREADS, (void**)scene->fractal_params, mandelbrot_work);
 	plot_threaded_pixels(scene);
 }
+

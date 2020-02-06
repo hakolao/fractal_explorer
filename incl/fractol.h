@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 13:13:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:32:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,7 @@ char				*guide(t_scene *scene);
 int					draw(t_scene *scene);
 void				plot_pixel(t_scene *scene, int x, int y, int color);
 int					lerp_rgb(int start, int end, double gradient_mul);
+void				plot_threaded_pixels(t_scene *scene);
 
 /*
 ** Events
@@ -163,5 +164,11 @@ int					log_perr(char *str);
 void				draw_mandelbrot(t_scene *scene);
 t_fractal_params	**thread_fractal_params(t_scene *scene);
 int					zoom(t_scene *scene, double amount);
+
+/*
+** Threads
+*/
+void				work_parallel(int num_threads, void **thread_params,
+					void (*worker_f)(void *params));
 
 #endif
