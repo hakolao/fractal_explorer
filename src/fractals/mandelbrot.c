@@ -6,11 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/04 10:46:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 14:33:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 14:54:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+// static void		
 
 static void		mandelbrot(int pixel_i, int px, int py, void *args)
 {
@@ -24,7 +26,6 @@ static void		mandelbrot(int pixel_i, int px, int py, void *args)
 	double				log_zn;
 	double				iter;
 	t_fractal_params	*params;
-	int					color;
 
 	params = (t_fractal_params*)args;
 	x0 = ft_lmap_double((double)px,
@@ -50,16 +51,14 @@ static void		mandelbrot(int pixel_i, int px, int py, void *args)
 		zsquare = (x + y) * (x + y);
 		iter++;
 	}
+	params->pixels[pixel_i]->color = params->color_palette[px * params->max_iter / WIDTH];
 	if (iter < params->max_iter)
 	{
 		log_zn = log(rsquare + isquare) / 2.0;
 		iter = iter + 1.0 - log(log_zn / log(2.0)) / log(2.0);
-		color = lerp_rgb(params->color_palette[(int)floor(iter)],
-		params->color_palette[(int)(floor(iter) + 1.0)], iter - floor(iter));	
+		params->pixels[pixel_i]->color = lerp_rgb(params->color_palette[(int)floor(iter)],
+			params->color_palette[(int)(floor(iter)) + 1], iter - floor(iter));
 	}
-	else
-		color = params->color_palette[(int)iter];
-	params->pixels[pixel_i]->color = color;
 	params->pixels[pixel_i]->x = px;
 	params->pixels[pixel_i]->y = py;
 }
