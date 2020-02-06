@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:12:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 14:32:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:11:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void			work_parallel(int num_threads, void **thread_params,
 	i = 0;
 	while (i < THREADS)
 	{
-		if (pthread_create(&threads[i], NULL, (void*)worker_f, thread_params[i]))
+		if (pthread_create(&threads[i], NULL, (void*)worker_f,
+			thread_params[i]))
 			log_perr("Something went wrong in thread creation.");
 		i++;
 	}

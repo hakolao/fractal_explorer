@@ -6,12 +6,12 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 14:32:28 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:17:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 
 # include <mlx.h>
 # include <stdio.h>
@@ -77,8 +77,8 @@
 # define HEIGHT 1080
 # define ASPECT_RATIO WIDTH / HEIGHT
 # define MAX_ITER 1000
-# define THREADS 8
-# define PIXELS_SIZE (WIDTH * HEIGHT) / THREADS
+# define THREADS 16
+# define PIXELS (WIDTH * HEIGHT) / THREADS
 
 typedef struct		s_fractal_params
 {
@@ -138,6 +138,7 @@ int					draw(t_scene *scene);
 void				plot_pixel(t_scene *scene, int x, int y, int color);
 int					lerp_rgb(int start, int end, double gradient_mul);
 void				plot_threaded_pixels(t_scene *scene);
+void				set_pixel(t_pixel *pixel, int x, int y, int color);
 
 /*
 ** Events

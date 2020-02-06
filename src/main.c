@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 12:43:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:11:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int				init_fractol()
+int				init_fractol(void)
 {
 	t_scene		*scene;
 	void		*mlx;

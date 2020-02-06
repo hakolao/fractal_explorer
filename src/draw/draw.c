@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 14:53:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 15:55:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ static void			clear_frame(t_scene *scene)
 		y++;
 	}
 }
-
-/*
-** Draw pipeline to draw fdf
-*/
 
 int					draw(t_scene *scene)
 {

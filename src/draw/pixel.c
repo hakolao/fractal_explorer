@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:18:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 14:36:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 16:09:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ void			plot_threaded_pixels(t_scene *scene)
 				scene->fractal_params[i]->pixels[j]->color);
 		i++;
 	}
+}
+
+void			set_pixel(t_pixel *pixel, int x, int y, int color)
+{
+	pixel->color = color;
+	pixel->x = x;
+	pixel->y = y;
 }
