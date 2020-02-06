@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/05 16:28:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 13:13:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ typedef struct	s_pixel
 	int			y;
 	int			color;
 }				t_pixel;
-
-typedef struct	s_thread_pixel
-{
-	int			x;
-	int			y;
-	int			color_index;
-}				t_thread_pixel;
 
 typedef struct	s_pixel_bounds
 {

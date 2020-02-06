@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 12:14:39 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 13:13:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,18 @@
 # define ASPECT_RATIO WIDTH / HEIGHT
 # define MAX_ITER 1000
 # define THREADS 8
+# define PIXELS_SIZE (WIDTH * HEIGHT) / THREADS
 
 typedef struct		s_fractal_params
 {
 	t_pixel_bounds		*pixel_bounds;
-	t_thread_pixel		**pixels;
+	t_pixel				**pixels;
 	int					size;
 	int					max_iter;
+	double				zoom_multiplier;
+	double				x_move;
+	double				y_move;
+	int					*color_palette;
 }					t_fractal_params;
 
 /*
@@ -99,9 +104,7 @@ typedef struct		s_scene
 	int					pixel_bits;
 	int					line_bytes;
 	int					pixel_endian;
-	int					mouse_right_pressed;
 	int					mouse_left_pressed;
-	int					shift_pressed;
 	int					mouse_x;
 	int					mouse_y;
 	int					show_guide;
@@ -111,7 +114,6 @@ typedef struct		s_scene
 	int					col_b;
 	int					col_a;
 	int					max_iter;
-	int					*color_palette;
 	t_fractal_params	**fractal_params;
 }					t_scene;
 
@@ -159,5 +161,7 @@ int					log_perr(char *str);
 ** Fractals
 */
 void				draw_mandelbrot(t_scene *scene);
+t_fractal_params	**thread_fractal_params(t_scene *scene);
+int					zoom(t_scene *scene, double amount);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 12:16:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/06 13:34:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,13 @@ static void			clear_frame(t_scene *scene)
 	int		pixel;
 	int		color;
 
-	// color = COLOR(scene->col_r, scene->col_g, scene->col_b, scene->col_a);
+	color = COLOR(scene->col_r, scene->col_g, scene->col_b, scene->col_a);
 	y = 0;
 	while (y < HEIGHT)
 	{
 		x = 0;
 		while (x < WIDTH)
 		{
-			color = scene->color_palette[x * scene->max_iter / WIDTH];
 			pixel = y * scene->line_bytes + x * 4;
 			scene->frame_buf[pixel] = BLUE(color);
 			scene->frame_buf[pixel + 1] = GREEN(color);
