@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 14:56:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/07 15:01:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@
 # define WIDTH 1080
 # define HEIGHT 1080
 # define ASPECT_RATIO WIDTH / HEIGHT
-# define MAX_ITER 8
+# define MAX_ITER_INIT 30
 # define COLORS 50
 # define THREADS 8
 # define PIXELS (WIDTH * HEIGHT) / THREADS
