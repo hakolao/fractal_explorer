@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 15:01:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/07 17:12:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,12 @@ typedef struct		s_fractal_params
 	int					max_iter;
 	double				zoom;
 	int					*color_palette;
+	double				center_x;
+	double				center_y;
+	double				min_x;
+	double				max_x;
+	double				min_y;
+	double				max_y;
 }					t_fractal_params;
 
 /*
@@ -173,9 +179,11 @@ int					log_guide(void);
 ** Fractals
 */
 void				draw_mandelbrot(t_scene *scene);
-t_fractal_params	**thread_fractal_params(t_scene *scene);
-int					zoom(t_scene *scene, double amount, int mouse_x,
-					int mouse_y);
+int					zoom(t_scene *scene, double amount);
+int					palette(t_fractal_params *params,
+					t_rgb *palette, int palette_size);
+int					mandelbrot_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
 
 /*
 ** Threads

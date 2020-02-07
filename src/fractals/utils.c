@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 15:08:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/07 17:25:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_pixel			**thread_pixels(int size)
 	return (pixels);
 }
 
-static int				palette(t_fractal_params *params,
+int						palette(t_fractal_params *params,
 						t_rgb *palette, int palette_size)
 {
 	int		i;
@@ -68,39 +68,34 @@ static int				palette(t_fractal_params *params,
 	return (TRUE);
 }
 
-t_fractal_params		**thread_fractal_params(t_scene *scene)
+int						mandelbrot_params(t_fractal_params
+						*fractal_params, t_scene *scene, int i)
 {
-	t_fractal_params		**fractal_params;
-	int						i;
-
-	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)) ||
-		(HEIGHT % THREADS != 0 && log_err("HEIGHT % THREADS != 0", "Headers")))
-		return (NULL);
-	i = 0;
-	while (i < THREADS)
-	{
-		if (!(fractal_params[i] = malloc(sizeof(**fractal_params) * PIXELS)))
-			return (NULL);
-		fractal_params[i]->max_iter = scene->max_iter;
-		fractal_params[i]->zoom = 1.0;
-		fractal_params[i]->size = PIXELS;
-		if (!(fractal_params[i]->pixel_bounds = pixel_bounds(0, WIDTH,
+	if (!fractal_params)
+		return (FALSE);
+	fractal_params->max_iter = scene->max_iter;
+	fractal_params->zoom = 1.0;
+	fractal_params->size = PIXELS;
+	fractal_params->center_x = -0.761574;
+	fractal_params->center_y = -0.0847596;
+	fractal_params->min_x = -2.5;
+	fractal_params->max_x = 1.0;
+	fractal_params->min_y = -1.0;
+	fractal_params->max_y = 1.0;
+	if (!(fractal_params->pixel_bounds = pixel_bounds(0, WIDTH,
 			i * (HEIGHT / THREADS), (i + 1) * (HEIGHT / THREADS))) ||
-			!(fractal_params[i]->pixels = thread_pixels(PIXELS)) ||
-			!palette(fractal_params[i], (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
+		!(fractal_params->pixels = thread_pixels(PIXELS)) ||
+		!palette(fractal_params, (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
 			{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}}, 6))
-			return (NULL);
-		i++;
-	}
-	return (fractal_params);
+		return (FALSE);
+	return (TRUE);
 }
 
-int						zoom(t_scene *scene, double amount, int mouse_x, int mouse_y)
+int						zoom(t_scene *scene, double amount)
 {
 	int	i;
+
 	i = 0;
-	(void)mouse_x;
-	(void)mouse_y;
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->zoom += amount;

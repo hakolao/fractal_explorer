@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/04 10:46:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 16:03:29 by ohakola          ###   ########.fr       */
+/*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
+/*   Updated: 2020/02/07 17:20:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,15 @@ static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
 	double	min_y0;
 	double	max_x0;
 	double	max_y0;
-	double	*cent_xy;
 
-	min_x0 = -2.5;
-	max_x0 = 1.0;
-	min_y0 = -1.0;
-	max_y0 = 1.0;
-	cent_xy = (double[2]){-0.761574,-0.0847596};
+	min_x0 = params->min_x;
+	max_x0 = params->max_y;
+	min_y0 = params->min_y;
+	max_y0 = params->max_y;
 	x0_y0[0] = (min_x0 + px * (max_x0 - min_x0) / WIDTH) *
-		pow(0.95, params->zoom) + cent_xy[0];
+		pow(0.95, params->zoom) + params->center_x;
 	x0_y0[1] = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) *
-		pow(0.95, params->zoom) + cent_xy[1];
+		pow(0.95, params->zoom) + params->center_y;
 	return (x0_y0);
 }
 

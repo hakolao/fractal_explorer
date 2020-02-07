@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 15:08:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/07 17:03:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int				handle_mouse_button_press(int button, int x, int y, void *param)
 		scene->mouse_y = y;
 	}
 	scene->redraw = TRUE;
-	return ((button == SCROLL_UP && zoom(scene, 1, x, y)) ||
-			(button == SCROLL_DOWN && zoom(scene, -1, x, y)));
+	return ((button == SCROLL_UP && zoom(scene, 1)) ||
+			(button == SCROLL_DOWN && zoom(scene, -1)));
 }
 
 int				handle_mouse_button_release(int button, int x, int y,

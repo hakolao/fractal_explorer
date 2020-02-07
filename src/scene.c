@@ -6,14 +6,14 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 15:01:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/07 17:25:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int					scene_render_params(t_scene *scene,
-					void *mlx, void *mlx_wdw)
+static int				scene_render_params(t_scene *scene,
+						void *mlx, void *mlx_wdw)
 {
 	scene->mlx = mlx;
 	scene->mlx_wdw = mlx_wdw;
@@ -33,7 +33,27 @@ int					scene_render_params(t_scene *scene,
 	return (TRUE);
 }
 
-t_scene				*new_scene(void *mlx, void *mlx_wdw)
+static t_fractal_params	**thread_fractal_params(t_scene *scene)
+{
+	t_fractal_params		**fractal_params;
+	int						i;
+
+	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)) ||
+		(HEIGHT % THREADS != 0 && log_err("HEIGHT % THREADS != 0", "Headers")))
+		return (NULL);
+	i = 0;
+	while (i < THREADS)
+	{
+		if (!(fractal_params[i] =
+				malloc(sizeof(**fractal_params) * PIXELS)) ||
+			!mandelbrot_params(fractal_params[i], scene, i))
+			return (NULL);
+		i++;
+	}
+	return (fractal_params);
+}
+
+t_scene					*new_scene(void *mlx, void *mlx_wdw)
 {
 	t_scene		*scene;
 
