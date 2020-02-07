@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 18:48:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/07 14:56:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@
 # define WIDTH 1080
 # define HEIGHT 1080
 # define ASPECT_RATIO WIDTH / HEIGHT
-# define MAX_ITER 1000
+# define MAX_ITER 8
+# define COLORS 50
 # define THREADS 8
 # define PIXELS (WIDTH * HEIGHT) / THREADS
 
@@ -92,9 +93,7 @@ typedef struct		s_fractal_params
 	t_pixel				**pixels;
 	int					size;
 	int					max_iter;
-	double				zoom_multiplier;
-	double				x_move;
-	double				y_move;
+	double				zoom;
 	int					*color_palette;
 }					t_fractal_params;
 
@@ -175,7 +174,8 @@ int					log_guide(void);
 */
 void				draw_mandelbrot(t_scene *scene);
 t_fractal_params	**thread_fractal_params(t_scene *scene);
-int					zoom(t_scene *scene, double amount);
+int					zoom(t_scene *scene, double amount, int mouse_x,
+					int mouse_y);
 
 /*
 ** Threads
