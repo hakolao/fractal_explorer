@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 14:09:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 14:29:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	if (iter < params->max_iter)
 		color_fractal_pixel(params->pixels[pixel_i], iter, r_i_z_square,
 			params->color_palette);
+	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 
 static void		mandelbrot_work(void *args)
@@ -101,5 +102,5 @@ static void		mandelbrot_work(void *args)
 void			draw_mandelbrot(t_scene *scene)
 {
 	work_parallel(THREADS, (void**)scene->fractal_params, mandelbrot_work);
-	plot_threaded_pixels(scene);
+	// plot_threaded_pixels(scene);
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:18:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 16:09:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:11:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,21 @@ int				lerp_rgb(int start, int end, double gradient_mul)
 				BLUE(start) + (int)(gradient_mul * ft_abs(b_diff)), 0));
 }
 
-void			plot_pixel(t_scene *scene, int x, int y, int color)
+void			plot_pixel_on_thread_frame(t_fractal_params *params,
+				t_pixel *pixel)
 {
-	int	pixel;
+	int	pixel_i;
+	int	size;
 
-	pixel = (y * scene->line_bytes) + (x * 4);
-	if (pixel > 0 && pixel < HEIGHT * WIDTH * 4)
+	size = params->width * params->height;
+	pixel_i = (pixel->y * WIDTH * 4) +
+		(pixel->x * 4) - params->thread_i * size * 4;
+	if (pixel_i > 0 && pixel_i < size * 4)
 	{
-		scene->frame_buf[pixel + 0] = BLUE(color);
-		scene->frame_buf[pixel + 1] = GREEN(color);
-		scene->frame_buf[pixel + 2] = RED(color);
-		scene->frame_buf[pixel + 3] = ALPHA(color);
-	}
-}
-
-void			plot_threaded_pixels(t_scene *scene)
-{
-	int				i;
-	int				j;
-
-	i = 0;
-	while (i < THREADS)
-	{
-		j = -1;
-		while (++j < scene->fractal_params[i]->size)
-			plot_pixel(scene, scene->fractal_params[i]->pixels[j]->x,
-				scene->fractal_params[i]->pixels[j]->y,
-				scene->fractal_params[i]->pixels[j]->color);
-		i++;
+		params->frame_buf[pixel_i + 0] = BLUE(pixel->color);
+		params->frame_buf[pixel_i + 1] = GREEN(pixel->color);
+		params->frame_buf[pixel_i + 2] = RED(pixel->color);
+		params->frame_buf[pixel_i + 3] = ALPHA(pixel->color);
 	}
 }
 

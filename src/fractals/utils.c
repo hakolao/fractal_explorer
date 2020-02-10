@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 12:37:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:09:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,18 @@ int						mandelbrot_params(t_fractal_params
 	fractal_params->max_x = 2.0;
 	fractal_params->min_y = -2.0;
 	fractal_params->max_y = 2.0;
+	fractal_params->thread_i = i;
+	fractal_params->width = WIDTH;
+	fractal_params->height = HEIGHT / THREADS;
 	if (!(fractal_params->pixel_bounds = pixel_bounds(0, WIDTH,
 			i * (HEIGHT / THREADS), (i + 1) * (HEIGHT / THREADS))) ||
 		!(fractal_params->pixels = thread_pixels(PIXELS)) ||
 		!palette(fractal_params, (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
-			{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}}, 6))
+			{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}}, 6) ||
+		!(fractal_params->frame = mlx_new_image(scene->mlx,
+			WIDTH, HEIGHT / THREADS)) ||
+		!(fractal_params->frame_buf = mlx_get_data_addr(fractal_params->frame,
+			&scene->pixel_bits, &scene->line_bytes, &scene->pixel_endian)))
 		return (FALSE);
 	return (TRUE);
 }

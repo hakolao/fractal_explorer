@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 12:28:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:09:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,11 @@ typedef struct		s_fractal_params
 	double				max_x;
 	double				min_y;
 	double				max_y;
+	void				*frame;
+	char				*frame_buf;
+	int					width;
+	int					height;
+	int					thread_i;
 }					t_fractal_params;
 
 /*
@@ -155,6 +160,8 @@ int					lerp_rgb(int start, int end, double gradient_mul);
 void				plot_threaded_pixels(t_scene *scene);
 void				set_pixel(t_pixel *pixel, int x, int y, int color);
 t_fractal_artist	artist_draw(enum e_fractal type);
+void				plot_pixel_on_thread_frame(t_fractal_params *params,
+					t_pixel *pixel);
 
 /*
 ** Events
