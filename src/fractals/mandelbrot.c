@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 17:20:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 12:08:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
 	min_y0 = params->min_y;
 	max_y0 = params->max_y;
 	x0_y0[0] = (min_x0 + px * (max_x0 - min_x0) / WIDTH) *
-		pow(0.95, params->zoom) + params->center_x;
+		params->zoom_mul + params->center_x;
 	x0_y0[1] = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) *
-		pow(0.95, params->zoom) + params->center_y;
+		params->zoom_mul + params->center_y;
 	return (x0_y0);
 }
 
