@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 12:09:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 12:37:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ int						mandelbrot_params(t_fractal_params
 	fractal_params->size = PIXELS;
 	fractal_params->center_x = -0.7746806106269039;
 	fractal_params->center_y = -0.1374168856037867;
-	fractal_params->min_x = -2.5;
-	fractal_params->max_x = 1.0;
-	fractal_params->min_y = -1.0;
-	fractal_params->max_y = 1.0;
+	fractal_params->min_x = -2.0;
+	fractal_params->max_x = 2.0;
+	fractal_params->min_y = -2.0;
+	fractal_params->max_y = 2.0;
 	if (!(fractal_params->pixel_bounds = pixel_bounds(0, WIDTH,
 			i * (HEIGHT / THREADS), (i + 1) * (HEIGHT / THREADS))) ||
 		!(fractal_params->pixels = thread_pixels(PIXELS)) ||
@@ -108,28 +108,16 @@ int						zoom(t_scene *scene, double amount)
 	return (0);
 }
 
-int						center_to(t_scene *scene, double mouse_x,
-						double mouse_y)
+int						move_by(t_scene *scene, double x_amount,
+						double y_amount)
 {
 	int		i;
-	double	scaled_x;
-	double	scaled_y;
-	double	x_diff;
-	double	y_diff;
 
 	i = 0;
-	scaled_x = (scene->fractal_params[i]->min_x + mouse_x *
-		(scene->fractal_params[i]->max_x - scene->fractal_params[i]->min_x) / WIDTH);
-	scaled_y = (scene->fractal_params[i]->min_y + mouse_y *
-		(scene->fractal_params[i]->max_y - scene->fractal_params[i]->min_y) / HEIGHT);
-	x_diff = scene->fractal_params[i]->center_x - scaled_x;
-	y_diff = scene->fractal_params[i]->center_y - scaled_y;
-	// printf("x_diff: %f, y_diff: %f\ncenter_x: %f, center_y: %f\n", x_diff, y_diff,
-	// 	scene->fractal_params[i]->center_x, scene->fractal_params[i]->center_y);
 	while (i < THREADS)
 	{
-		scene->fractal_params[i]->center_x -= x_diff;
-		scene->fractal_params[i]->center_y -= y_diff;
+		scene->fractal_params[i]->center_x += x_amount * scene->fractal_params[i]->zoom_mul;
+		scene->fractal_params[i]->center_y += y_amount * scene->fractal_params[i]->zoom_mul;
 		i++;
 	}
 	return (0);

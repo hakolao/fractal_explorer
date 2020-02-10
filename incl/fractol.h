@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 12:07:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 12:28:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,8 +185,8 @@ int					palette(t_fractal_params *params,
 					t_rgb *palette, int palette_size);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
-int					center_to(t_scene *scene, double mouse_x,
-					double mouse_y);
+int					move_by(t_scene *scene, double x_amount,
+					double y_amount);
 
 /*
 ** Threads

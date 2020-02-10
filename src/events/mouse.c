@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/07 17:03:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 12:34:11 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ int				handle_mouse_move(int x, int y, void *param)
 	y_diff = y - scene->mouse_y;
 	diff_lim = 5;
 	if (scene->mouse_left_pressed == TRUE && ft_abs(x_diff) > diff_lim &&
-		1)
+		move_by(scene, x_diff > 0 ? -0.01 : 0.01, 0))
 		scene->mouse_x = x;
 	else if (scene->mouse_left_pressed == TRUE && ft_abs(y_diff) > diff_lim &&
-		1)
+		move_by(scene, 0, y_diff > 0 ? -0.01 : 0.01))
 		scene->mouse_y = y;
 	if (scene->mouse_left_pressed)
 		scene->redraw = TRUE;
