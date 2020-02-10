@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 12:08:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 14:09:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
 		params->zoom_mul + params->center_y;
 	return (x0_y0);
 }
+
+// static double	compute_dist_based_iter(int px, int py, int max_iter)
+// {
+// 	double	x_diff;
+// 	double	y_diff;
+// 	double	dist;
+
+// 	x_diff = (px - WIDTH / 2);
+// 	y_diff = (py - HEIGHT / 2);
+// 	dist = sqrt(x_diff * x_diff + y_diff * y_diff);
+// 	return (ft_lmap_double(dist,
+// 		(double[2]){sqrt(WIDTH * WIDTH + HEIGHT * HEIGHT), 0},
+// 		(double[2]){30, max_iter}));
+// }
 
 static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
