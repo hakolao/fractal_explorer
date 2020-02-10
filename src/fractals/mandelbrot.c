@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 14:29:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:27:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,4 @@ static void		mandelbrot_work(void *args)
 void			draw_mandelbrot(t_scene *scene)
 {
 	work_parallel(THREADS, (void**)scene->fractal_params, mandelbrot_work);
-	// plot_threaded_pixels(scene);
 }
