@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 15:37:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:41:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	r_i_z_square = (double[3]){0.0};
 	x0_y0 = scaled_xy((double[2]){0.0}, params, px, py);
 	iter = 0.0;
-	while (r_i_z_square[0] + r_i_z_square[1] <= (1 << 2) &&
+	while (r_i_z_square[0] + r_i_z_square[1] <= 4 &&
 		iter < (params->max_iter))
 	{
 		xy[0] = r_i_z_square[0] - r_i_z_square[1] + x0_y0[0];
