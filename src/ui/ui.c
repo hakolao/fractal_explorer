@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 18:33:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 19:11:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void				draw_ui(t_scene *scene)
 		!(iterstr = ft_strjoin("Max iters: ", iterations)))
 		return ;
 	draw_paragraph(scene, guidestr, 10, 60);
-	draw_paragraph(scene, iterstr, WIDTH - 200, 60);
+	if (scene->show_guide)
+		draw_paragraph(scene, iterstr, WIDTH - 200, 60);
 	ft_strdel(&guidestr);
 	ft_strdel(&iterations);
 	ft_strdel(&iterstr);
