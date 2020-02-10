@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 15:27:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 15:37:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 		xy[1] = r_i_z_square[2] - r_i_z_square[0] - r_i_z_square[1] + x0_y0[1];
 		r_i_z_square[0] = xy[0] * xy[0];
 		r_i_z_square[1] = xy[1] * xy[1];
-		r_i_z_square[2] = (xy[0] + xy[1]) * (xy[0] + xy[1]);
+		r_i_z_square[2] = r_i_z_square[0] + r_i_z_square[1] + 2 * xy[0] * xy[1];
 		iter++;
 	}
 	set_pixel(params->pixels[pixel_i], px, py, COLOR(0, 0, 0, 0));
