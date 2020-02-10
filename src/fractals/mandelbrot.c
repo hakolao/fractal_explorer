@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 16:30:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:34:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,6 @@ static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
 	return (x0_y0);
 }
 
-// static double	compute_dist_based_iter(int px, int py, int max_iter)
-// {
-// 	double	x_diff;
-// 	double	y_diff;
-// 	double	dist;
-
-// 	x_diff = (px - WIDTH / 2);
-// 	y_diff = (py - HEIGHT / 2);
-// 	dist = sqrt(x_diff * x_diff + y_diff * y_diff);
-// 	return (ft_lmap_double(dist,
-// 		(double[2]){sqrt(WIDTH * WIDTH + HEIGHT * HEIGHT), 0},
-// 		(double[2]){30, max_iter}));
-// }
-
 static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
 	double				xy[2];
@@ -81,7 +67,7 @@ static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 		xy[1] = r_i_z_square[2] - r_i_z_square[0] - r_i_z_square[1] + x0_y0[1];
 		r_i_z_square[0] = xy[0] * xy[0];
 		r_i_z_square[1] = xy[1] * xy[1];
-		r_i_z_square[2] = r_i_z_square[0] + r_i_z_square[1] + 2 * xy[0] * xy[1];
+		r_i_z_square[2] = (xy[0] + xy[1]) * (xy[0] + xy[1]);
 		iter++;
 	}
 	set_pixel(params->pixels[pixel_i], px, py, 0);

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 12:14:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:34:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ char			*guide(t_scene *scene)
 
 	if ((scene->show_guide && (guide = ft_strdup("USAGE Keys:\n"
 			"----------\nESC: Exit\nG: Toggle guide\n"
-			"Scroll: Zoom in/out\n"
-			"Mouse button 1: Drag to move")) == NULL) ||
+			"Scroll: Zoom in/out (increases max iters)\n"
+			"Mouse button 1: Drag to move\n"
+			"Keys 1 & 2: Increase max iterations")) == NULL) ||
 		(!scene->show_guide && (guide = ft_strdup("")) == NULL))
 		return (NULL);
 	return (guide);

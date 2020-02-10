@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 16:27:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:35:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,8 @@
 # define COLORS 50
 # define THREADS 8
 # define PIXELS (WIDTH * HEIGHT) / THREADS
+# define CENTER_X -0.7746806106269039
+# define CENTER_Y -0.1374168856037867
 
 enum				e_fractal {
 	mandelbrot,
@@ -130,7 +132,6 @@ typedef struct		s_scene
 	int					col_g;
 	int					col_b;
 	int					col_a;
-	int					max_iter;
 	enum e_fractal		artist;
 	t_fractal_params	**fractal_params;
 }					t_scene;
@@ -194,6 +195,7 @@ int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					move_by(t_scene *scene, double x_amount,
 					double y_amount);
+int					change_iters(t_scene *scene, double amount);
 
 /*
 ** Threads

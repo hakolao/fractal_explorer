@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 15:09:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 18:33:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ int						mandelbrot_params(t_fractal_params
 {
 	if (!fractal_params)
 		return (FALSE);
-	fractal_params->max_iter = scene->max_iter;
+	fractal_params->max_iter = MAX_ITER_INIT;
 	fractal_params->zoom = 1.0;
 	fractal_params->zoom_mul = 1.0;
 	fractal_params->size = PIXELS;
-	fractal_params->center_x = -0.7746806106269039;
-	fractal_params->center_y = -0.1374168856037867;
+	fractal_params->center_x = CENTER_X;
+	fractal_params->center_y = CENTER_Y;
 	fractal_params->min_x = -2.0;
 	fractal_params->max_x = 2.0;
 	fractal_params->min_y = -2.0;
@@ -107,9 +107,9 @@ int						zoom(t_scene *scene, double amount)
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->zoom += amount;
-		scene->fractal_params[i]->zoom_mul = pow(0.95,
+		scene->fractal_params[i]->zoom_mul = pow(0.97,
 			scene->fractal_params[i]->zoom);
-		scene->fractal_params[i]->max_iter += amount > 0 ? 2 : -2;
+		scene->fractal_params[i]->max_iter += amount > 0 ? 1 : -1;
 		i++;
 	}
 	return (0);
@@ -123,8 +123,23 @@ int						move_by(t_scene *scene, double x_amount,
 	i = 0;
 	while (i < THREADS)
 	{
-		scene->fractal_params[i]->center_x += x_amount * scene->fractal_params[i]->zoom_mul;
-		scene->fractal_params[i]->center_y += y_amount * scene->fractal_params[i]->zoom_mul;
+		scene->fractal_params[i]->center_x +=
+			x_amount * scene->fractal_params[i]->zoom_mul;
+		scene->fractal_params[i]->center_y +=
+			y_amount * scene->fractal_params[i]->zoom_mul;
+		i++;
+	}
+	return (0);
+}
+
+int						change_iters(t_scene *scene, double amount)
+{
+	int		i;
+
+	i = 0;
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->max_iter += amount;
 		i++;
 	}
 	return (0);
