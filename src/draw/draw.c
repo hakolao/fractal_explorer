@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 15:11:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/10 16:10:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,29 +17,9 @@
 */
 
 static void			clear_frame(char *frame_buf,
-					int line_bytes, int height, int width)
+					int height, int width)
 {
-	int		x;
-	int		y;
-	int		pixel;
-	int		color;
-
-	color = COLOR(255, 0, 0, 0);
-	y = 0;
-	while (y < height)
-	{
-		x = 0;
-		while (x < width)
-		{
-			pixel = y * line_bytes + x * 4;
-			frame_buf[pixel] = BLUE(color);
-			frame_buf[pixel + 1] = GREEN(color);
-			frame_buf[pixel + 2] = RED(color);
-			frame_buf[pixel + 3] = ALPHA(color);
-			x++;
-		}
-		y++;
-	}
+	ft_memset(frame_buf, 0, height * width);
 }
 
 t_fractal_artist	artist_draw(enum e_fractal type)
@@ -58,7 +38,7 @@ static void			clear_thread_frames(t_scene *scene)
 	while (i < THREADS)
 	{
 		clear_frame(scene->fractal_params[i]->frame_buf,
-			scene->line_bytes, HEIGHT / THREADS, WIDTH);
+			HEIGHT / THREADS, WIDTH);
 		i++;
 	}
 }
