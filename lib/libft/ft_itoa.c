@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 19:10:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/01/20 16:03:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 17:44:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void			str_rev(char *str)
 	}
 }
 
-static size_t		get_num_len(int nb)
+static size_t		get_num_len(long int nb)
 {
 	size_t	i;
 
@@ -47,6 +47,29 @@ static size_t		get_num_len(int nb)
 }
 
 char				*ft_itoa(int nb)
+{
+	int		i;
+	char	*arr;
+	int		sign;
+
+	sign = nb < 0 ? -1 : 1;
+	if (!(arr = (char*)ft_memalloc(get_num_len(nb) + (sign < 0 ? 1 : 0) + 1)))
+		return (NULL);
+	if (nb == FALSE)
+		arr[0] = '0';
+	i = 0;
+	while (nb != 0)
+	{
+		arr[i++] = sign * (nb % 10) + 48;
+		nb = nb / 10;
+	}
+	if (sign == -1)
+		arr[i] = '-';
+	str_rev(arr);
+	return (arr);
+}
+
+char				*ft_itoa_long(long int nb)
 {
 	int		i;
 	char	*arr;

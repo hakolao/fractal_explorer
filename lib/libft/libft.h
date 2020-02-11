@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 16:12:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 17:44:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,6 @@ int				ft_min_int(int *arr, size_t size);
 void			ft_pixel_foreach(t_pixel_bounds *limits,
 				void *params, void (*f)(int pixel_i, int x, int y,
 				void *params));
+char			*ft_itoa_long(long int nb);
 
 #endif
