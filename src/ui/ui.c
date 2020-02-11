@@ -6,11 +6,34 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 14:01:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 14:18:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+static void			draw_whole_palette(t_scene *scene, int x, int y)
+{
+	int		i;
+	int		px;
+	int		py;
+	int		color;
+	int		x_len;
+
+	i = -1;
+	x_len = WIDTH / scene->palette_size + 1;
+	while (++i < scene->palette_size)
+	{
+		color = scene->fractal_params[0]->color_palette[i];
+		py = y - 1;
+		while (++py < y + 30)
+		{
+			px = x + i * x_len - 1;
+			while (++px < x + i * x_len + x_len)
+				mlx_pixel_put(scene->mlx, scene->mlx_wdw, px, py, color);
+		}
+	}
+}
 
 static void			draw_palette(t_scene *scene, int x, int y)
 {
@@ -55,7 +78,8 @@ void				draw_ui(t_scene *scene)
 	{
 		draw_paragraph(scene, guidestr, 10, 60);
 		draw_paragraph(scene, iterstr, WIDTH - 200, 60);
-		draw_palette(scene, 10, HEIGHT - 90);
+		draw_palette(scene, 10, HEIGHT - 120);
+		draw_whole_palette(scene, 0, HEIGHT - 30);
 	}
 	ft_strdel(&guidestr);
 	ft_strdel(&iterations);
