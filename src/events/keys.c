@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 12:23:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 12:49:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,19 @@ int				randomize_palette(t_scene *scene)
 			{rand() % 255, 0, 0}, {rand() % 255, rand() % 255, 0},
 			{0, rand() % 255, 0}, {0, rand() % 255, rand() % 255},
 			{0, 0, rand() % 255}, {rand() % 255, 0, rand() % 255}};
-	i = 0;
-	while (i < THREADS)
+	i = -1;
+	while (++i < 6)
+	{
+		scene->colors[i]->r = colors[i].r;
+		scene->colors[i]->g = colors[i].g;
+		scene->colors[i]->b = colors[i].b;
+	}
+	i = -1;
+	while (++i < THREADS)
 	{
 		free(scene->fractal_params[i]->color_palette);
-		if (!color_palette(scene->fractal_params[i], colors, 6))
+		if (!color_palette(scene->fractal_params[i], scene->colors, 6))
 			return (FALSE);
-		i++;
 	}
 	return (0);
 }

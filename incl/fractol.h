@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 12:28:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 12:49:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct		s_scene
 	int					show_guide;
 	int					redraw;
 	enum e_fractal		artist;
+	t_rgb				**colors;
 	t_fractal_params	**fractal_params;
 }					t_scene;
 
@@ -184,7 +185,7 @@ int					log_guide(void);
 void				draw_mandelbrot(t_scene *scene);
 int					zoom(t_scene *scene, double amount);
 int					color_palette(t_fractal_params *params,
-					t_rgb *palette, int palette_size);
+					t_rgb **palette, int palette_size);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					move_by(t_scene *scene, double x_amount,

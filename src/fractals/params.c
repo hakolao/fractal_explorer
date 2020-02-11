@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 12:13:05 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 12:27:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 12:44:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ static int				thread_render_params(t_fractal_params *fractal_params,
 int						mandelbrot_params(t_fractal_params
 						*fractal_params, t_scene *scene, int i)
 {
-	t_rgb	*colors;
-
-	colors = (t_rgb[6]){{255, 0, 0}, {255, 255, 0}, {0, 255, 0},
-			{0, 255, 255}, {0, 0, 255}, {255, 0, 255}};
 	fractal_params->max_iter = MAX_ITER_INIT;
 	fractal_params->zoom = 1.0;
 	fractal_params->zoom_mul = 1.0;
@@ -74,7 +70,7 @@ int						mandelbrot_params(t_fractal_params
 	fractal_params->thread_i = i;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
-	if (!color_palette(fractal_params, colors, 6) ||
+	if (!color_palette(fractal_params, scene->colors, 6) ||
 		!thread_render_params(fractal_params, scene, i))
 		return (FALSE);
 	return (TRUE);
