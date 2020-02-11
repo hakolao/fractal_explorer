@@ -6,21 +6,23 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 18:34:09 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 15:43:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static void		color_fractal_pixel(t_pixel *pixel, double iter,
-				double r_i_z_square[3], int *color_palette)
+				double r_i_z_square[3], t_fractal_params *params)
 {
 	double				log_zn;
 
 	log_zn = log(r_i_z_square[0] + r_i_z_square[1]) / 2.0;
 	iter = iter + 1.0 - log(log_zn / log(2.0)) / log(2.0);
-	pixel->color = lerp_rgb(color_palette[(int)floor(iter) % COLORS],
-		color_palette[(int)((floor(iter)) + 1) % COLORS],
+	pixel->color = lerp_rgb(params->color_palette[
+			(int)floor(iter) % params->palette_size],
+		params->color_palette[
+			(int)((floor(iter)) + 1) % params->palette_size],
 		iter - floor(iter));
 }
 
@@ -72,8 +74,8 @@ static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	}
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_fractal_pixel(params->pixels[pixel_i], iter, r_i_z_square,
-			params->color_palette);
+		color_fractal_pixel(params->pixels[pixel_i], iter,
+			r_i_z_square, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

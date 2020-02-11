@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 14:18:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 14:41:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void			draw_whole_palette(t_scene *scene, int x, int y)
 	int		x_len;
 
 	i = -1;
-	x_len = WIDTH / scene->palette_size + 1;
+	x_len = ceil((double)WIDTH / scene->palette_size);
 	while (++i < scene->palette_size)
 	{
 		color = scene->fractal_params[0]->color_palette[i];

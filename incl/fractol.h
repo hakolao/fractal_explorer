@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 14:17:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 15:38:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ typedef struct		s_fractal_params
 	int					width;
 	int					height;
 	int					thread_i;
+	int					palette_size;
 }					t_fractal_params;
 
 /*
