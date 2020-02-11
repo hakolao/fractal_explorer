@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:23:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:58:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,10 @@
 # define COLORS 50
 # define THREADS 8
 # define PIXELS (WIDTH * HEIGHT) / THREADS
-# define CENTER_X -0.7746806106269039
-# define CENTER_Y -0.1374168856037867
+# define MANDEL_CENTER_X -0.7746806106269039
+# define MANDEL_CENTER_Y -0.1374168856037867
+# define JULIA_CENTER_X 0.0
+# define JULIA_CENTER_Y 0.0
 
 enum				e_fractal {
 	mandelbrot,
@@ -103,6 +105,9 @@ typedef struct		s_fractal_params
 	long double			max_x;
 	long double			min_y;
 	long double			max_y;
+	long double			r;
+	long double			jx;
+	long double			jy;
 	void				*frame;
 	char				*frame_buf;
 	int					width;
@@ -184,6 +189,7 @@ int					log_guide(void);
 ** Fractals
 */
 void				draw_mandelbrot(t_scene *scene);
+void				draw_julia(t_scene *scene);
 int					zoom(t_scene *scene, long double amount);
 int					color_palette(t_fractal_params *params,
 					t_rgb **colors, int colors_size, int palette_size);
@@ -192,6 +198,8 @@ int					mandelbrot_params(t_fractal_params
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
 int					change_iters(t_scene *scene, long double amount);
+long double			*scaled_xy(long double *x0_y0,
+					t_fractal_params *params, int px, int py);
 
 /*
 ** Threads

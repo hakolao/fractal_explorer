@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:25:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 17:01:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			color_fractal_pixel(t_pixel *pixel, long double iter,
+static void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
 					long double r_i_z_square[3], t_fractal_params *params)
 {
 	long double				log_zn;
@@ -26,37 +26,13 @@ static void			color_fractal_pixel(t_pixel *pixel, long double iter,
 		iter - floor(iter));
 }
 
-/*
-** Centers of interest:
-** http://paulbourke.net/fractals/mandelbrot/
-*/
-
-static long double	*scaled_xy(long double *x0_y0, t_fractal_params *params,
-					int px, int py)
-{
-	long double	min_x0;
-	long double	min_y0;
-	long double	max_x0;
-	long double	max_y0;
-
-	min_x0 = params->min_x;
-	max_x0 = params->max_y;
-	min_y0 = params->min_y;
-	max_y0 = params->max_y;
-	x0_y0[0] = (min_x0 + px * (max_x0 - min_x0) / WIDTH) /
-		params->zoom + params->center_x;
-	x0_y0[1] = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) /
-		params->zoom + params->center_y;
-	return (x0_y0);
-}
-
 static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
 	long double				xy[2];
 	long double				*x0_y0;
 	long double				*r_i_z_square;
 	long double				iter;
-	t_fractal_params	*params;
+	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
 	r_i_z_square = (long double[3]){0.0};
@@ -74,7 +50,7 @@ static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	}
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_fractal_pixel(params->pixels[pixel_i], iter,
+		color_mandelbrot_pixel(params->pixels[pixel_i], iter,
 			r_i_z_square, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }

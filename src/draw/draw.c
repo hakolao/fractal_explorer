@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/10 16:34:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:59:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_fractal_artist	artist_draw(enum e_fractal type)
 {
 	return ((t_fractal_artist[2]){
 		draw_mandelbrot,
-		draw_mandelbrot
+		draw_julia
 	}[type]);
 }
 
