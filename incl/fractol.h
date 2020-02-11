@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:13:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:23:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,14 @@ typedef struct		s_fractal_params
 	t_pixel				**pixels;
 	int					size;
 	int					max_iter;
-	double				zoom;
+	long double			zoom;
 	int					*color_palette;
-	double				center_x;
-	double				center_y;
-	double				min_x;
-	double				max_x;
-	double				min_y;
-	double				max_y;
+	long double			center_x;
+	long double			center_y;
+	long double			min_x;
+	long double			max_x;
+	long double			min_y;
+	long double			max_y;
 	void				*frame;
 	char				*frame_buf;
 	int					width;
@@ -184,14 +184,14 @@ int					log_guide(void);
 ** Fractals
 */
 void				draw_mandelbrot(t_scene *scene);
-int					zoom(t_scene *scene, double amount);
+int					zoom(t_scene *scene, long double amount);
 int					color_palette(t_fractal_params *params,
 					t_rgb **colors, int colors_size, int palette_size);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
-int					move_by(t_scene *scene, double x_amount,
-					double y_amount);
-int					change_iters(t_scene *scene, double amount);
+int					move_by(t_scene *scene, long double x_amount,
+					long double y_amount);
+int					change_iters(t_scene *scene, long double amount);
 
 /*
 ** Threads

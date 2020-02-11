@@ -6,16 +6,16 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:14:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:25:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void		color_fractal_pixel(t_pixel *pixel, double iter,
-				double r_i_z_square[3], t_fractal_params *params)
+static void			color_fractal_pixel(t_pixel *pixel, long double iter,
+					long double r_i_z_square[3], t_fractal_params *params)
 {
-	double				log_zn;
+	long double				log_zn;
 
 	log_zn = log(r_i_z_square[0] + r_i_z_square[1]) / 2.0;
 	iter = iter + 1.0 - log(log_zn / log(2.0)) / log(2.0);
@@ -31,13 +31,13 @@ static void		color_fractal_pixel(t_pixel *pixel, double iter,
 ** http://paulbourke.net/fractals/mandelbrot/
 */
 
-static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
-				int px, int py)
+static long double	*scaled_xy(long double *x0_y0, t_fractal_params *params,
+					int px, int py)
 {
-	double	min_x0;
-	double	min_y0;
-	double	max_x0;
-	double	max_y0;
+	long double	min_x0;
+	long double	min_y0;
+	long double	max_x0;
+	long double	max_y0;
 
 	min_x0 = params->min_x;
 	max_x0 = params->max_y;
@@ -50,17 +50,17 @@ static double	*scaled_xy(double *x0_y0, t_fractal_params *params,
 	return (x0_y0);
 }
 
-static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
+static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
-	double				xy[2];
-	double				*x0_y0;
-	double				*r_i_z_square;
-	double				iter;
+	long double				xy[2];
+	long double				*x0_y0;
+	long double				*r_i_z_square;
+	long double				iter;
 	t_fractal_params	*params;
 
 	params = (t_fractal_params*)args;
-	r_i_z_square = (double[3]){0.0};
-	x0_y0 = scaled_xy((double[2]){0.0}, params, px, py);
+	r_i_z_square = (long double[3]){0.0};
+	x0_y0 = scaled_xy((long double[2]){0.0}, params, px, py);
 	iter = 0.0;
 	while (r_i_z_square[0] + r_i_z_square[1] <= 16 &&
 		iter < (params->max_iter))
@@ -79,7 +79,7 @@ static void		mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 
-static void		mandelbrot_work(void *args)
+static void			mandelbrot_work(void *args)
 {
 	t_fractal_params *params;
 
@@ -87,7 +87,7 @@ static void		mandelbrot_work(void *args)
 	ft_pixel_foreach(params->pixel_bounds, args, mandelbrot_pixel);
 }
 
-void			draw_mandelbrot(t_scene *scene)
+void				draw_mandelbrot(t_scene *scene)
 {
 	work_parallel(THREADS, (void**)scene->fractal_params, mandelbrot_work);
 }

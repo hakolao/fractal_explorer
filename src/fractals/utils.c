@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:19:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:26:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int						color_palette(t_fractal_params *params,
 	return (TRUE);
 }
 
-int						zoom(t_scene *scene, double amount)
+int						zoom(t_scene *scene, long double amount)
 {
 	int	i;
 
@@ -56,8 +56,8 @@ int						zoom(t_scene *scene, double amount)
 	return (0);
 }
 
-int						move_by(t_scene *scene, double x_amount,
-						double y_amount)
+int						move_by(t_scene *scene, long double x_amount,
+						long double y_amount)
 {
 	int		i;
 
@@ -73,7 +73,7 @@ int						move_by(t_scene *scene, double x_amount,
 	return (0);
 }
 
-int						change_iters(t_scene *scene, double amount)
+int						change_iters(t_scene *scene, long double amount)
 {
 	int		i;
 
