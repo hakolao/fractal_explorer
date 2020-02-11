@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 15:41:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:16:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ int				handle_key_press(int key, void *param)
 		scene->show_guide = !scene->show_guide;
 	if (key == KEY_C)
 		randomize_palette(scene);
-	ret = (key == KEY_W && zoom(scene, 1)) ||
-			(key == KEY_S && zoom(scene, -1)) ||
+	ret = (key == KEY_W && zoom(scene, 1.03)) ||
+			(key == KEY_S && zoom(scene, 1 / 1.03)) ||
 			(key == KEY_2 && change_iters(scene, 1)) ||
 			(key == KEY_1 && change_iters(scene, -1)) ||
 			(key == KEY_LEFT && change_palette_size(scene, -1)) ||

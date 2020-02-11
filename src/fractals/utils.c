@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 15:43:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:19:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,8 @@ int						zoom(t_scene *scene, double amount)
 	i = 0;
 	while (i < THREADS)
 	{
-		scene->fractal_params[i]->zoom += amount;
-		scene->fractal_params[i]->zoom_mul = pow(0.97,
-			scene->fractal_params[i]->zoom);
-		scene->fractal_params[i]->max_iter += amount > 0 ? 1 : -1;
+		scene->fractal_params[i]->zoom *= amount;
+		scene->fractal_params[i]->max_iter += amount > 1 ? 1 : -1;
 		i++;
 	}
 	return (0);
@@ -67,9 +65,9 @@ int						move_by(t_scene *scene, double x_amount,
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->center_x +=
-			x_amount * scene->fractal_params[i]->zoom_mul;
+			x_amount / scene->fractal_params[i]->zoom;
 		scene->fractal_params[i]->center_y +=
-			y_amount * scene->fractal_params[i]->zoom_mul;
+			y_amount / scene->fractal_params[i]->zoom;
 		i++;
 	}
 	return (0);

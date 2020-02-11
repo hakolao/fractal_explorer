@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 15:38:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:13:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct		s_fractal_params
 	int					size;
 	int					max_iter;
 	double				zoom;
-	double				zoom_mul;
 	int					*color_palette;
 	double				center_x;
 	double				center_y;

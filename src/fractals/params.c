@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 12:13:05 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 15:39:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 16:13:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ int						mandelbrot_params(t_fractal_params
 {
 	fractal_params->max_iter = MAX_ITER_INIT;
 	fractal_params->zoom = 1.0;
-	fractal_params->zoom_mul = 1.0;
 	fractal_params->size = PIXELS;
 	fractal_params->center_x = CENTER_X;
 	fractal_params->center_y = CENTER_Y;
