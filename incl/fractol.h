@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 12:22:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 12:28:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,6 @@ typedef struct		s_scene
 {
 	void				*mlx;
 	void				*mlx_wdw;
-	void				*frame;
-	char				*frame_buf;
 	int					pixel_bits;
 	int					line_bytes;
 	int					pixel_endian;
@@ -128,10 +126,6 @@ typedef struct		s_scene
 	int					mouse_y;
 	int					show_guide;
 	int					redraw;
-	int					col_r;
-	int					col_g;
-	int					col_b;
-	int					col_a;
 	enum e_fractal		artist;
 	t_fractal_params	**fractal_params;
 }					t_scene;
