@@ -6,14 +6,14 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:59:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 17:26:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static int				scene_render_params(t_scene *scene,
-						void *mlx, void *mlx_wdw)
+static int					scene_render_params(t_scene *scene,
+							void *mlx, void *mlx_wdw)
 {
 	scene->mlx = mlx;
 	scene->mlx_wdw = mlx_wdw;
@@ -24,7 +24,15 @@ static int				scene_render_params(t_scene *scene,
 	return (TRUE);
 }
 
-static t_fractal_params	**thread_fractal_params(t_scene *scene)
+static t_fractal_param_f	select_params(enum e_fractal type)
+{
+	return ((t_fractal_param_f[2]){
+		mandelbrot_params,
+		julia_params
+	}[type]);
+}
+
+static t_fractal_params		**thread_fractal_params(t_scene *scene)
 {
 	t_fractal_params		**fractal_params;
 	int						i;
@@ -37,14 +45,14 @@ static t_fractal_params	**thread_fractal_params(t_scene *scene)
 	{
 		if (!(fractal_params[i] =
 				malloc(sizeof(**fractal_params) * PIXELS)) ||
-			!mandelbrot_params(fractal_params[i], scene, i))
+			!select_params(scene->artist)(fractal_params[i], scene, i))
 			return (NULL);
 		i++;
 	}
 	return (fractal_params);
 }
 
-static int				scene_colors(t_scene *scene)
+static int					scene_colors(t_scene *scene)
 {
 	t_rgb	*colors;
 	int		i;
@@ -66,7 +74,8 @@ static int				scene_colors(t_scene *scene)
 	return (TRUE);
 }
 
-t_scene					*new_scene(void *mlx, void *mlx_wdw)
+t_scene						*new_scene(void *mlx, void *mlx_wdw,
+							enum e_fractal artist)
 {
 	t_scene		*scene;
 
@@ -79,7 +88,7 @@ t_scene					*new_scene(void *mlx, void *mlx_wdw)
 	scene->mouse_y = FALSE;
 	scene->show_guide = FALSE;
 	scene->palette_size = COLORS;
-	scene->artist = mandelbrot;
+	scene->artist = artist;
 	if (!scene_colors(scene) ||
 		!(scene->fractal_params = thread_fractal_params(scene)))
 		return (NULL);

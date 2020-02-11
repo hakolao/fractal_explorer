@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:58:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 17:26:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,12 +138,14 @@ typedef struct		s_scene
 }					t_scene;
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
+typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
+					t_scene *scene, int thread_i);
 
 /*
 ** Scene
 */
 int					init_scene(t_scene *scene);
-t_scene				*new_scene(void *mlx, void *mlx_wdw);
+t_scene				*new_scene(void *mlx, void *mlx_wdw, enum e_fractal artist);
 
 /*
 ** UI
@@ -194,6 +196,8 @@ int					zoom(t_scene *scene, long double amount);
 int					color_palette(t_fractal_params *params,
 					t_rgb **colors, int colors_size, int palette_size);
 int					mandelbrot_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
+int					julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
