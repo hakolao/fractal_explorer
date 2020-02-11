@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 12:50:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 13:20:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ t_scene					*new_scene(void *mlx, void *mlx_wdw)
 	scene->mouse_x = FALSE;
 	scene->mouse_y = FALSE;
 	scene->show_guide = FALSE;
+	scene->palette_size = COLORS;
 	scene->artist = mandelbrot;
 	if (!scene_colors(scene) ||
 		!(scene->fractal_params = thread_fractal_params(scene)))

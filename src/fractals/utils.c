@@ -6,14 +6,14 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 12:45:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/11 13:21:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 int						color_palette(t_fractal_params *params,
-						t_rgb **colors, int palette_size)
+						t_rgb **colors, int colors_size, int palette_size)
 {
 	int		i;
 	int		j;
@@ -21,12 +21,12 @@ int						color_palette(t_fractal_params *params,
 	double	mul;
 
 	if (!(params->color_palette =
-			malloc(sizeof(*params->color_palette) * COLORS)))
+			malloc(sizeof(*params->color_palette) * palette_size)))
 		return (FALSE);
 	i = 0;
 	j = 0;
-	lim = COLORS / (palette_size - 1);
-	while (i < COLORS)
+	lim = palette_size / (colors_size - 1);
+	while (i < palette_size)
 	{
 		mul = (double)(i % lim) / lim;
 		params->color_palette[i] = lerp_rgb(
