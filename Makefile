@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/11 16:59:48 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/12 14:13:34 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SOURCES = main.c \
 			scene.c \
 			log.c \
 			thread.c \
+			colors.c \
 			draw/pixel.c \
 			draw/draw.c \
 			events/keys.c \

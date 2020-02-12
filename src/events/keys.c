@@ -6,57 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 16:16:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:12:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static int		randomize_palette(t_scene *scene)
-{
-	int		i;
-	t_rgb	*colors;
-
-	colors = (t_rgb[6]){
-			{rand() % 255, 0, 0}, {rand() % 255, rand() % 255, 0},
-			{0, rand() % 255, 0}, {0, rand() % 255, rand() % 255},
-			{0, 0, rand() % 255}, {rand() % 255, 0, rand() % 255}};
-	i = -1;
-	while (++i < 6)
-	{
-		scene->colors[i]->r = colors[i].r;
-		scene->colors[i]->g = colors[i].g;
-		scene->colors[i]->b = colors[i].b;
-	}
-	i = -1;
-	while (++i < THREADS)
-	{
-		free(scene->fractal_params[i]->color_palette);
-		if (!color_palette(scene->fractal_params[i], scene->colors, 6,
-			scene->palette_size))
-			return (FALSE);
-	}
-	return (0);
-}
-
-static int		change_palette_size(t_scene *scene, int amount)
-{
-	int		i;
-
-	if (scene->palette_size == 12 && amount < 0)
-		return (FALSE);
-	scene->palette_size += amount;
-	i = 0;
-	while (i < THREADS)
-	{
-		free(scene->fractal_params[i]->color_palette);
-		if (!color_palette(scene->fractal_params[i], scene->colors, 6,
-			scene->palette_size))
-			return (FALSE);
-		i++;
-	}
-	return (0);
-}
 
 int				handle_key_press(int key, void *param)
 {

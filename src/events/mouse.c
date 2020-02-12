@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:00:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:13:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int				handle_mouse_move(int x, int y, void *param)
 	x_diff = x - scene->mouse_x;
 	y_diff = y - scene->mouse_y;
 	diff_lim = 10;
+	// if (scene->artist == julia)
+	// 	handle_julia_params(scene, x, y);
 	if (scene->mouse_left_pressed == TRUE && ft_abs(x_diff) > diff_lim &&
 		move_by(scene, x_diff > 0 ? -0.01 : 0.01, 0))
 		scene->mouse_x = x;

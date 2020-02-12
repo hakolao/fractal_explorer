@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:26:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:11:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,28 +50,6 @@ static t_fractal_params		**thread_fractal_params(t_scene *scene)
 		i++;
 	}
 	return (fractal_params);
-}
-
-static int					scene_colors(t_scene *scene)
-{
-	t_rgb	*colors;
-	int		i;
-
-	colors = (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
-		{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}};
-	if (!(scene->colors = malloc(sizeof(t_rgb*) * 6)))
-		return (FALSE);
-	i = 0;
-	while (i < 6)
-	{
-		if (!(scene->colors[i] = malloc(sizeof(t_rgb))))
-			return (FALSE);
-		scene->colors[i]->r = colors[i].r;
-		scene->colors[i]->g = colors[i].g;
-		scene->colors[i]->b = colors[i].b;
-		i++;
-	}
-	return (TRUE);
 }
 
 t_scene						*new_scene(void *mlx, void *mlx_wdw,

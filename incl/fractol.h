@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 13:43:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:13:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,6 @@ int					log_guide(void);
 void				draw_mandelbrot(t_scene *scene);
 void				draw_julia(t_scene *scene);
 int					zoom(t_scene *scene, long double amount);
-int					color_palette(t_fractal_params *params,
-					t_rgb **colors, int colors_size, int palette_size);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					julia_params(t_fractal_params
@@ -210,5 +208,14 @@ long double			*scaled_xy(long double *x0_y0,
 */
 void				work_parallel(int num_threads, void **thread_params,
 					void (*worker_f)(void *params));
+
+/*
+** Colors
+*/
+int					scene_colors(t_scene *scene);
+int					color_palette(t_fractal_params *params,
+					t_rgb **colors, int colors_size, int palette_size);
+int					change_palette_size(t_scene *scene, int amount);
+int					randomize_palette(t_scene *scene);
 
 #endif
