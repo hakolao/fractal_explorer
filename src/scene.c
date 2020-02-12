@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:37:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 17:02:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,27 @@ static t_fractal_params		**thread_fractal_params(t_scene *scene)
 	return (fractal_params);
 }
 
+static char					*artist_name(enum e_fractal artist)
+{
+	char	*name;
+
+	if (artist == mandelbrot)
+		name = ft_strdup("Mandelbrot");
+	else if (artist == julia)
+		name = ft_strdup("Julia");
+	else
+		name = ft_strdup("Fractol");
+	return (name);
+}
+
 t_scene						*new_scene(void *mlx, enum e_fractal artist)
 {
 	t_scene		*scene;
+	char		*name;
 
-	if (!(scene = (t_scene*)malloc(sizeof(*scene))) ||
-		!(scene->mlx_wdw = mlx_new_window(mlx, WIDTH, HEIGHT,
-			"Fractol - ohakola")) ||
+	if (!(name = artist_name(artist)) ||
+		!(scene = (t_scene*)malloc(sizeof(*scene))) ||
+		!(scene->mlx_wdw = mlx_new_window(mlx, WIDTH, HEIGHT, name)) ||
 		!scene_render_params(scene, mlx, scene->mlx_wdw))
 		return (NULL);
 	scene->mlx = mlx;
@@ -72,5 +86,6 @@ t_scene						*new_scene(void *mlx, enum e_fractal artist)
 	if (!scene_colors(scene) ||
 		!(scene->fractal_params = thread_fractal_params(scene)))
 		return (NULL);
+	ft_strdel(&name);
 	return (scene);
 }
