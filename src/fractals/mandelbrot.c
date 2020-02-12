@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 13:34:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:01:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,29 @@ static void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
 		iter - floor(iter));
 }
 
-static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
+static double		escape_time(long double *r_i_z_square, long double *cx_cy,
+					long double max_iter)
 {
 	long double				zx_zy[2];
+	long double				iter;
+
+	iter = 0.0;
+	while (r_i_z_square[0] + r_i_z_square[1] <= 16 &&
+		iter < max_iter)
+	{
+		zx_zy[0] = r_i_z_square[0] - r_i_z_square[1] + cx_cy[0];
+		zx_zy[1] = r_i_z_square[2] - r_i_z_square[0] - r_i_z_square[1] +
+			cx_cy[1];
+		r_i_z_square[0] = zx_zy[0] * zx_zy[0];
+		r_i_z_square[1] = zx_zy[1] * zx_zy[1];
+		r_i_z_square[2] = (zx_zy[0] + zx_zy[1]) * (zx_zy[0] + zx_zy[1]);
+		iter++;
+	}
+	return (iter);
+}
+
+static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
+{
 	long double				*cx_cy;
 	long double				*r_i_z_square;
 	long double				iter;
@@ -37,17 +57,7 @@ static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	params = (t_fractal_params*)args;
 	r_i_z_square = (long double[3]){0.0};
 	cx_cy = scaled_xy((long double[2]){0.0}, params, px, py);
-	iter = 0.0;
-	while (r_i_z_square[0] + r_i_z_square[1] <= 16 &&
-		iter < (params->max_iter))
-	{
-		zx_zy[0] = r_i_z_square[0] - r_i_z_square[1] + cx_cy[0];
-		zx_zy[1] = r_i_z_square[2] - r_i_z_square[0] - r_i_z_square[1] + cx_cy[1];
-		r_i_z_square[0] = zx_zy[0] * zx_zy[0];
-		r_i_z_square[1] = zx_zy[1] * zx_zy[1];
-		r_i_z_square[2] = (zx_zy[0] + zx_zy[1]) * (zx_zy[0] + zx_zy[1]);
-		iter++;
-	}
+	iter = escape_time(r_i_z_square, cx_cy, params->max_iter);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		color_mandelbrot_pixel(params->pixels[pixel_i], iter,

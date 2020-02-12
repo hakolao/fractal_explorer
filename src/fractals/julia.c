@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 13:54:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:55:53 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void			color_julia_pixel(t_pixel *pixel, long double iter,
 					long double *zx_zy, t_fractal_params *params)
 {
-	iter = iter + 2.0 - log(log(pow(zx_zy[0], 2) +pow(zx_zy[1], 2))) / log(2.0);
+	iter = iter + 2.0 - log(log(pow(zx_zy[0], 2) +
+		pow(zx_zy[1], 2))) / log(2.0);
 	pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
 		params->color_palette[
