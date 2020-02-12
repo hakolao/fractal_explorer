@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 14:50:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:37:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,16 @@ static t_fractal_params		**thread_fractal_params(t_scene *scene)
 	return (fractal_params);
 }
 
-t_scene						*new_scene(void *mlx, void *mlx_wdw,
-							enum e_fractal artist)
+t_scene						*new_scene(void *mlx, enum e_fractal artist)
 {
 	t_scene		*scene;
 
-	if ((scene = (t_scene*)malloc(sizeof(*scene))) == NULL)
+	if (!(scene = (t_scene*)malloc(sizeof(*scene))) ||
+		!(scene->mlx_wdw = mlx_new_window(mlx, WIDTH, HEIGHT,
+			"Fractol - ohakola")) ||
+		!scene_render_params(scene, mlx, scene->mlx_wdw))
 		return (NULL);
-	if (scene_render_params(scene, mlx, mlx_wdw) == FALSE)
-		return (NULL);
+	scene->mlx = mlx;
 	scene->mouse_left_pressed = FALSE;
 	scene->mouse_x = FALSE;
 	scene->mouse_y = FALSE;

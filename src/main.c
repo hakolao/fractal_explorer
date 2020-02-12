@@ -6,38 +6,46 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 13:55:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:32:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+t_scene			*mlx_init_scene(void *mlx, t_scene *scene,
+				int scene_id, enum e_fractal artist)
+{
+	if (!(scene = new_scene(mlx, artist)) &&
+			log_err("Failed to create scene.", strerror(5)))
+		return (NULL);
+	scene->id = scene_id;
+	mlx_hook(scene->mlx_wdw, 2, 0, handle_key_press, scene);
+	mlx_hook(scene->mlx_wdw, 3, 0, handle_key_release, scene);
+	mlx_hook(scene->mlx_wdw, 4, 0, handle_mouse_button_press, scene);
+	mlx_hook(scene->mlx_wdw, 5, 0, handle_mouse_button_release, scene);
+	mlx_hook(scene->mlx_wdw, 6, 0, handle_mouse_move, scene);
+	mlx_hook(scene->mlx_wdw, 17, 0, handle_exit_event, scene);
+	return (scene);
+}
+
 int				init_fractol(int *fractals, int size)
 {
-	t_scene		*scene;
+	t_scenes	*data;
 	int			i;
-	void		*mlx;
-	void		*mlx_wdw;
 
+	if (!(data = malloc(sizeof(*data))) ||
+		!(data->scenes = malloc(sizeof(*data->scenes) * size)) ||
+		!(data->mlx = mlx_init()))
+		return (FALSE);
+	data->size = size;
 	i = -1;
 	while (++i < size)
-	{
-		if (((mlx = mlx_init()) == NULL ||
-			(mlx_wdw = mlx_new_window(mlx, WIDTH, HEIGHT,
-			"Fractol - ohakola")) == NULL ||
-			(scene = new_scene(mlx, mlx_wdw, fractals[i])) == NULL) &&
-				log_err("Failed to create scene.", strerror(5)))
-			return (0);
-		mlx_hook(mlx_wdw, 2, 0, handle_key_press, scene);
-		mlx_hook(mlx_wdw, 3, 0, handle_key_release, scene);
-		mlx_hook(mlx_wdw, 4, 0, handle_mouse_button_press, scene);
-		mlx_hook(mlx_wdw, 5, 0, handle_mouse_button_release, scene);
-		mlx_hook(mlx_wdw, 6, 0, handle_mouse_move, scene);
-		mlx_hook(mlx_wdw, 17, 0, handle_exit_event, scene);
-		mlx_loop_hook(mlx, handle_loop, scene);
-	}
-	mlx_loop(mlx);
-	return (0);
+		if (!(data->scenes[i] =
+				mlx_init_scene(data->mlx, data->scenes[i], i, fractals[i])))
+			return (FALSE);
+	mlx_loop_hook(data->mlx, handle_loop, data);
+	mlx_loop(data->mlx);
+	return (FALSE);
 }
 
 int				parse_args(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 14:50:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:34:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct		s_fractal_params
 */
 typedef struct		s_scene
 {
+	int					id;
 	void				*mlx;
 	void				*mlx_wdw;
 	int					pixel_bits;
@@ -138,6 +139,13 @@ typedef struct		s_scene
 	t_fractal_params	**fractal_params;
 }					t_scene;
 
+typedef struct		s_scenes
+{
+	int				size;
+	void			*mlx;
+	t_scene			**scenes;
+}					t_scenes;
+
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
 					t_scene *scene, int thread_i);
@@ -146,7 +154,7 @@ typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
 ** Scene
 */
 int					init_scene(t_scene *scene);
-t_scene				*new_scene(void *mlx, void *mlx_wdw, enum e_fractal artist);
+t_scene				*new_scene(void *mlx, enum e_fractal artist);
 
 /*
 ** UI
@@ -179,7 +187,7 @@ int					handle_mouse_button_release(int key, int x, int y,
 					void *param);
 int					handle_mouse_move(int x, int y, void *param);
 int					handle_loop(void *params);
-int					handle_exit_event(void);
+int					handle_exit_event(void *params);
 
 /*
 ** Logging
