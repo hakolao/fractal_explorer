@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:32:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:54:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,27 @@ int				init_fractol(int *fractals, int size)
 int				parse_args(int argc, char **argv)
 {
 	int	i;
-	int	*fractals;
+	int	fractals[argc - 1];
 	int	size;
 
-	fractals = (int[2]){mandelbrot, julia};
 	i = -1;
 	size = 0;
-	while (++i < 2 && i < argc - 1)
+	while (++i < argc - 1)
 	{
+		fractals[i] = -1;
+		if (ft_strequ(argv[i + 1], "mandelbrot") ||
+			ft_strequ(argv[i + 1], "julia"))
+			size++;
 		if (ft_strequ(argv[i + 1], "mandelbrot"))
-		{
-			size++;
 			fractals[i] = mandelbrot;
-		}
 		else if (ft_strequ(argv[i + 1], "julia"))
-		{
-			size++;
 			fractals[i] = julia;
-		}
 		else
 			return (log_guide() && FALSE);
 	}
+	if (size > MAX_WINDOWS)
+		return (log_err("Too many windows: max 10", strerror(5)));
+	ft_sort_int_tab(fractals, argc - 1, -1);
 	return (init_fractol(fractals, size));
 }
 

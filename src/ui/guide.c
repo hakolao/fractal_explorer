@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 14:21:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:54:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char			*guide(void)
 	char	*guide;
 
 	if ((guide = ft_strdup("USAGE Keys:\n"
-			"----------\nESC: Exit\nG: Toggle guide\n"
+			"----------\nESC: Exit all, (x): Exit window\n"
+			"G: Toggle guide\n"
 			"Scroll/W/S: Zoom in/out (increases max iters)\n"
 			"Mouse 1: Drag to move\n"
 			"1/2: Increase max iterations\n"

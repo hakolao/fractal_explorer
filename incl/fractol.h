@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:34:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 16:52:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@
 */
 # define WIDTH 1080
 # define HEIGHT 1080
+# define MAX_WINDOWS 10
 # define ASPECT_RATIO WIDTH / HEIGHT
 # define MAX_ITER_INIT 30
 # define COLORS 50
