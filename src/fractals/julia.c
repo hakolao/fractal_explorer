@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 13:47:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:54:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,17 +33,19 @@ static void			julia_pixel(int pixel_i, int px, int py, void *args)
 	params = (t_fractal_params*)args;
 	zx_zy = scaled_xy((long double[2]){0.0}, params, px, py);
 	iter = 0.0;
-	while (pow(zx_zy[0], 2) + pow(zx_zy[1], 2) <= pow(params->r, 2) &&
+	while (zx_zy[0] * zx_zy[0] + zx_zy[1] * zx_zy[1] <=
+		params->r * params->r &&
 		iter < (params->max_iter))
 	{
-		x_temp = pow(zx_zy[0], 2) - pow(zx_zy[1], 2);
+		x_temp = zx_zy[0] * zx_zy[0] - zx_zy[1] * zx_zy[1];
 		zx_zy[1] = 2.0 * zx_zy[0] * zx_zy[1] + params->cy;
 		zx_zy[0] = x_temp + params->cx;
 		iter++;
 	}
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_julia_pixel(params->pixels[pixel_i], iter, zx_zy, params);
+		color_julia_pixel(params->pixels[pixel_i],
+			iter, zx_zy, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 
