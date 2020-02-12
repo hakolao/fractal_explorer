@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 14:13:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:50:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct		s_scene
 	int					mouse_left_pressed;
 	int					mouse_x;
 	int					mouse_y;
+	int					stop_julia;
 	int					show_guide;
 	int					redraw;
 	enum e_fractal		artist;
@@ -202,6 +203,8 @@ int					move_by(t_scene *scene, long double x_amount,
 int					change_iters(t_scene *scene, long double amount);
 long double			*scaled_xy(long double *x0_y0,
 					t_fractal_params *params, int px, int py);
+int					handle_julia_params(t_scene *scene, int mouse_x,
+					int mouse_y);
 
 /*
 ** Threads

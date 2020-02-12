@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 14:11:03 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 14:50:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_scene						*new_scene(void *mlx, void *mlx_wdw,
 	scene->show_guide = FALSE;
 	scene->palette_size = COLORS;
 	scene->artist = artist;
+	scene->stop_julia = FALSE;
 	if (!scene_colors(scene) ||
 		!(scene->fractal_params = thread_fractal_params(scene)))
 		return (NULL);
