@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 12:13:05 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:01:39 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:43:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int						julia_params(t_fractal_params
 	fractal_params->max_x = fractal_params->r;
 	fractal_params->min_y = -fractal_params->r;
 	fractal_params->max_y = fractal_params->r;
-	fractal_params->jx = -0.7;
-	fractal_params->jy = 0.27015;
+	fractal_params->cx = -0.7;
+	fractal_params->cy = 0.27015;
 	fractal_params->thread_i = i;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;

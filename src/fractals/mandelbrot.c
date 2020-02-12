@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:01:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:34:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,24 @@ static void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
 
 static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
-	long double				xy[2];
-	long double				*x0_y0;
+	long double				zx_zy[2];
+	long double				*cx_cy;
 	long double				*r_i_z_square;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
 	r_i_z_square = (long double[3]){0.0};
-	x0_y0 = scaled_xy((long double[2]){0.0}, params, px, py);
+	cx_cy = scaled_xy((long double[2]){0.0}, params, px, py);
 	iter = 0.0;
 	while (r_i_z_square[0] + r_i_z_square[1] <= 16 &&
 		iter < (params->max_iter))
 	{
-		xy[0] = r_i_z_square[0] - r_i_z_square[1] + x0_y0[0];
-		xy[1] = r_i_z_square[2] - r_i_z_square[0] - r_i_z_square[1] + x0_y0[1];
-		r_i_z_square[0] = xy[0] * xy[0];
-		r_i_z_square[1] = xy[1] * xy[1];
-		r_i_z_square[2] = (xy[0] + xy[1]) * (xy[0] + xy[1]);
+		zx_zy[0] = r_i_z_square[0] - r_i_z_square[1] + cx_cy[0];
+		zx_zy[1] = r_i_z_square[2] - r_i_z_square[0] - r_i_z_square[1] + cx_cy[1];
+		r_i_z_square[0] = zx_zy[0] * zx_zy[0];
+		r_i_z_square[1] = zx_zy[1] * zx_zy[1];
+		r_i_z_square[2] = (zx_zy[0] + zx_zy[1]) * (zx_zy[0] + zx_zy[1]);
 		iter++;
 	}
 	set_pixel(params->pixels[pixel_i], px, py, 0);

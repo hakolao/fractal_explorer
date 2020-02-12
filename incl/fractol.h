@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:26:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/12 13:43:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ typedef struct		s_fractal_params
 	long double			min_y;
 	long double			max_y;
 	long double			r;
-	long double			jx;
-	long double			jy;
+	long double			cx;
+	long double			cy;
 	void				*frame;
 	char				*frame_buf;
 	int					width;
