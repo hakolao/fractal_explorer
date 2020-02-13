@@ -6,23 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:06:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:15:41 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
-					t_complex squares, t_fractal_params *params)
-{
-	iter = iter + 1.0 - log(log(squares.x + squares.y) /
-		2.0 / log(2.0)) / log(2.0);
-	pixel->color = lerp_rgb(params->color_palette[
-			(int)floor(iter) % params->palette_size],
-		params->color_palette[
-			(int)((floor(iter)) + 1) % params->palette_size],
-		iter - floor(iter));
-}
 
 static double		escape_time(t_complex z_init, t_complex c,
 					t_complex *squares, long double max_iter)

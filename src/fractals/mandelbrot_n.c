@@ -6,28 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:08:02 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:07:03 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:26:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-void				color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
-					t_complex powers, t_fractal_params *params)
-{
-	if ((int)params->pow_n == 2)
-	{
-		iter = iter + 1.0 - log(log(powers.x + powers.y) /
-			2.0 / log(2.0)) / log(2.0);
-		pixel->color = lerp_rgb(params->color_palette[
-			(int)floor(iter) % params->palette_size],
-		params->color_palette[
-			(int)((floor(iter)) + 1) % params->palette_size],
-		iter - floor(iter));
-		return ;
-	}
-	pixel->color = params->color_palette[(int)iter];
-}
 
 static double		escape_time(t_complex c, t_complex *powers,
 					long double max_iter, long double pow_n)
@@ -37,8 +20,7 @@ static double		escape_time(t_complex c, t_complex *powers,
 	t_complex				z;
 
 	iter = 0.0;
-	z.x = c.x;
-	z.y = c.y;
+	z = c;
 	while (z.x * z.x + z.y * z.y <= 16 && iter < max_iter)
 	{
 		xtemp = pow(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *

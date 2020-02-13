@@ -6,23 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:49:38 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:07:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:13:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void			color_burning_ship_pixel(t_pixel *pixel, long double iter,
-					t_complex squares, t_fractal_params *params)
-{
-	iter = iter + 1.0 - log(log(squares.x + squares.y) /
-		2.0 / log(2.0)) / log(2.0);
-	pixel->color = lerp_rgb(params->color_palette[
-			(int)floor(iter) % params->palette_size],
-		params->color_palette[
-			(int)((floor(iter)) + 1) % params->palette_size],
-		iter - floor(iter));
-}
 
 static double		escape_time(t_complex z_init, t_complex c,
 					t_complex *squares, long double max_iter)
@@ -60,7 +48,8 @@ static void			burning_ship_pixel(int pixel_i, int px, int py, void *args)
 	iter = escape_time(z, c, &squares, params->max_iter);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_burning_ship_pixel(params->pixels[pixel_i], iter, squares, params);
+		color_mandelbrot_pixel(params->pixels[pixel_i], iter,
+			squares, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

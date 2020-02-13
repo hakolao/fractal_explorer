@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 22:32:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:27:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,11 @@ int					julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					burning_ship_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
+
+/*
+** Fractal utils (functionality)
+*/
+
 int					zoom(t_scene *scene, long double amount);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
@@ -236,7 +241,14 @@ int					move_cx_cy(t_scene *scene, int mouse_x,
 					int mouse_y);
 int					center_to(t_scene *scene, long double mouse_x,
 					long double mouse_y);
-void				color_fractal_pixel(t_pixel *pixel, long double iter,
+int					increment_pow_n(t_scene *scene, int incr);
+void				color_mandelbrot_pixel(t_pixel *pixel, long double iter,
+					t_complex squares, t_fractal_params *params);
+void				color_julia_pixel(t_pixel *pixel, long double iter,
+					t_complex squares, t_fractal_params *params);
+void				color_julia_n_pixel(t_pixel *pixel, long double iter,
+					t_complex powers, t_fractal_params *params);
+void				color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
 					t_complex powers, t_fractal_params *params);
 
 /*

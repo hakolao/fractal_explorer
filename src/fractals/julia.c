@@ -6,23 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 16:25:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 22:59:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:13:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static void			color_julia_pixel(t_pixel *pixel, long double iter,
-					t_complex squares, t_fractal_params *params)
-{
-	iter = iter + 2.0 - log(log(squares.x * squares.x +
-		squares.y * squares.y)) / log(2.0);
-	pixel->color = lerp_rgb(params->color_palette[
-			(int)floor(iter) % params->palette_size],
-		params->color_palette[
-			(int)((floor(iter)) + 1) % params->palette_size],
-		iter - floor(iter));
-}
 
 static double		escape_time(t_complex z, t_complex *squares,
 					t_fractal_params *params)
