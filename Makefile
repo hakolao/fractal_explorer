@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/13 23:23:55 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/13 23:38:29 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,10 +22,10 @@ LIBMLXFLAGS = -I$(LIBMLX) -L$(LIBMLX) -lmlx -framework OpenGL -framework Appkit
 LIBFTFLAGS = -L$(LIBFT) -lft
 THREADFLAGS = -lpthread
 SOURCES = main.c \
-			scene.c \
 			log.c \
-			thread.c \
-			select.c \
+			scene/scene.c \
+			scene/select.c \
+			scene/thread.c \
 			draw/pixel.c \
 			draw/draw.c \
 			events/keys.c \
@@ -56,6 +56,7 @@ $(NAME): $(OBJS)
 
 $(DIR_OBJ):
 	@mkdir -p temp
+	@mkdir -p temp/scene
 	@mkdir -p temp/draw
 	@mkdir -p temp/ui
 	@mkdir -p temp/events
