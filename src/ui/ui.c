@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:45:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 13:37:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ void				draw_ui(t_scene *scene)
 	if (!(guidestr = guide()) ||
 		!(iterations = ft_itoa(scene->fractal_params[0]->max_iter)) ||
 		!(iterstr = ft_strjoin("Max iters: ", iterations)) ||
-		!(zoom = ft_itoa_long(scene->fractal_params[0]->zoom)) ||
-		!(zoomstr = ft_strjoin("Zoom (int): ", zoom)))
+		!(zoom = ft_ftoa(scene->fractal_params[0]->zoom, 15)) ||
+		!(zoomstr = ft_strjoin("Zoom: ", zoom)))
 		return ;
 	if (scene->show_guide)
 	{
