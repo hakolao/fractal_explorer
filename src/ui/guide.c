@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:54:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 16:29:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ char			*guide(void)
 			"----------\nESC: Exit all, (x): Exit window\n"
 			"G: Toggle guide\n"
 			"Scroll/W/S: Zoom in/out (increases max iters)\n"
-			"Mouse 1: Drag to move\n"
+			"Mouse 1: Center to point\n"
 			"1/2: Increase max iterations\n"
 			"C: Change color palette\n"
-			"<-/->: Change palette size")) == NULL)
+			"Up/Down: Increment pow_n (only mandelbrot_n)\n"
+			"Left/Right: Change palette size")) == NULL)
 		return (NULL);
 	return (guide);
 }

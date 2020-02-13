@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 12:44:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 16:47:15 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,17 @@ int				init_fractol(int *fractals, int size)
 	return (FALSE);
 }
 
-int				is_valid_arg(char *arg)
+int				is_valid_arg(char *arg, int *size)
 {
-	return (ft_strequ(arg, "mandelbrot") ||
+	int		res;
+
+	res = ft_strequ(arg, "mandelbrot") ||
 			ft_strequ(arg, "julia") ||
-			ft_strequ(arg, "burning_ship"));
+			ft_strequ(arg, "burning_ship") ||
+			ft_strequ(arg, "mandelbrot_n");
+	if (res)
+		(*size)++;
+	return (res);
 }
 
 int				parse_args(int argc, char **argv)
@@ -66,9 +72,7 @@ int				parse_args(int argc, char **argv)
 	while (++i < argc - 1)
 	{
 		fractals[i] = -1;
-		if (is_valid_arg(argv[i + 1]))
-			size++;
-		else
+		if (!is_valid_arg(argv[i + 1], &size))
 			return (log_guide() && FALSE);
 		if (ft_strequ(argv[i + 1], "mandelbrot"))
 			fractals[i] = mandelbrot;
@@ -76,6 +80,8 @@ int				parse_args(int argc, char **argv)
 			fractals[i] = julia;
 		else if (ft_strequ(argv[i + 1], "burning_ship"))
 			fractals[i] = burning_ship;
+		else if (ft_strequ(argv[i + 1], "mandelbrot_n"))
+			fractals[i] = mandelbrot_n;
 	}
 	if (size > MAX_WINDOWS)
 		return (log_err("Too many windows: max 10", strerror(5)));
