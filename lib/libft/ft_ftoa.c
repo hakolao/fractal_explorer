@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 14:24:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:31:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char			*ft_ftoa(float nb, int precision)
 	char	*tmp2;
 
 	ipart = (int)nb;
-	fpart = nb - (float)ipart;
+	fpart = ft_abs_long_double(nb) - ft_abs_long_double((float)ipart);
 	if (!(tmp1 = ft_itoa_long(ipart)))
 		return (NULL);
 	if (precision <= 0)

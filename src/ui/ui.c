@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 13:37:33 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:36:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,26 @@ static void			draw_palette(t_scene *scene, int x, int y)
 	ft_strdel(&nbstr);
 }
 
+static void			draw_center_position(t_scene *scene, int x, int y)
+{
+	char	*x_pos;
+	char	*y_pos;
+
+	if (!(x_pos = ft_ftoa(scene->fractal_params[0]->center_x, 15)) ||
+		!(y_pos = ft_ftoa(scene->fractal_params[0]->center_y, 15)))
+		return ;
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y, UI_COLOR,
+		"Center x: ");
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y,
+		UI_COLOR, x_pos);
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 20, UI_COLOR,
+		"Center y: ");
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 20, UI_COLOR,
+		y_pos);
+	ft_strdel(&x_pos);
+	ft_strdel(&y_pos);
+}
+
 void				draw_ui(t_scene *scene)
 {
 	char	*guidestr;
@@ -72,20 +92,20 @@ void				draw_ui(t_scene *scene)
 	char	*iterstr;
 	char	*zoomstr;
 
+	if (scene->show_guide)
+		return ;
 	if (!(guidestr = guide()) ||
 		!(iterations = ft_itoa(scene->fractal_params[0]->max_iter)) ||
 		!(iterstr = ft_strjoin("Max iters: ", iterations)) ||
 		!(zoom = ft_ftoa(scene->fractal_params[0]->zoom, 15)) ||
 		!(zoomstr = ft_strjoin("Zoom: ", zoom)))
 		return ;
-	if (scene->show_guide)
-	{
-		draw_paragraph(scene, guidestr, 10, 60);
-		draw_paragraph(scene, iterstr, WIDTH - 300, 60);
-		draw_paragraph(scene, zoomstr, WIDTH - 300, 80);
-		draw_palette(scene, 10, HEIGHT - 120);
-		draw_whole_palette(scene, 0, HEIGHT - 30);
-	}
+	draw_paragraph(scene, guidestr, 10, 30);
+	draw_paragraph(scene, iterstr, WIDTH - 300, 30);
+	draw_paragraph(scene, zoomstr, WIDTH - 300, 50);
+	draw_center_position(scene, WIDTH - 300, 70);
+	draw_palette(scene, 10, HEIGHT - 120);
+	draw_whole_palette(scene, 0, HEIGHT - 30);
 	ft_strdel(&guidestr);
 	ft_strdel(&iterations);
 	ft_strdel(&iterstr);
