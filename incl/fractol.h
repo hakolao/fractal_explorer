@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:27:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:42:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,11 @@ typedef struct		s_complex
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
 					t_scene *scene, int thread_i);
+
+/*
+** Args
+*/
+int					check_args(char *arg, int *size, int *fractal);
 
 /*
 ** Scene

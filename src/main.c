@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 18:05:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:44:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ t_scene			*mlx_init_scene(void *mlx, t_scene *scene,
 	return (scene);
 }
 
+/*
+** Separates fractals into windows depending on input
+** fractal array (see enum e_fractal) and its size
+*/
+
 int				init_fractol(int *fractals, int size)
 {
 	t_scenes	*data;
@@ -46,30 +51,6 @@ int				init_fractol(int *fractals, int size)
 	mlx_loop_hook(data->mlx, handle_loop, data);
 	mlx_loop(data->mlx);
 	return (FALSE);
-}
-
-int				check_args(char *arg, int *size, int *fractal)
-{
-	int		res;
-
-	res = ft_strequ(arg, "mandelbrot") ||
-			ft_strequ(arg, "julia") ||
-			ft_strequ(arg, "burning_ship") ||
-			ft_strequ(arg, "julia_n") ||
-			ft_strequ(arg, "mandelbrot_n");
-	if (res)
-		(*size)++;
-	if (ft_strequ(arg, "mandelbrot"))
-		*fractal = mandelbrot;
-	else if (ft_strequ(arg, "julia"))
-		*fractal = julia;
-	else if (ft_strequ(arg, "burning_ship"))
-		*fractal = burning_ship;
-	else if (ft_strequ(arg, "mandelbrot_n"))
-		*fractal = mandelbrot_n;
-	else if (ft_strequ(arg, "julia_n"))
-		*fractal = julia_n;
-	return (res);
 }
 
 int				parse_args(int argc, char **argv)

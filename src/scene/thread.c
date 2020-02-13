@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:12:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 13:02:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:46:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ static t_pixel				**thread_pixels(int size)
 	return (pixels);
 }
 
+/*
+** Sets renders specific fractal params that are then used
+** in drawing pixel data on screen.
+*/
+
 int							thread_render_params(t_fractal_params
 							*fractal_params, t_scene *scene, int i)
 {
@@ -53,6 +58,10 @@ int							thread_render_params(t_fractal_params
 		return (FALSE);
 	return (TRUE);
 }
+
+/*
+** Allocates and sets thread specific fractal params
+*/
 
 t_fractal_params			**thread_fractal_params(t_scene *scene)
 {

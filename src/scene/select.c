@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 18:01:41 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 18:02:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:47:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** Convenience selector for fractal specific parameters
+*/
 
 t_fractal_param_f			select_params(enum e_fractal type)
 {
@@ -22,6 +26,10 @@ t_fractal_param_f			select_params(enum e_fractal type)
 		julia_n_params
 	}[type]);
 }
+
+/*
+** Convenience selector for fractal algorithms ("Artist draws")
+*/
 
 t_fractal_artist			artist_draw(enum e_fractal type)
 {

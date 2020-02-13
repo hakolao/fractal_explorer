@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/13 23:38:29 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/13 23:42:29 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ LIBFTFLAGS = -L$(LIBFT) -lft
 THREADFLAGS = -lpthread
 SOURCES = main.c \
 			log.c \
+			args.c \
 			scene/scene.c \
 			scene/select.c \
 			scene/thread.c \
