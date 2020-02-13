@@ -6,11 +6,16 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:15:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:52:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** https://en.wikipedia.org/wiki/Plotting_
+** algorithms_for_the_Mandelbrot_set
+*/
 
 static double		escape_time(t_complex z_init, t_complex c,
 					t_complex *squares, long double max_iter)

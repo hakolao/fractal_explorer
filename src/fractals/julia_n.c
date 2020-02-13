@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:39:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:24:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:51:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** https://en.wikipedia.org/wiki/Julia_set
+*/
 
 static double		escape_time(t_complex z, t_complex *powers,
 					t_fractal_params *params)

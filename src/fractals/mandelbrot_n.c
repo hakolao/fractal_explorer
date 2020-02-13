@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:08:02 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:26:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:50:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** https://en.wikipedia.org/wiki/Multibrot_set
+*/
 
 static double		escape_time(t_complex c, t_complex *powers,
 					long double max_iter, long double pow_n)

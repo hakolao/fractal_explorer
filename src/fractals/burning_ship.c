@@ -6,11 +6,15 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:49:38 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:13:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:52:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** https://en.wikipedia.org/wiki/Burning_Ship_fractal
+*/
 
 static double		escape_time(t_complex z_init, t_complex c,
 					t_complex *squares, long double max_iter)
