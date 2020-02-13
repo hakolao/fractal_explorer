@@ -6,20 +6,24 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:08:02 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 16:40:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:22:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static void			color_inverse_mandelbrot_pixel(t_pixel *pixel,
-					long double iter, long double r_i_z_square[3],
+					long double iter, long double r_i_z_pow[3],
 					t_fractal_params *params)
 {
-	long double				log_zn;
-
-	log_zn = log(r_i_z_square[0] + r_i_z_square[1]) / 2.0;
-	iter = iter + 1.0 - log(log_zn / log(2.0)) / log(2.0);
+	if ((int)params->pow_n % 2 == 1)
+	{
+		pixel->color = params->color_palette[(int)iter];
+		return ;
+	}
+	iter = iter - log(log(
+		pow((r_i_z_pow[0] + r_i_z_pow[1]), 1 / params->pow_n)) /
+		log(params->palette_size)) / log(params->pow_n);
 	pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
 		params->color_palette[
@@ -27,7 +31,7 @@ static void			color_inverse_mandelbrot_pixel(t_pixel *pixel,
 		iter - floor(iter));
 }
 
-static double		escape_time(long double *r_i_z_square, long double *cx_cy,
+static double		escape_time(long double *r_i_z_pow, long double *cx_cy,
 					long double max_iter, long double pow_n)
 {
 	long double				zx_zy[2];
@@ -47,9 +51,9 @@ static double		escape_time(long double *r_i_z_square, long double *cx_cy,
 		zx_zy[0] = xtemp;
 		iter++;
 	}
-	r_i_z_square[0] = zx_zy[0] * zx_zy[0];
-	r_i_z_square[1] = zx_zy[1] * zx_zy[1];
-	r_i_z_square[2] = (zx_zy[0] + zx_zy[1]) * (zx_zy[0] + zx_zy[1]);
+	r_i_z_pow[0] = pow(zx_zy[0], pow_n);
+	r_i_z_pow[1] = pow(zx_zy[1], pow_n);
+	r_i_z_pow[2] = pow((zx_zy[0] + zx_zy[1]), pow_n);
 	return (iter);
 }
 
@@ -57,18 +61,18 @@ static void			inverse_mandelbrot_pixel(int pixel_i, int px,
 					int py, void *args)
 {
 	long double				*cx_cy;
-	long double				*r_i_z_square;
+	long double				*r_i_z_pow;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
-	r_i_z_square = (long double[3]){0.0};
+	r_i_z_pow = (long double[3]){0.0};
 	cx_cy = scaled_xy((long double[2]){0.0}, params, px, py);
-	iter = escape_time(r_i_z_square, cx_cy, params->max_iter, params->pow_n);
+	iter = escape_time(r_i_z_pow, cx_cy, params->max_iter, params->pow_n);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		color_inverse_mandelbrot_pixel(params->pixels[pixel_i], iter,
-			r_i_z_square, params);
+			r_i_z_pow, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

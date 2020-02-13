@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 16:34:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:21:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int				increment_pow_n(t_scene *scene, int incr)
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->pow_n += incr;
+		if (scene->fractal_params[i]->pow_n <= 2)
+			scene->fractal_params[i]->pow_n = 2;
+		else if (scene->fractal_params[i]->pow_n >= 100)
+			scene->fractal_params[i]->pow_n = 100;
 		i++;
 	}
 	return (1);
