@@ -6,19 +6,17 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:49:38 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 12:56:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:07:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 static void			color_burning_ship_pixel(t_pixel *pixel, long double iter,
-					long double r_i_z_square[3], t_fractal_params *params)
+					t_complex squares, t_fractal_params *params)
 {
-	long double				log_zn;
-
-	log_zn = log(r_i_z_square[0] + r_i_z_square[1]) / 2.0;
-	iter = iter + 1.0 - log(log_zn / log(2.0)) / log(2.0);
+	iter = iter + 1.0 - log(log(squares.x + squares.y) /
+		2.0 / log(2.0)) / log(2.0);
 	pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
 		params->color_palette[
@@ -26,23 +24,22 @@ static void			color_burning_ship_pixel(t_pixel *pixel, long double iter,
 		iter - floor(iter));
 }
 
-static double		escape_time(long double *r_i_z_square, long double *cx_cy,
-					long double max_iter)
+static double		escape_time(t_complex z_init, t_complex c,
+					t_complex *squares, long double max_iter)
 {
-	long double				zx_zy[2];
+	long double				z_sqr;
 	long double				iter;
+	t_complex				z;
 
 	iter = 0.0;
-	while (r_i_z_square[0] + r_i_z_square[1] <= 16 &&
-		iter < max_iter)
+	z = z_init;
+	while (squares->x + squares->y <= 16 && iter < max_iter)
 	{
-		zx_zy[0] = ft_abs_long_double(r_i_z_square[0] -
-			r_i_z_square[1] + cx_cy[0]);
-		zx_zy[1] = ft_abs_long_double(r_i_z_square[2] - r_i_z_square[0] -
-			r_i_z_square[1] + cx_cy[1]);
-		r_i_z_square[0] = zx_zy[0] * zx_zy[0];
-		r_i_z_square[1] = zx_zy[1] * zx_zy[1];
-		r_i_z_square[2] = (zx_zy[0] + zx_zy[1]) * (zx_zy[0] + zx_zy[1]);
+		z.x = ft_abs_long_double(squares->x - squares->y + c.x);
+		z.y = ft_abs_long_double(z_sqr - squares->x - squares->y + c.y);
+		squares->x = z.x * z.x;
+		squares->y = z.y * z.y;
+		z_sqr = (z.x + z.y) * (z.x + z.y);
 		iter++;
 	}
 	return (iter);
@@ -50,19 +47,20 @@ static double		escape_time(long double *r_i_z_square, long double *cx_cy,
 
 static void			burning_ship_pixel(int pixel_i, int px, int py, void *args)
 {
-	long double				*cx_cy;
-	long double				*r_i_z_square;
+	t_complex				squares;
+	t_complex				c;
+	t_complex				z;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
-	r_i_z_square = (long double[3]){0.0};
-	cx_cy = scaled_xy((long double[2]){0.0}, params, px, py);
-	iter = escape_time(r_i_z_square, cx_cy, params->max_iter);
+	squares = (t_complex){0.0, 0.0};
+	z = (t_complex){0.0, 0.0};
+	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
+	iter = escape_time(z, c, &squares, params->max_iter);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_burning_ship_pixel(params->pixels[pixel_i], iter,
-			r_i_z_square, params);
+		color_burning_ship_pixel(params->pixels[pixel_i], iter, squares, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

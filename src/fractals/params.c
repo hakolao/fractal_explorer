@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 12:13:05 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 18:01:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 22:16:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int							mandelbrot_params(t_fractal_params
 	fractal_params->min_y = -2.0;
 	fractal_params->max_y = 2.0;
 	fractal_params->thread_i = i;
+	fractal_params->pow_n = 2.0;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	if (!color_palette(fractal_params, scene->colors, 6,
@@ -72,6 +73,7 @@ int							julia_params(t_fractal_params
 	fractal_params->max_y = fractal_params->r;
 	fractal_params->cx = -0.7;
 	fractal_params->cy = 0.27015;
+	fractal_params->pow_n = 2.0;
 	fractal_params->thread_i = i;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
@@ -120,6 +122,7 @@ int							burning_ship_params(t_fractal_params
 	fractal_params->max_x = 2.0;
 	fractal_params->min_y = -2.0;
 	fractal_params->max_y = 2.0;
+	fractal_params->pow_n = 2.0;
 	fractal_params->thread_i = i;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;

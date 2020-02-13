@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/13 18:02:48 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/13 22:45:05 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,6 @@ SOURCES = main.c \
 			scene.c \
 			log.c \
 			thread.c \
-			colors.c \
 			select.c \
 			draw/pixel.c \
 			draw/draw.c \
@@ -39,10 +38,11 @@ SOURCES = main.c \
 			fractals/burning_ship.c \
 			fractals/mandelbrot_n.c \
 			fractals/utils.c \
+			fractals/colors.c \
 			fractals/params.c \
 			ui/ui.c \
 			ui/guide.c
-			
+
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))
 OBJS = $(addprefix $(DIR_OBJ)/,$(SOURCES:.c=.o))
 
@@ -68,7 +68,7 @@ clean:
 	@make -C $(LIBFT) clean
 	@make -C $(LIBMLX) clean
 	@/bin/rm -rf $(DIR_OBJ)
-	
+
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@make -C $(LIBFT) fclean

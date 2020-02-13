@@ -6,86 +6,82 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:08:02 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 17:48:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 23:07:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			color_inverse_mandelbrot_pixel(t_pixel *pixel,
-					long double iter, long double r_i_z_pow[3],
-					t_fractal_params *params)
+void				color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
+					t_complex powers, t_fractal_params *params)
 {
-	if ((int)params->pow_n % 2 == 1)
+	if ((int)params->pow_n == 2)
 	{
-		pixel->color = params->color_palette[(int)iter];
-		return ;
-	}
-	iter = iter - log(log(
-		pow((r_i_z_pow[0] + r_i_z_pow[1]), 1 / params->pow_n)) /
-		log(params->palette_size)) / log(params->pow_n);
-	pixel->color = lerp_rgb(params->color_palette[
+		iter = iter + 1.0 - log(log(powers.x + powers.y) /
+			2.0 / log(2.0)) / log(2.0);
+		pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
 		params->color_palette[
 			(int)((floor(iter)) + 1) % params->palette_size],
 		iter - floor(iter));
+		return ;
+	}
+	pixel->color = params->color_palette[(int)iter];
 }
 
-static double		escape_time(long double *r_i_z_pow, long double *cx_cy,
+static double		escape_time(t_complex c, t_complex *powers,
 					long double max_iter, long double pow_n)
 {
-	long double				zx_zy[2];
-	long double				xtemp;
 	long double				iter;
+	long double				xtemp;
+	t_complex				z;
 
 	iter = 0.0;
-	zx_zy[0] = cx_cy[0];
-	zx_zy[1] = cx_cy[1];
-	while (pow(zx_zy[0], 2) + pow(zx_zy[1], 2) <= 16 &&
-		iter < max_iter)
+	z.x = c.x;
+	z.y = c.y;
+	while (z.x * z.x + z.y * z.y <= 16 && iter < max_iter)
 	{
-		xtemp = pow(pow(zx_zy[0], 2) + pow(zx_zy[1], 2),
-			(pow_n / 2.0)) * cos(pow_n * atan2(zx_zy[1], zx_zy[0])) + cx_cy[0];
-		zx_zy[1] = pow(pow(zx_zy[0], 2) + pow(zx_zy[1], 2),
-			(pow_n / 2.0)) * sin(pow_n * atan2(zx_zy[1], zx_zy[0])) + cx_cy[1];
-		zx_zy[0] = xtemp;
+		xtemp = pow(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *
+			cos(pow_n * atan2(z.y, z.x)) + c.x;
+		z.y = pow(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *
+			sin(pow_n * atan2(z.y, z.x)) + c.y;
+		z.x = xtemp;
 		iter++;
 	}
-	r_i_z_pow[0] = pow(zx_zy[0], pow_n);
-	r_i_z_pow[1] = pow(zx_zy[1], pow_n);
-	r_i_z_pow[2] = pow((zx_zy[0] + zx_zy[1]), pow_n);
+	powers->x = pow(z.x, pow_n);
+	powers->y = pow(z.y, pow_n);
 	return (iter);
 }
 
-static void			inverse_mandelbrot_pixel(int pixel_i, int px,
+static void			mandelbrot_n_pixel(int pixel_i, int px,
 					int py, void *args)
 {
-	long double				*cx_cy;
-	long double				*r_i_z_pow;
+	t_complex				powers;
+	t_complex				c;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
-	r_i_z_pow = (long double[3]){0.0};
-	cx_cy = scaled_xy((long double[2]){0.0}, params, px, py);
-	iter = escape_time(r_i_z_pow, cx_cy, params->max_iter, params->pow_n);
+	powers = (t_complex){0.0, 0.0};
+	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
+	iter = escape_time(c, &powers, params->max_iter, params->pow_n);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_inverse_mandelbrot_pixel(params->pixels[pixel_i], iter,
-			r_i_z_pow, params);
+		color_mandelbrot_n_pixel(params->pixels[pixel_i], iter,
+			powers, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 
-static void			inverse_mandelbrot_work(void *args)
+static void			mandelbrot_n_work(void *args)
 {
 	t_fractal_params *params;
 
 	params = (t_fractal_params*)args;
-	ft_pixel_foreach(params->pixel_bounds, args, inverse_mandelbrot_pixel);
+	ft_pixel_foreach(params->pixel_bounds, args, mandelbrot_n_pixel);
 }
 
 void				draw_mandelbrot_n(t_scene *scene)
 {
 	work_parallel(THREADS, (void**)scene->fractal_params,
-		inverse_mandelbrot_work);
+		mandelbrot_n_work);
 }

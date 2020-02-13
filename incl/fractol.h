@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 18:02:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 22:32:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,12 @@ typedef struct		s_scenes
 	t_scene			**scenes;
 }					t_scenes;
 
+typedef struct		s_complex
+{
+	long double		x;
+	long double		y;
+}					t_complex;
+
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
 					t_scene *scene, int thread_i);
@@ -224,12 +230,14 @@ int					zoom(t_scene *scene, long double amount);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
 int					change_iters(t_scene *scene, long double amount);
-long double			*scaled_xy(long double *x0_y0,
+t_complex			scaled_xy(t_complex c,
 					t_fractal_params *params, int px, int py);
 int					move_cx_cy(t_scene *scene, int mouse_x,
 					int mouse_y);
 int					center_to(t_scene *scene, long double mouse_x,
 					long double mouse_y);
+void				color_fractal_pixel(t_pixel *pixel, long double iter,
+					t_complex powers, t_fractal_params *params);
 
 /*
 ** Threads
