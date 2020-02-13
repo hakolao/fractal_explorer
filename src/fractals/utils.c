@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 12:47:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 13:11:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,21 @@ int						zoom(t_scene *scene, long double amount)
 	return (0);
 }
 
-int						move_by(t_scene *scene, long double x_amount,
-						long double y_amount)
+int						center_to(t_scene *scene, long double mouse_x,
+						long double mouse_y)
 {
-	int		i;
+	int			i;
+	long double	*new_x_y;
 
 	i = 0;
+	new_x_y = scaled_xy((long double[2]){0.0}, scene->fractal_params[i],
+		mouse_x, mouse_y);
 	while (i < THREADS)
 	{
-		scene->fractal_params[i]->center_x +=
-			x_amount / scene->fractal_params[i]->zoom;
-		scene->fractal_params[i]->center_y +=
-			y_amount / scene->fractal_params[i]->zoom;
+		scene->fractal_params[i]->center_x =
+			new_x_y[0];
+		scene->fractal_params[i]->center_y =
+			new_x_y[1];
 		i++;
 	}
 	return (0);

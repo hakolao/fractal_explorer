@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 13:01:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 13:12:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,8 @@ long double			*scaled_xy(long double *x0_y0,
 					t_fractal_params *params, int px, int py);
 int					move_cx_cy(t_scene *scene, int mouse_x,
 					int mouse_y);
+int					center_to(t_scene *scene, long double mouse_x,
+					long double mouse_y);
 
 /*
 ** Threads
