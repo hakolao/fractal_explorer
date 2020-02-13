@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 14:31:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:42:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,21 +61,19 @@ char			*ft_ftoa(float nb, int precision)
 
 	ipart = (int)nb;
 	fpart = ft_abs_long_double(nb) - ft_abs_long_double((float)ipart);
-	if (!(tmp1 = ft_itoa_long(ipart)))
+	if (!(result = ft_itoa_long(ipart)))
 		return (NULL);
 	if (precision <= 0)
-		return (tmp1);
-	if (!(result = ft_strjoin(tmp1, ".")))
-		return (NULL);
-	ft_strdel(&tmp1);
-	fpart = fpart * ft_pow(10, precision);
-	if (!(result = add_zeros(fpart, precision, result)))
-		return (NULL);
-	if (!(tmp2 = ft_itoa_long(fpart)))
-		return (NULL);
-	if (!(tmp1 = ft_strjoin(result, tmp2)))
+		return (result);
+	if (!(tmp1 = ft_strjoin(result, ".")))
 		return (NULL);
 	ft_strdel(&result);
-	result = tmp1;
+	fpart = fpart * ft_pow(10, precision);
+	if (!(tmp1 = add_zeros(fpart, precision, tmp1)) ||
+		!(tmp2 = ft_itoa_long(fpart)) ||
+		!(result = ft_strjoin(tmp1, tmp2)))
+		return (NULL);
+	ft_strdel(&tmp1);
+	ft_strdel(&tmp2);
 	return (result);
 }
