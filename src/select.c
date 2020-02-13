@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   select.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/11 13:03:22 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 18:01:57 by ohakola          ###   ########.fr       */
+/*   Created: 2020/02/13 18:01:41 by ohakola           #+#    #+#             */
+/*   Updated: 2020/02/13 18:02:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			place_thread_frames(t_scene *scene)
+t_fractal_param_f			select_params(enum e_fractal type)
 {
-	int	i;
-
-	i = 0;
-	while (i < THREADS)
-	{
-		mlx_put_image_to_window(scene->mlx, scene->mlx_wdw,
-			scene->fractal_params[i]->frame, 0, i * HEIGHT / THREADS);
-		i++;
-	}
+	return ((t_fractal_param_f[5]){
+		mandelbrot_params,
+		julia_params,
+		burning_ship_params,
+		mandelbrot_n_params,
+		julia_n_params
+	}[type]);
 }
 
-int					draw(t_scene *scene)
+t_fractal_artist			artist_draw(enum e_fractal type)
 {
-	mlx_clear_window(scene->mlx, scene->mlx_wdw);
-	artist_draw(scene->artist)(scene);
-	place_thread_frames(scene);
-	draw_ui(scene);
-	scene->redraw = FALSE;
-	return (1);
+	return ((t_fractal_artist[5]){
+		draw_mandelbrot,
+		draw_julia,
+		draw_burning_ship,
+		draw_mandelbrot_n,
+		draw_julia_n
+	}[type]);
 }

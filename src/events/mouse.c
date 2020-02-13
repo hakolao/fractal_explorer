@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 13:05:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 18:00:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int				handle_mouse_button_press(int button, int x, int y, void *param)
 		scene->mouse_y = y;
 		center_to(scene, x, y);
 	}
-	if (scene->artist == julia && button == MOUSE_BUTTON_RIGHT)
+	if ((scene->artist == julia || scene->artist == julia_n)
+		&& button == MOUSE_BUTTON_RIGHT)
 		scene->stop_julia = !scene->stop_julia;
 	scene->redraw = TRUE;
 	return ((button == SCROLL_UP && zoom(scene, 1.03)) ||
@@ -56,7 +57,8 @@ int				handle_mouse_move(int x, int y, void *param)
 	x_diff = x - scene->mouse_x;
 	y_diff = y - scene->mouse_y;
 	diff_lim = 10;
-	if (scene->artist == julia && !scene->stop_julia &&
+	if ((scene->artist == julia || scene->artist == julia_n)
+		&& !scene->stop_julia &&
 		move_cx_cy(scene, x, y))
 		scene->redraw = TRUE;
 	if (scene->mouse_left_pressed == TRUE && ft_abs(x_diff) > diff_lim &&

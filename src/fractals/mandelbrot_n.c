@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:08:02 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 17:22:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:48:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void			inverse_mandelbrot_work(void *args)
 	ft_pixel_foreach(params->pixel_bounds, args, inverse_mandelbrot_pixel);
 }
 
-void				draw_inverse_mandelbrot(t_scene *scene)
+void				draw_mandelbrot_n(t_scene *scene)
 {
 	work_parallel(THREADS, (void**)scene->fractal_params,
 		inverse_mandelbrot_work);

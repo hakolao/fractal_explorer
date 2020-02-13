@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 16:44:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 17:50:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void			draw_center_info(t_scene *scene, int x, int y)
 		"Center y: ");
 	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 20, UI_COLOR,
 		y_pos);
-	if (scene->artist == mandelbrot_n &&
+	if ((scene->artist == mandelbrot_n || scene->artist == julia_n) &&
 		(n_pow = ft_itoa(scene->fractal_params[0]->pow_n)))
 	{
 		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 40,

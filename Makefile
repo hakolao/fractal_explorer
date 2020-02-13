@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/13 16:25:13 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/13 18:02:48 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SOURCES = main.c \
 			log.c \
 			thread.c \
 			colors.c \
+			select.c \
 			draw/pixel.c \
 			draw/draw.c \
 			events/keys.c \
@@ -34,6 +35,7 @@ SOURCES = main.c \
 			events/exit.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
+			fractals/julia_n.c \
 			fractals/burning_ship.c \
 			fractals/mandelbrot_n.c \
 			fractals/utils.c \

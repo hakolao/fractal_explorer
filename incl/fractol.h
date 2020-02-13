@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 16:30:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 18:02:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ enum				e_fractal {
 	mandelbrot,
 	julia,
 	burning_ship,
-	mandelbrot_n
+	mandelbrot_n,
+	julia_n
 };
 
 typedef struct		s_fractal_params
@@ -178,7 +179,6 @@ void				plot_pixel(t_scene *scene, int x, int y, int color);
 int					lerp_rgb(int start, int end, double gradient_mul);
 void				plot_threaded_pixels(t_scene *scene);
 void				set_pixel(t_pixel *pixel, int x, int y, int color);
-t_fractal_artist	artist_draw(enum e_fractal type);
 void				plot_pixel_on_thread_frame(t_fractal_params *params,
 					t_pixel *pixel);
 
@@ -208,16 +208,18 @@ int					log_guide(void);
 void				draw_mandelbrot(t_scene *scene);
 void				draw_julia(t_scene *scene);
 void				draw_burning_ship(t_scene *scene);
-void				draw_inverse_mandelbrot(t_scene *scene);
+void				draw_mandelbrot_n(t_scene *scene);
+void				draw_julia_n(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					mandelbrot_n_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
+int					julia_n_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					burning_ship_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
-t_fractal_param_f	select_params(enum e_fractal type);
 int					zoom(t_scene *scene, long double amount);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
@@ -246,5 +248,11 @@ int					color_palette(t_fractal_params *params,
 					t_rgb **colors, int colors_size, int palette_size);
 int					change_palette_size(t_scene *scene, int amount);
 int					randomize_palette(t_scene *scene);
+
+/*
+** Selectors
+*/
+t_fractal_artist	artist_draw(enum e_fractal type);
+t_fractal_param_f	select_params(enum e_fractal type);
 
 #endif
