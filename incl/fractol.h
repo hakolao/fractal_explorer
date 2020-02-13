@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:52:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 13:01:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,13 @@
 # define MANDEL_CENTER_Y -0.1374168856037867
 # define JULIA_CENTER_X 0.0
 # define JULIA_CENTER_Y 0.0
+# define BURNING_CENTER_X 0.0
+# define BURNING_CENTER_Y 0.0
 
 enum				e_fractal {
 	mandelbrot,
 	julia,
+	burning_ship
 };
 
 typedef struct		s_fractal_params
@@ -202,17 +205,21 @@ int					log_guide(void);
 */
 void				draw_mandelbrot(t_scene *scene);
 void				draw_julia(t_scene *scene);
-int					zoom(t_scene *scene, long double amount);
+void				draw_burning_ship(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
+int					burning_ship_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
+t_fractal_param_f	select_params(enum e_fractal type);
+int					zoom(t_scene *scene, long double amount);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
 int					change_iters(t_scene *scene, long double amount);
 long double			*scaled_xy(long double *x0_y0,
 					t_fractal_params *params, int px, int py);
-int					handle_julia_params(t_scene *scene, int mouse_x,
+int					move_cx_cy(t_scene *scene, int mouse_x,
 					int mouse_y);
 
 /*
@@ -220,6 +227,9 @@ int					handle_julia_params(t_scene *scene, int mouse_x,
 */
 void				work_parallel(int num_threads, void **thread_params,
 					void (*worker_f)(void *params));
+t_fractal_params	**thread_fractal_params(t_scene *scene);
+int					thread_render_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
 
 /*
 ** Colors

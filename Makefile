@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/12 14:13:34 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/13 11:58:55 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SOURCES = main.c \
 			events/exit.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
+			fractals/burning_ship.c \
 			fractals/utils.c \
 			fractals/params.c \
 			ui/ui.c \

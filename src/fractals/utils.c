@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:37:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:47:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ long double				*scaled_xy(long double *cx_cy,
 	return (cx_cy);
 }
 
-int						handle_julia_params(t_scene *scene, int mouse_x,
+int						move_cx_cy(t_scene *scene, int mouse_x,
 						int mouse_y)
 {
 	int			i;

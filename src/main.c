@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 16:54:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:44:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int				init_fractol(int *fractals, int size)
 	return (FALSE);
 }
 
+int				is_valid_arg(char *arg)
+{
+	return (ft_strequ(arg, "mandelbrot") ||
+			ft_strequ(arg, "julia") ||
+			ft_strequ(arg, "burning_ship"));
+}
+
 int				parse_args(int argc, char **argv)
 {
 	int	i;
@@ -59,15 +66,16 @@ int				parse_args(int argc, char **argv)
 	while (++i < argc - 1)
 	{
 		fractals[i] = -1;
-		if (ft_strequ(argv[i + 1], "mandelbrot") ||
-			ft_strequ(argv[i + 1], "julia"))
+		if (is_valid_arg(argv[i + 1]))
 			size++;
+		else
+			return (log_guide() && FALSE);
 		if (ft_strequ(argv[i + 1], "mandelbrot"))
 			fractals[i] = mandelbrot;
 		else if (ft_strequ(argv[i + 1], "julia"))
 			fractals[i] = julia;
-		else
-			return (log_guide() && FALSE);
+		else if (ft_strequ(argv[i + 1], "burning_ship"))
+			fractals[i] = burning_ship;
 	}
 	if (size > MAX_WINDOWS)
 		return (log_err("Too many windows: max 10", strerror(5)));

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/06 18:00:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 11:57:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int				log_perr(char *str)
 
 int				log_guide(void)
 {
-	ft_putstr("Allowed arguments: [mandelbrot, julia]");
+	ft_putstr("Allowed arguments: [mandelbrot, julia, burning_ship]");
 	return (1);
 }

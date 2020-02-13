@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/12 17:02:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 12:57:25 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,6 @@ static int					scene_render_params(t_scene *scene,
 	return (TRUE);
 }
 
-static t_fractal_param_f	select_params(enum e_fractal type)
-{
-	return ((t_fractal_param_f[2]){
-		mandelbrot_params,
-		julia_params
-	}[type]);
-}
-
-static t_fractal_params		**thread_fractal_params(t_scene *scene)
-{
-	t_fractal_params		**fractal_params;
-	int						i;
-
-	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)) ||
-		(HEIGHT % THREADS != 0 && log_err("HEIGHT % THREADS != 0", "Headers")))
-		return (NULL);
-	i = 0;
-	while (i < THREADS)
-	{
-		if (!(fractal_params[i] =
-				malloc(sizeof(**fractal_params) * PIXELS)) ||
-			!select_params(scene->artist)(fractal_params[i], scene, i))
-			return (NULL);
-		i++;
-	}
-	return (fractal_params);
-}
-
 static char					*artist_name(enum e_fractal artist)
 {
 	char	*name;
@@ -60,6 +32,8 @@ static char					*artist_name(enum e_fractal artist)
 		name = ft_strdup("Mandelbrot");
 	else if (artist == julia)
 		name = ft_strdup("Julia");
+	else if (artist == burning_ship)
+		name = ft_strdup("Burning ship");
 	else
 		name = ft_strdup("Fractol");
 	return (name);
