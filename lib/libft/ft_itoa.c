@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 19:10:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/11 17:44:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:58:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** into a string representation of the number
 */
 
-static void			str_rev(char *str)
+void				ft_str_rev(char *str)
 {
 	int		i;
 	int		len;
@@ -65,7 +65,7 @@ char				*ft_itoa(int nb)
 	}
 	if (sign == -1)
 		arr[i] = '-';
-	str_rev(arr);
+	ft_str_rev(arr);
 	return (arr);
 }
 
@@ -88,6 +88,6 @@ char				*ft_itoa_long(long int nb)
 	}
 	if (sign == -1)
 		arr[i] = '-';
-	str_rev(arr);
+	ft_str_rev(arr);
 	return (arr);
 }

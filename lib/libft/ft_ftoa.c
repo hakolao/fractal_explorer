@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 14:42:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/13 14:59:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,26 @@ static char		*add_zeros(long int fpart, int precision, char *str)
 	return (res);
 }
 
+static char		*handle_negative_zero(float nb, char *str)
+{
+	char	*res;
+	int		len;
+
+	if (nb < 0 && nb > -1)
+	{
+		len = ft_strlen(str);
+		if (!(res = ft_strnew(len + 1)))
+			return (NULL);
+		res = ft_strcpy(res, str);
+		ft_str_rev(res);
+		res[len] = '-';
+		ft_str_rev(res);
+		ft_strdel(&str);
+		return (res);
+	}
+	return (str);
+}
+
 char			*ft_ftoa(float nb, int precision)
 {
 	int		ipart;
@@ -61,7 +81,8 @@ char			*ft_ftoa(float nb, int precision)
 
 	ipart = (int)nb;
 	fpart = ft_abs_long_double(nb) - ft_abs_long_double((float)ipart);
-	if (!(result = ft_itoa_long(ipart)))
+	if (!(result = ft_itoa_long(ipart)) ||
+		!(result = handle_negative_zero(nb, result)))
 		return (NULL);
 	if (precision <= 0)
 		return (result);
