@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 18:01:41 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:47:13 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 13:09:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@
 
 t_fractal_param_f			select_params(enum e_fractal type)
 {
-	return ((t_fractal_param_f[5]){
+	return ((t_fractal_param_f[6]){
 		mandelbrot_params,
 		julia_params,
 		burning_ship_params,
 		mandelbrot_n_params,
-		julia_n_params
+		julia_n_params,
+		bird_of_prey_params
 	}[type]);
 }
 
@@ -33,11 +34,12 @@ t_fractal_param_f			select_params(enum e_fractal type)
 
 t_fractal_artist			artist_draw(enum e_fractal type)
 {
-	return ((t_fractal_artist[5]){
+	return ((t_fractal_artist[6]){
 		draw_mandelbrot,
 		draw_julia,
 		draw_burning_ship,
 		draw_mandelbrot_n,
-		draw_julia_n
+		draw_julia_n,
+		draw_bird_of_prey
 	}[type]);
 }
