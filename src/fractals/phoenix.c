@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:07:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 15:10:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 16:33:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,23 @@ static double		escape_time(t_complex z, t_complex *squares,
 					t_fractal_params *params)
 {
 	long double				iter;
+	long double				xold;
+	long double				yold;
+	long double				xtemp;
+	long double				ytemp;
 
+	xold = 1.0;
+	yold = 0.0;
 	iter = 0.0;
-	while (squares->x + squares->y <=
+	while (z.x * z.x + z.y * z.y <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		z.y = 2 * ft_abs_long_double(z.y * z.x) + params->cy;
-		z.x = squares->x - squares->y - params->cx;
+		ytemp = 2 * z.y * z.x + params->cy + yold * params->cy;
+		xtemp = z.x * z.x - z.y * z.y + params->cx + xold * params->cx;
+		xold = z.x;
+		yold = z.y;
+		z.x = xtemp;
+		z.y = ytemp;
 		squares->x = z.x * z.x;
 		squares->y = z.y * z.y;
 		iter++;

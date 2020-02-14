@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:59:43 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:59:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 16:03:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 /*
 ** Modified version of julia set with abs values &
 ** flippable cx, cy signs :). Creates quite fancy
-** fractals.
+** fractals. Similar to burning ship julia
+** http://usefuljs.net/fractals/docs/mandelvariants.html
 */
 
 static double		escape_time(t_complex z, t_complex *squares,
