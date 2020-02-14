@@ -6,23 +6,29 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:59:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 15:11:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int				check_args(char *arg, int *size, int *fractal)
+int				is_valid_arg(char *arg)
 {
-	int		res;
-
-	if (res = ft_strequ(arg, "mandelbrot") ||
+	return (ft_strequ(arg, "mandelbrot") ||
 			ft_strequ(arg, "julia") ||
 			ft_strequ(arg, "burning_ship") ||
 			ft_strequ(arg, "bird_of_prey") ||
 			ft_strequ(arg, "julia_n") ||
 			ft_strequ(arg, "julia_mod") ||
-			ft_strequ(arg, "mandelbrot_n"))
+			ft_strequ(arg, "phoenix") ||
+			ft_strequ(arg, "mandelbrot_n"));
+}
+
+int				check_args(char *arg, int *size, int *fractal)
+{
+	int		res;
+
+	if ((res = is_valid_arg(arg)))
 		(*size)++;
 	if (ft_strequ(arg, "mandelbrot"))
 		*fractal = mandelbrot;
@@ -38,5 +44,7 @@ int				check_args(char *arg, int *size, int *fractal)
 		*fractal = bird_of_prey;
 	else if (ft_strequ(arg, "julia_mod"))
 		*fractal = julia_mod;
+	else if (ft_strequ(arg, "phoenix"))
+		*fractal = phoenix;
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:28:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 15:08:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int				log_guide(void)
 {
 	ft_putstr("Allowed arguments: [mandelbrot, julia, "
 			"burning_ship, mandelbrot_n, julia_n, bird_of_prey, "
-			"julia_mod]\n");
+			"julia_mod, phoenix]\n");
 	return (1);
 }

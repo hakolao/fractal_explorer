@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:50:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 15:11:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ enum				e_fractal {
 	mandelbrot_n,
 	julia_n,
 	bird_of_prey,
-	julia_mod
+	julia_mod,
+	phoenix
 };
 
 typedef struct		s_fractal_params
@@ -229,6 +230,7 @@ void				draw_mandelbrot_n(t_scene *scene);
 void				draw_julia_n(t_scene *scene);
 void				draw_bird_of_prey(t_scene *scene);
 void				draw_julia_mod(t_scene *scene);
+void				draw_phoenix(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					mandelbrot_n_params(t_fractal_params
@@ -242,6 +244,8 @@ int					burning_ship_params(t_fractal_params
 int					bird_of_prey_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					julia_mod_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
+int					phoenix_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 
 /*
