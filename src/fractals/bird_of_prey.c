@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 13:06:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 13:37:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 15:01:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static double		escape_time(t_complex z_init, t_complex c,
 
 	iter = 0.0;
 	z = z_init;
-	while (z.x * z.x + z.y *z.y <= 16 && iter < max_iter)
+	while (z.x * z.x + z.y * z.y <= 16 && iter < max_iter)
 	{
 		xtemp = (z.x * z.x - z.y * z.y * 3) *
 			ft_abs_long_double(z.x) + c.x;
