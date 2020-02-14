@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   phoenix.c                                          :+:      :+:    :+:   */
+/*   julia_mod.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:06:00 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:20:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 14:25:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
 /*
-** http://www.jamesh.id.au/fractals/mandel/Phoenix.html
+** Modified version of julia set with abs values &
+** flippable cx, cy signs :). Creates quite fancy
+** fractals.
 */
 
 static double		escape_time(t_complex z, t_complex *squares,
@@ -25,8 +27,10 @@ static double		escape_time(t_complex z, t_complex *squares,
 	while (squares->x + squares->y <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		z.y = 2 * ft_abs_long_double(z.y * z.x) + params->cy;
-		z.x = squares->x - squares->y - params->cx;
+		z.y = 2 * ft_abs_long_double(z.y * z.x) +
+			params->cx_sign * params->cy;
+		z.x = ft_abs_long_double(squares->x - squares->y) +
+			params->cy_sign * params->cx;
 		squares->x = z.x * z.x;
 		squares->y = z.y * z.y;
 		iter++;
@@ -34,7 +38,7 @@ static double		escape_time(t_complex z, t_complex *squares,
 	return (iter);
 }
 
-static void			phoenix_pixel(int pixel_i, int px, int py, void *args)
+static void			julia_mod_pixel(int pixel_i, int px, int py, void *args)
 {
 	t_complex				z;
 	t_complex				squares;
@@ -52,15 +56,15 @@ static void			phoenix_pixel(int pixel_i, int px, int py, void *args)
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 
-static void			phoenix_work(void *args)
+static void			julia_mod_work(void *args)
 {
 	t_fractal_params *params;
 
 	params = (t_fractal_params*)args;
-	ft_pixel_foreach(params->pixel_bounds, args, phoenix_pixel);
+	ft_pixel_foreach(params->pixel_bounds, args, julia_mod_pixel);
 }
 
-void				draw_phoenix(t_scene *scene)
+void				draw_julia_mod(t_scene *scene)
 {
-	work_parallel(THREADS, (void**)scene->fractal_params, phoenix_work);
+	work_parallel(THREADS, (void**)scene->fractal_params, julia_mod_work);
 }

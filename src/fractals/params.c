@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 12:13:05 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 13:08:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 14:41:20 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int							mandelbrot_params(t_fractal_params
 	fractal_params->max_y = 2.0;
 	fractal_params->thread_i = i;
 	fractal_params->pow_n = 2.0;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	if (!color_palette(fractal_params, scene->colors, 6,
@@ -51,6 +53,8 @@ int							mandelbrot_n_params(t_fractal_params
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	fractal_params->pow_n = 3.0;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = 1;
 	if (!color_palette(fractal_params, scene->colors, 6,
 			scene->palette_size) ||
 		!thread_render_params(fractal_params, scene, i))
@@ -75,6 +79,8 @@ int							julia_params(t_fractal_params
 	fractal_params->cy = 0.27015;
 	fractal_params->pow_n = 2.0;
 	fractal_params->thread_i = i;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	if (!color_palette(fractal_params, scene->colors, 6,
@@ -101,6 +107,8 @@ int							julia_n_params(t_fractal_params
 	fractal_params->cx = -0.7;
 	fractal_params->cy = 0.27015;
 	fractal_params->thread_i = i;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	if (!color_palette(fractal_params, scene->colors, 6,
@@ -124,6 +132,8 @@ int							burning_ship_params(t_fractal_params
 	fractal_params->max_y = 2.0;
 	fractal_params->pow_n = 2.0;
 	fractal_params->thread_i = i;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	if (!color_palette(fractal_params, scene->colors, 6,

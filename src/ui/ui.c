@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 17:50:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 14:53:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static void			draw_center_info(t_scene *scene, int x, int y)
 {
 	char	*x_pos;
 	char	*y_pos;
-	char	*n_pow;
 
 	if (!(x_pos = ft_ftoa(scene->fractal_params[0]->center_x, 15)) ||
 		!(y_pos = ft_ftoa(scene->fractal_params[0]->center_y, 15)))
@@ -80,17 +79,15 @@ static void			draw_center_info(t_scene *scene, int x, int y)
 		"Center y: ");
 	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 20, UI_COLOR,
 		y_pos);
-	if ((scene->artist == mandelbrot_n || scene->artist == julia_n) &&
-		(n_pow = ft_itoa(scene->fractal_params[0]->pow_n)))
-	{
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 40,
-			UI_COLOR, "Pow n: ");
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 40, UI_COLOR,
-		n_pow);
-		ft_strdel(&n_pow);
-	}
 	ft_strdel(&x_pos);
 	ft_strdel(&y_pos);
+}
+
+static void			draw_info(t_scene *scene, int x, int y)
+{
+	draw_center_info(scene, x, y);
+	draw_power_info(scene, x, y);
+	draw_cx_cy_sign_info(scene, x, y);
 }
 
 void				draw_ui(t_scene *scene)
@@ -112,7 +109,7 @@ void				draw_ui(t_scene *scene)
 	draw_paragraph(scene, guidestr, 10, 30);
 	draw_paragraph(scene, iterstr, WIDTH - 300, 30);
 	draw_paragraph(scene, zoomstr, WIDTH - 300, 50);
-	draw_center_info(scene, WIDTH - 300, 70);
+	draw_info(scene, WIDTH - 300, 70);
 	draw_palette(scene, 10, HEIGHT - 120);
 	draw_whole_palette(scene, 0, HEIGHT - 30);
 	ft_strdel(&guidestr);

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 13:49:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 14:50:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ enum				e_fractal {
 	mandelbrot_n,
 	julia_n,
 	bird_of_prey,
-	phoenix
+	julia_mod
 };
 
 typedef struct		s_fractal_params
@@ -116,6 +116,8 @@ typedef struct		s_fractal_params
 	long double			r;
 	long double			cx;
 	long double			cy;
+	int					cx_sign;
+	int					cy_sign;
 	long double			pow_n;
 	void				*frame;
 	char				*frame_buf;
@@ -183,6 +185,8 @@ void				draw_paragraph(t_scene *scene, char *text, int xpos,
 					int ypos);
 void				draw_ui(t_scene *scene);
 char				*guide(void);
+void				draw_cx_cy_sign_info(t_scene *scene, int x, int y);
+void				draw_power_info(t_scene *scene, int x, int y);
 
 /*
 ** Draw
@@ -224,7 +228,7 @@ void				draw_burning_ship(t_scene *scene);
 void				draw_mandelbrot_n(t_scene *scene);
 void				draw_julia_n(t_scene *scene);
 void				draw_bird_of_prey(t_scene *scene);
-void				draw_phoenix(t_scene *scene);
+void				draw_julia_mod(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					mandelbrot_n_params(t_fractal_params
@@ -237,7 +241,7 @@ int					burning_ship_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					bird_of_prey_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
-int					phoenix_params(t_fractal_params
+int					julia_mod_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 
 /*
@@ -263,6 +267,8 @@ void				color_julia_n_pixel(t_pixel *pixel, long double iter,
 					t_complex powers, t_fractal_params *params);
 void				color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
 					t_complex powers, t_fractal_params *params);
+int					flip_cy_sign(t_scene *scene);
+int					flip_cx_sign(t_scene *scene);
 
 /*
 ** Threads

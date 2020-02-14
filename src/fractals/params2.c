@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 13:08:14 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 13:49:56 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 14:40:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int							bird_of_prey_params(t_fractal_params
 	fractal_params->max_y = 2.0;
 	fractal_params->pow_n = 2.0;
 	fractal_params->thread_i = i;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
 	if (!color_palette(fractal_params, scene->colors, 6,
@@ -35,7 +37,7 @@ int							bird_of_prey_params(t_fractal_params
 	return (TRUE);
 }
 
-int							phoenix_params(t_fractal_params
+int							julia_mod_params(t_fractal_params
 							*fractal_params, t_scene *scene, int i)
 {
 	fractal_params->max_iter = MAX_ITER_INIT;
@@ -51,6 +53,8 @@ int							phoenix_params(t_fractal_params
 	fractal_params->cx = -0.7;
 	fractal_params->cy = 0.27015;
 	fractal_params->pow_n = 2.0;
+	fractal_params->cx_sign = 1;
+	fractal_params->cy_sign = -1;
 	fractal_params->thread_i = i;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;

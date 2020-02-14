@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   log.c                                              :+:      :+:    :+:   */
+/*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:28:24 by ohakola          ###   ########.fr       */
+/*   Created: 2020/02/14 14:31:15 by ohakola           #+#    #+#             */
+/*   Updated: 2020/02/14 14:56:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int				log_err(char *str, char *strerror)
+int			flip_cx_sign(t_scene *scene)
 {
-	ft_putstr_fd(strerror, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(str, 2);
-	return (1);
+	int		i;
+
+	i = 0;
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->cx_sign = -1 *
+			scene->fractal_params[i]->cx_sign;
+		i++;
+	}
+	return (0);
 }
 
-int				log_perr(char *str)
+int			flip_cy_sign(t_scene *scene)
 {
-	perror(str);
-	return (1);
-}
+	int		i;
 
-int				log_guide(void)
-{
-	ft_putstr("Allowed arguments: [mandelbrot, julia, "
-			"burning_ship, mandelbrot_n, julia_n, bird_of_prey, "
-			"julia_mod]\n");
-	return (1);
+	i = 0;
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->cy_sign = -1 *
+			scene->fractal_params[i]->cy_sign;
+		i++;
+	}
+	return (0);
 }

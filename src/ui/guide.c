@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:18:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 14:52:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ char			*guide(void)
 			"Mouse 1: Center to point\n"
 			"1/2: Increase max iterations\n"
 			"C: Change color palette\n"
+			"Q/E: Flip cx, cy signs (in julia_mod)\n"
 			"Up/Down: Increment pow_n (only [fractal]_n])\n"
 			"Left/Right: Change palette size")) == NULL)
 		return (NULL);

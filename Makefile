@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/14 13:51:21 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/14 14:51:35 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,17 +35,19 @@ SOURCES = main.c \
 			events/exit.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
-			fractals/phoenix.c \
+			fractals/julia_mod.c \
 			fractals/julia_n.c \
 			fractals/burning_ship.c \
 			fractals/bird_of_prey.c \
 			fractals/mandelbrot_n.c \
 			fractals/utils.c \
 			fractals/utils2.c \
+			fractals/utils3.c \
 			fractals/colors.c \
 			fractals/params.c \
 			fractals/params2.c \
 			ui/ui.c \
+			ui/utils.c \
 			ui/guide.c
 
 SRCS = $(addprefix $(DIR_SRC)/,$(SOURCES))
