@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 13:06:26 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 13:10:53 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 13:37:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,23 @@
 static double		escape_time(t_complex z_init, t_complex c,
 					t_complex *squares, long double max_iter)
 {
-	long double				z_sqr;
-	long double				iter;
 	t_complex				z;
+	long double				xtemp;
+	long double				iter;
 
 	iter = 0.0;
 	z = z_init;
-	while (squares->x + squares->y <= 16 && iter < max_iter)
+	while (z.x * z.x + z.y *z.y <= 16 && iter < max_iter)
 	{
-		z.x = ft_abs_long_double(squares->x - squares->y + c.x);
-		z.y = ft_abs_long_double(z_sqr - squares->x - squares->y + c.y);
-		squares->x = z.x * z.x;
-		squares->y = z.y * z.y;
-		z_sqr = (z.x + z.y) * (z.x + z.y);
+		xtemp = (z.x * z.x - z.y * z.y * 3) *
+			ft_abs_long_double(z.x) + c.x;
+		z.y = (z.x * z.x * 3 - z.y * z.y) *
+			ft_abs_long_double(z.y) + c.y;
+		z.x = xtemp;
 		iter++;
 	}
+	squares->x = z.x * z.x;
+	squares->y = z.y * z.y;
 	return (iter);
 }
 
