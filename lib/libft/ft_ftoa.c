@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 13:19:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 14:59:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 12:41:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static char		*add_zeros(long int fpart, int precision, char *str)
 	return (res);
 }
 
-static char		*handle_negative_zero(float nb, char *str)
+static char		*handle_negative_zero(long double nb, char *str)
 {
 	char	*res;
 	int		len;
@@ -71,16 +71,16 @@ static char		*handle_negative_zero(float nb, char *str)
 	return (str);
 }
 
-char			*ft_ftoa(float nb, int precision)
+char			*ft_ftoa(long double nb, int precision)
 {
-	int		ipart;
-	float	fpart;
-	char	*result;
-	char	*tmp1;
-	char	*tmp2;
+	long int	ipart;
+	long double	fpart;
+	char		*result;
+	char		*tmp1;
+	char		*tmp2;
 
-	ipart = (int)nb;
-	fpart = ft_abs_long_double(nb) - ft_abs_long_double((float)ipart);
+	ipart = (long int)nb;
+	fpart = ft_abs_long_double(nb) - ft_abs_long_double((long double)ipart);
 	if (!(result = ft_itoa_long(ipart)) ||
 		!(result = handle_negative_zero(nb, result)))
 		return (NULL);
@@ -89,7 +89,7 @@ char			*ft_ftoa(float nb, int precision)
 	if (!(tmp1 = ft_strjoin(result, ".")))
 		return (NULL);
 	ft_strdel(&result);
-	fpart = fpart * ft_pow(10, precision);
+	fpart = fpart * ft_powl(10, precision);
 	if (!(tmp1 = add_zeros(fpart, precision, tmp1)) ||
 		!(tmp2 = ft_itoa_long(fpart)) ||
 		!(result = ft_strjoin(tmp1, tmp2)))

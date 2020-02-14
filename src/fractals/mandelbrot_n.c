@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 15:08:02 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:50:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 12:33:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ static double		escape_time(t_complex c, t_complex *powers,
 	z = c;
 	while (z.x * z.x + z.y * z.y <= 16 && iter < max_iter)
 	{
-		xtemp = pow(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *
+		xtemp = powl(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *
 			cos(pow_n * atan2(z.y, z.x)) + c.x;
-		z.y = pow(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *
+		z.y = powl(z.x * z.x + z.y * z.y, (pow_n / 2.0)) *
 			sin(pow_n * atan2(z.y, z.x)) + c.y;
 		z.x = xtemp;
 		iter++;
 	}
-	powers->x = pow(z.x, pow_n);
-	powers->y = pow(z.y, pow_n);
+	powers->x = powl(z.x, pow_n);
+	powers->y = powl(z.y, pow_n);
 	return (iter);
 }
 

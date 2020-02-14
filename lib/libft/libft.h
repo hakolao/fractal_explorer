@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 14:55:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 12:40:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,8 @@ void			ft_pixel_foreach(t_pixel_bounds *limits,
 char			*ft_itoa_long(long int nb);
 void			ft_sort_int_tab(int *tab, unsigned int size, int dir);
 long double		ft_abs_long_double(long double nb);
-long double		ft_pow(double nb, int pow);
-char			*ft_ftoa(float nb, int precision);
+long double		ft_powl(double nb, int pow);
+char			*ft_ftoa(long double nb, int precision);
 void			ft_str_rev(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 16:39:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:51:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 12:33:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ static double		escape_time(t_complex z, t_complex *powers,
 	iter = 0.0;
 	while (z.x * z.x + z.y * z.y <= 16 && iter < params->max_iter)
 	{
-		xtemp = pow(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
+		xtemp = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
 			cos(params->pow_n * atan2(z.y, z.x)) + params->cx;
-		z.y = pow(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
+		z.y = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
 			sin(params->pow_n * atan2(z.y, z.x)) + params->cy;
 		z.x = xtemp;
 		iter++;
 	}
-	powers->x = pow(z.x, params->pow_n);
-	powers->y = pow(z.y, params->pow_n);
+	powers->x = powl(z.x, params->pow_n);
+	powers->y = powl(z.y, params->pow_n);
 	return (iter);
 }
 
