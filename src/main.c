@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:44:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/14 15:54:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int				main(int argc, char **argv)
 	if (argc > 1)
 		parse_args(argc, argv);
 	else
-		init_fractol(&(int){mandelbrot}, 1);
+		log_guide() &&
+			init_fractol(&(int){mandelbrot}, 1);
 	return (0);
 }
