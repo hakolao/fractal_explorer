@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:48:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:33:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:09:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,27 @@ void			draw_cx_cy_info(t_scene *scene, int x, int y)
 		cy);
 		ft_strdel(&cx);
 		ft_strdel(&cy);
+	}
+}
+
+void			draw_px_py_info(t_scene *scene, int x, int y)
+{
+	char	*px;
+	char	*py;
+
+	if ((px = ft_ftoa(scene->fractal_params[0]->px, 15)) &&
+		(py = ft_ftoa(scene->fractal_params[0]->py, 15)) &&
+		scene->artist == phoenix)
+	{
+		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 80,
+			UI_COLOR, "Px: ");
+		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 80, UI_COLOR,
+		px);
+		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 100,
+			UI_COLOR, "Py: ");
+		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 100, UI_COLOR,
+		py);
+		ft_strdel(&px);
+		ft_strdel(&py);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:52:52 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:21:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ char			*guide(void)
 	char	*guide;
 
 	if ((guide = ft_strdup("USAGE Keys:\n"
-			"----------\nESC: Exit all, (x): Exit window\n"
+			"----------\nESC: Exit all\n(x): Exit window\n"
 			"G: Toggle guide\n"
 			"Scroll/W/S: Zoom in/out (increases max iters)\n"
 			"Mouse 1: Center to point\n"
-			"1/2: Increase max iterations\n"
 			"C: Change color palette\n"
+			"Left/Right: Change palette size\n"
+			"Mouse 2: Stop Julia cx cy\n"
+			"Mouse Middle: Stop Phoenix px, py\n"
 			"Q/E: Flip cx, cy signs (in julia_mod)\n"
-			"Up/Down: Increment pow_n (only [fractal]_n])\n"
-			"Left/Right: Change palette size")) == NULL)
+			"Up/Down: Increment pow_n (only [fractal]_n])\n")) == NULL)
 		return (NULL);
 	return (guide);
 }

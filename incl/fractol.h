@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:32:28 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:14:03 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define SCROLL_DOWN 4
 # define MOUSE_BUTTON_RIGHT 2
 # define MOUSE_BUTTON_LEFT 1
+# define MOUSE_BUTTON_MIDDLE 3
 # define KEY_R 15
 # define KEY_NUM_PLUS 69
 # define KEY_NUM_MINUS 78
@@ -118,6 +119,8 @@ typedef struct		s_fractal_params
 	long double			r;
 	long double			cx;
 	long double			cy;
+	long double			px;
+	long double			py;
 	int					cx_sign;
 	int					cy_sign;
 	long double			pow_n;
@@ -145,6 +148,7 @@ typedef struct		s_scene
 	int					mouse_y;
 	int					stop_julia;
 	int					show_guide;
+	int					stop_phoenix;
 	int					redraw;
 	enum e_fractal		artist;
 	t_rgb				**colors;
@@ -190,6 +194,7 @@ char				*guide(void);
 void				draw_cx_cy_sign_info(t_scene *scene, int x, int y);
 void				draw_power_info(t_scene *scene, int x, int y);
 void				draw_cx_cy_info(t_scene *scene, int x, int y);
+void				draw_px_py_info(t_scene *scene, int x, int y);
 
 /*
 ** Draw
@@ -296,6 +301,8 @@ void				color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
 					t_complex powers, t_fractal_params *params);
 int					flip_cy_sign(t_scene *scene);
 int					flip_cx_sign(t_scene *scene);
+int					move_px_py(t_scene *scene, int mouse_x,
+					int mouse_y);
 
 /*
 ** Threads

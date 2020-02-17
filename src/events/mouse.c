@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:03:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:16:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int				handle_mouse_button_press(int button, int x, int y, void *param)
 		scene->artist == burning_julia)
 		&& button == MOUSE_BUTTON_RIGHT)
 		scene->stop_julia = !scene->stop_julia;
+	if (scene->artist == phoenix && button == MOUSE_BUTTON_MIDDLE)
+		scene->stop_phoenix = !scene->stop_phoenix;
 	scene->redraw = TRUE;
 	return ((button == SCROLL_UP && zoom(scene, 1.03)) ||
 			(button == SCROLL_DOWN && zoom(scene, 1 / 1.03)));
@@ -65,13 +67,8 @@ int				handle_mouse_move(int x, int y, void *param)
 		&& !scene->stop_julia &&
 		move_cx_cy(scene, x, y))
 		scene->redraw = TRUE;
-	if (scene->mouse_left_pressed == TRUE && ft_abs(x_diff) > diff_lim &&
-		1)
-		scene->mouse_x = x;
-	else if (scene->mouse_left_pressed == TRUE && ft_abs(y_diff) > diff_lim &&
-		1)
-		scene->mouse_y = y;
-	if (scene->mouse_left_pressed)
+	if (scene->artist == phoenix && !scene->stop_phoenix &&
+		move_px_py(scene, x, y))
 		scene->redraw = TRUE;
 	return (1);
 }

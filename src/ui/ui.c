@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:30:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:09:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ static void			draw_info(t_scene *scene, int x, int y)
 	draw_power_info(scene, x, y);
 	draw_cx_cy_info(scene, x, y);
 	draw_cx_cy_sign_info(scene, x, y);
+	draw_px_py_info(scene, x, y);
 }
 
 void				draw_ui(t_scene *scene)

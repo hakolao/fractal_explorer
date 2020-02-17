@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 16:04:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:23:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ double				bird_of_prey_escape(t_complex z, t_complex c,
 	return (iter);
 }
 
+/*
+** This does not quite look like the phoenixes online
+** but I am unsure what's wrong with the iteration parameters...
+** Nevertheless it's pretty.
+*/
+
 double				phoenix_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params)
 {
@@ -68,15 +74,14 @@ double				phoenix_escape(t_complex z, t_complex c,
 	long double				ytemp;
 
 	iter = 0.0;
-	xold = 1.0;
+	xold = 0.0;
 	yold = 0.0;
-	// double px = 0.56667;
-	// double py = -0.5;
-	while (powers->x + powers->y <=
+	while (z.x * z.x + z.y * z.y <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		xtemp = powers->x - powers->y - c.x + xold;
-		ytemp = 2 * (z.y * z.x) + c.y + yold;
+		xtemp = z.x * z.x - z.y * z.y + c.x + params->px *
+			xold - params->py * yold;
+		ytemp = 2 * z.y * z.x - c.y + params->px * yold + params->py * xold;
 		xold = z.x;
 		yold = z.y;
 		z.x = xtemp;

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 13:08:14 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:09:50 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:00:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ int							phoenix_params(t_fractal_params
 	fractal_params->pow_n = 2.0;
 	fractal_params->cx_sign = 1;
 	fractal_params->cy_sign = 1;
+	fractal_params->px = 0.56667;
+	fractal_params->py = -0.5;
 	fractal_params->thread_i = i;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;

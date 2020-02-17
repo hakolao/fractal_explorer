@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:31:15 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 15:02:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:23:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,22 @@ int			flip_cy_sign(t_scene *scene)
 		i++;
 	}
 	return (0);
+}
+
+int			move_px_py(t_scene *scene, int mouse_x,
+			int mouse_y)
+{
+	int			i;
+	t_complex	p;
+
+	i = 0;
+	p = scaled_xy((t_complex){0.0, 0.0}, scene->fractal_params[i],
+		mouse_x, mouse_y);
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->px = p.x;
+		scene->fractal_params[i]->py = p.y;
+		i++;
+	}
+	return (1);
 }

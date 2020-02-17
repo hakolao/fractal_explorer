@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 17:48:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 17:15:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ t_scene						*new_scene(void *mlx, enum e_fractal artist)
 	scene->palette_size = COLORS;
 	scene->artist = artist;
 	scene->stop_julia = FALSE;
+	scene->stop_phoenix = FALSE;
 	if (!scene_colors(scene) ||
 		!(scene->fractal_params = thread_fractal_params(scene)))
 		return (NULL);
