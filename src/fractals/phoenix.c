@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:07:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:22:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 16:00:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,19 @@
 static void			phoenix_pixel(int pixel_i, int px, int py, void *args)
 {
 	t_complex				z;
-	t_complex				squares;
+	t_complex				powers;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
 	z = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	squares = (t_complex){z.x * z.x, z.y * z.y};
+	powers = (t_complex){z.x * z.x, z.y * z.y};
 	iter = phoenix_escape(z,
-		(t_complex){params->cx, params->cy}, &squares, params);
+		(t_complex){params->cx, params->cy}, &powers, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		color_julia_pixel(params->pixels[pixel_i],
-			iter, squares, params);
+			iter, powers, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

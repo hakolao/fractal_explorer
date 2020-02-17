@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:09:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 16:04:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,16 @@ double				phoenix_escape(t_complex z, t_complex c,
 	long double				xtemp;
 	long double				ytemp;
 
+	iter = 0.0;
 	xold = 1.0;
 	yold = 0.0;
-	iter = 0.0;
-	while (z.x * z.x + z.y * z.y <=
+	// double px = 0.56667;
+	// double py = -0.5;
+	while (powers->x + powers->y <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		ytemp = 2 * z.y * z.x + c.y + yold * c.y;
-		xtemp = z.x * z.x - z.y * z.y + c.x + xold * c.x;
+		xtemp = powers->x - powers->y - c.x + xold;
+		ytemp = 2 * (z.y * z.x) + c.y + yold;
 		xold = z.x;
 		yold = z.y;
 		z.x = xtemp;

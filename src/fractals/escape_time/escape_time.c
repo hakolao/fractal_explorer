@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:10:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:59:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 16:10:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ double				julia_escape(t_complex z, t_complex c,
 		params->r * params->r && iter < params->max_iter)
 	{
 		z.y = 2 * (z.y * z.x) + c.y;
-		z.x = powers->x - powers->y - c.x;
+		z.x = powers->x - powers->y + c.x;
 		powers->x = z.x * z.x;
 		powers->y = z.y * z.y;
 		iter++;
@@ -112,7 +112,8 @@ double				julia_n_escape(t_complex z, t_complex c,
 
 /*
 ** Modified version of julia set with abs values &
-** flippable cx, cy signs :). Creates quite fancy
+** flippable cx, cy signs (flipping doesn't do much
+** just flips the axes) :). Creates quite fancy
 ** fractals. Similar to burning ship julia
 ** http://usefuljs.net/fractals/docs/mandelvariants.html
 */
