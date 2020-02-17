@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:02:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 14:32:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ void				draw_ui(t_scene *scene);
 char				*guide(void);
 void				draw_cx_cy_sign_info(t_scene *scene, int x, int y);
 void				draw_power_info(t_scene *scene, int x, int y);
+void				draw_cx_cy_info(t_scene *scene, int x, int y);
 
 /*
 ** Draw
