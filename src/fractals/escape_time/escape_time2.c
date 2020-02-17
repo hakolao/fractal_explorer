@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:28:20 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:43:26 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,19 @@ double				burning_ship_escape(t_complex z, t_complex c,
 double				bird_of_prey_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params)
 {
-	long double				xtemp;
 	long double				iter;
 
 	iter = 0.0;
-	while (z.x * z.x + z.y * z.y <= 16 && iter < params->max_iter)
+	while (powers->x + powers->y <= 16 && iter < params->max_iter)
 	{
-		xtemp = (z.x * z.x - z.y * z.y * 3) *
+		z.x = (powers->x - powers->y * 3) *
 			ft_abs_long_double(z.x) + c.x;
-		z.y = (z.x * z.x * 3 - z.y * z.y) *
+		z.y = (powers->x * 3 - powers->y) *
 			ft_abs_long_double(z.y) + c.y;
-		z.x = xtemp;
+		powers->x = z.x * z.x;
+		powers->y = z.y * z.y;
 		iter++;
 	}
-	powers->x = z.x * z.x;
-	powers->y = z.y * z.y;
 	return (iter);
 }
 

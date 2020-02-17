@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:10:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:28:37 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:50:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ double				julia_n_escape(t_complex z, t_complex c,
 	long double				xtemp;
 
 	iter = 0.0;
-	while (z.x * z.x + z.y * z.y <= 16 && iter < params->max_iter)
+	while (z.x * z.x + z.y * z.y <=
+		params->r * params->r && iter < params->max_iter)
 	{
 		xtemp = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
 			cos(params->pow_n * atan2(z.y, z.x)) + c.x;
@@ -104,8 +105,8 @@ double				julia_n_escape(t_complex z, t_complex c,
 		z.x = xtemp;
 		iter++;
 	}
-	powers->x = powl(z.x, params->pow_n);
-	powers->y = powl(z.y, params->pow_n);
+	powers->x = z.x * z.x;
+	powers->y = z.y * z.y;
 	return (iter);
 }
 
