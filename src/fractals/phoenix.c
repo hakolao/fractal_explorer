@@ -6,39 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 15:07:42 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 16:33:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:22:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-static double		escape_time(t_complex z, t_complex *squares,
-					t_fractal_params *params)
-{
-	long double				iter;
-	long double				xold;
-	long double				yold;
-	long double				xtemp;
-	long double				ytemp;
-
-	xold = 1.0;
-	yold = 0.0;
-	iter = 0.0;
-	while (z.x * z.x + z.y * z.y <=
-		params->r * params->r && iter < params->max_iter)
-	{
-		ytemp = 2 * z.y * z.x + params->cy + yold * params->cy;
-		xtemp = z.x * z.x - z.y * z.y + params->cx + xold * params->cx;
-		xold = z.x;
-		yold = z.y;
-		z.x = xtemp;
-		z.y = ytemp;
-		squares->x = z.x * z.x;
-		squares->y = z.y * z.y;
-		iter++;
-	}
-	return (iter);
-}
 
 static void			phoenix_pixel(int pixel_i, int px, int py, void *args)
 {
@@ -50,7 +22,8 @@ static void			phoenix_pixel(int pixel_i, int px, int py, void *args)
 	params = (t_fractal_params*)args;
 	z = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
 	squares = (t_complex){z.x * z.x, z.y * z.y};
-	iter = escape_time(z, &squares, params);
+	iter = phoenix_escape(z,
+		(t_complex){params->cx, params->cy}, &squares, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		color_julia_pixel(params->pixels[pixel_i],

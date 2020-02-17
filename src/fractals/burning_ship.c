@@ -6,36 +6,11 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:49:38 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:52:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:20:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-
-/*
-** https://en.wikipedia.org/wiki/Burning_Ship_fractal
-*/
-
-static double		escape_time(t_complex z_init, t_complex c,
-					t_complex *squares, long double max_iter)
-{
-	long double				z_sqr;
-	long double				iter;
-	t_complex				z;
-
-	iter = 0.0;
-	z = z_init;
-	while (squares->x + squares->y <= 16 && iter < max_iter)
-	{
-		z.x = ft_abs_long_double(squares->x - squares->y + c.x);
-		z.y = ft_abs_long_double(z_sqr - squares->x - squares->y + c.y);
-		squares->x = z.x * z.x;
-		squares->y = z.y * z.y;
-		z_sqr = (z.x + z.y) * (z.x + z.y);
-		iter++;
-	}
-	return (iter);
-}
 
 static void			burning_ship_pixel(int pixel_i, int px, int py, void *args)
 {
@@ -49,7 +24,7 @@ static void			burning_ship_pixel(int pixel_i, int px, int py, void *args)
 	squares = (t_complex){0.0, 0.0};
 	z = (t_complex){0.0, 0.0};
 	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	iter = escape_time(z, c, &squares, params->max_iter);
+	iter = burning_ship_escape(z, c, &squares, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		color_mandelbrot_pixel(params->pixels[pixel_i], iter,

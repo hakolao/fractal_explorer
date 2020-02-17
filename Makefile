@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/14 15:12:01 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/17 13:27:01 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SOURCES = main.c \
 			events/mouse.c \
 			events/loop.c \
 			events/exit.c \
+			fractals/escape_time/escape_time.c \
+			fractals/escape_time/escape_time2.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
 			fractals/phoenix.c \
@@ -41,12 +43,12 @@ SOURCES = main.c \
 			fractals/burning_ship.c \
 			fractals/bird_of_prey.c \
 			fractals/mandelbrot_n.c \
-			fractals/utils.c \
-			fractals/utils2.c \
-			fractals/utils3.c \
-			fractals/colors.c \
-			fractals/params.c \
-			fractals/params2.c \
+			fractals/utils/utils.c \
+			fractals/utils/utils2.c \
+			fractals/utils/utils3.c \
+			fractals/utils/colors.c \
+			fractals/params/params.c \
+			fractals/params/params2.c \
 			ui/ui.c \
 			ui/utils.c \
 			ui/guide.c
@@ -68,6 +70,9 @@ $(DIR_OBJ):
 	@mkdir -p temp/ui
 	@mkdir -p temp/events
 	@mkdir -p temp/fractals
+	@mkdir -p temp/fractals/utils
+	@mkdir -p temp/fractals/params
+	@mkdir -p temp/fractals/escape_time
 
 $(DIR_OBJ)/%.o: $(DIR_SRC)/%.c $(HEADERS)/$(NAME).h
 	@$(CC) $(FLAGS) -I $(HEADERS) -c -o $@ $<

@@ -6,54 +6,28 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:52:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:12:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*
-** https://en.wikipedia.org/wiki/Plotting_
-** algorithms_for_the_Mandelbrot_set
-*/
-
-static double		escape_time(t_complex z_init, t_complex c,
-					t_complex *squares, long double max_iter)
-{
-	long double				z_sqr;
-	long double				iter;
-	t_complex				z;
-
-	iter = 0.0;
-	z = z_init;
-	while (squares->x + squares->y <= 16 && iter < max_iter)
-	{
-		z.x = squares->x - squares->y + c.x;
-		z.y = z_sqr - squares->x - squares->y + c.y;
-		squares->x = z.x * z.x;
-		squares->y = z.y * z.y;
-		z_sqr = (z.x + z.y) * (z.x + z.y);
-		iter++;
-	}
-	return (iter);
-}
-
 static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
-	t_complex				squares;
+	t_complex				powers;
 	t_complex				c;
 	t_complex				z;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
-	squares = (t_complex){0.0, 0.0};
+	powers = (t_complex){0.0, 0.0};
 	z = (t_complex){0.0, 0.0};
 	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	iter = escape_time(z, c, &squares, params->max_iter);
+	iter = mandelbrot_escape((t_complex){0.0, 0.0}, c, &powers, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_mandelbrot_pixel(params->pixels[pixel_i], iter, squares, params);
+		color_mandelbrot_pixel(params->pixels[pixel_i], iter, powers, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

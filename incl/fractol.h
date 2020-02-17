@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 15:11:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:22:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,22 @@ int					julia_mod_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					phoenix_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
+double				mandelbrot_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				multibrot_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				julia_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				julia_n_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				julia_mod_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				burning_ship_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				bird_of_prey_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				phoenix_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
 
 /*
 ** Fractal utils (functionality)
