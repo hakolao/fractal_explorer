@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 11:49:38 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:20:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 13:40:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 static void			burning_ship_pixel(int pixel_i, int px, int py, void *args)
 {
-	t_complex				squares;
+	t_complex				powers;
 	t_complex				c;
 	t_complex				z;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
-	squares = (t_complex){0.0, 0.0};
+	powers = (t_complex){0.0, 0.0};
 	z = (t_complex){0.0, 0.0};
 	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	iter = burning_ship_escape(z, c, &squares, params);
+	iter = burning_ship_escape(z, c, &powers, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		color_mandelbrot_pixel(params->pixels[pixel_i], iter,
-			squares, params);
+			powers, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 
