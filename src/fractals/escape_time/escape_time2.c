@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:43:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 14:09:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,28 @@ double				phoenix_escape(t_complex z, t_complex c,
 		yold = z.y;
 		z.x = xtemp;
 		z.y = ytemp;
+		powers->x = z.x * z.x;
+		powers->y = z.y * z.y;
+		iter++;
+	}
+	return (iter);
+}
+
+/*
+** http://usefuljs.net/fractals/docs/mandelvariants.html
+*/
+
+double				burning_julia_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params)
+{
+	long double				iter;
+
+	iter = 0.0;
+	while (powers->x + powers->y <=
+		params->r * params->r && iter < params->max_iter)
+	{
+		z.y = ft_abs_long_double(2 * (z.y * z.x) + c.y);
+		z.x = ft_abs_long_double(powers->x - powers->y - c.x);
 		powers->x = z.x * z.x;
 		powers->y = z.y * z.y;
 		iter++;

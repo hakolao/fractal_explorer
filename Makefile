@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/17 13:27:01 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/17 14:00:56 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ SOURCES = main.c \
 			fractals/phoenix.c \
 			fractals/julia_mod.c \
 			fractals/julia_n.c \
+			fractals/burning_julia.c \
 			fractals/burning_ship.c \
 			fractals/bird_of_prey.c \
 			fractals/mandelbrot_n.c \

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:22:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/17 14:02:12 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ enum				e_fractal {
 	julia_n,
 	bird_of_prey,
 	julia_mod,
-	phoenix
+	phoenix,
+	burning_julia
 };
 
 typedef struct		s_fractal_params
@@ -231,6 +232,7 @@ void				draw_julia_n(t_scene *scene);
 void				draw_bird_of_prey(t_scene *scene);
 void				draw_julia_mod(t_scene *scene);
 void				draw_phoenix(t_scene *scene);
+void				draw_burning_julia(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					mandelbrot_n_params(t_fractal_params
@@ -247,6 +249,8 @@ int					julia_mod_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					phoenix_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
+int					burning_julia_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
 double				mandelbrot_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params);
 double				multibrot_escape(t_complex z, t_complex c,
@@ -262,6 +266,8 @@ double				burning_ship_escape(t_complex z, t_complex c,
 double				bird_of_prey_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params);
 double				phoenix_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				burning_julia_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params);
 
 /*
