@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 15:21:39 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 15:27:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -338,7 +338,7 @@ t_fractal_param_f	select_params(enum e_fractal type);
 ** Complex number functions
 */
 t_complex			c_multiply(t_complex a, t_complex b);
-t_complex			c_pow(t_complex c, int pow);
+t_complex			c_pow_int(t_complex c, int pow);
 t_complex			c_divide(t_complex a, t_complex b);
 t_complex			c_add(t_complex a, t_complex b);
 t_complex			c_minus(t_complex a, t_complex b);

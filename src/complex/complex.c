@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:16:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 15:23:41 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 15:27:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ t_complex			c_multiply(t_complex a, t_complex b)
 	return (new);	
 }
 
-t_complex			c_pow(t_complex c, int pow)
+t_complex			c_pow_int(t_complex c, int pow)
 {
 	int			i;
 	t_complex	new;
 
 	i = 0;
 	new = c;
-	while (i < pow)
+	while (i < pow - 1)
 	{
 		new = c_multiply(new, c);
 		i++;
