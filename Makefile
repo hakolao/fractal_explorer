@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/18 13:39:58 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/18 15:23:51 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SOURCES = main.c \
 			fractals/utils/colors.c \
 			fractals/params/params.c \
 			fractals/params/params2.c \
+			complex/complex.c \
 			ui/ui.c \
 			ui/utils.c \
 			ui/guide.c
@@ -71,6 +72,7 @@ $(DIR_OBJ):
 	@mkdir -p temp/draw
 	@mkdir -p temp/ui
 	@mkdir -p temp/events
+	@mkdir -p temp/complex
 	@mkdir -p temp/fractals
 	@mkdir -p temp/fractals/utils
 	@mkdir -p temp/fractals/params
