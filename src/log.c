@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 14:00:43 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 13:42:09 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ int				log_guide(void)
 			"Press key G for guide / info on screen.\n"
 			"Allowed arguments: [mandelbrot, julia, "
 			"burning_ship, mandelbrot_n, julia_n, bird_of_prey, "
-			"julia_mod, phoenix, burning_julia]\n");
+			"julia_mod, phoenix, burning_julia, nova]\n");
 	return (1);
 }

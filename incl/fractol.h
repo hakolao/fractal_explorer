@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 17:14:03 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:34:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,8 @@ enum				e_fractal {
 	bird_of_prey,
 	julia_mod,
 	phoenix,
-	burning_julia
+	burning_julia,
+	nova
 };
 
 typedef struct		s_fractal_params
@@ -165,8 +166,8 @@ typedef struct		s_scenes
 
 typedef struct		s_complex
 {
-	long double		x;
-	long double		y;
+	long double		r;
+	long double		i;
 }					t_complex;
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
@@ -239,6 +240,7 @@ void				draw_bird_of_prey(t_scene *scene);
 void				draw_julia_mod(t_scene *scene);
 void				draw_phoenix(t_scene *scene);
 void				draw_burning_julia(t_scene *scene);
+void				draw_nova(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					mandelbrot_n_params(t_fractal_params
@@ -257,6 +259,8 @@ int					phoenix_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					burning_julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
+int					nova_params(t_fractal_params
+					*fractal_params, t_scene *scene, int i);
 double				mandelbrot_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params);
 double				multibrot_escape(t_complex z, t_complex c,
@@ -274,6 +278,8 @@ double				bird_of_prey_escape(t_complex z, t_complex c,
 double				phoenix_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params);
 double				burning_julia_escape(t_complex z, t_complex c,
+					t_complex *powers, t_fractal_params *params);
+double				nova_escape(t_complex z, t_complex c,
 					t_complex *powers, t_fractal_params *params);
 
 /*

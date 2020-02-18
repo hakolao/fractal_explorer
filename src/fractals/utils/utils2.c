@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:23:33 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:53:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:34:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int				increment_pow_n(t_scene *scene, int incr)
 void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
 				t_complex squares, t_fractal_params *params)
 {
-	iter = iter + 1.0 - log(log(squares.x + squares.y) /
+	iter = iter + 1.0 - log(log(squares.r + squares.i) /
 		2.0 / log(2.0)) / log(2.0);
 	pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
@@ -47,7 +47,7 @@ void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
 void			color_julia_pixel(t_pixel *pixel, long double iter,
 				t_complex squares, t_fractal_params *params)
 {
-	iter = iter + 2.0 - log(log(squares.x + squares.y)) / log(2.0);
+	iter = iter + 2.0 - log(log(squares.r + squares.i)) / log(2.0);
 	pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
 		params->color_palette[

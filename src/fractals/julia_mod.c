@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:59:43 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:28:02 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:35:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void			julia_mod_pixel(int pixel_i, int px, int py, void *args)
 
 	params = (t_fractal_params*)args;
 	z = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	powers = (t_complex){z.x * z.x, z.y * z.y};
+	powers = (t_complex){z.r * z.r, z.i * z.i};
 	iter = julia_mod_escape(z, (t_complex){params->cx, params->cy},
 		&powers, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 15:02:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:34:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int						center_to(t_scene *scene, long double mouse_x,
 		mouse_x, mouse_y);
 	while (i < THREADS)
 	{
-		scene->fractal_params[i]->center_x = new.x;
-		scene->fractal_params[i]->center_y = new.y;
+		scene->fractal_params[i]->center_x = new.r;
+		scene->fractal_params[i]->center_y = new.i;
 		i++;
 	}
 	return (0);
@@ -69,9 +69,9 @@ t_complex				scaled_xy(t_complex c,
 	max_x0 = params->max_y;
 	min_y0 = params->min_y;
 	max_y0 = params->max_y;
-	c.x = (min_x0 + px * (max_x0 - min_x0) / WIDTH) /
+	c.r = (min_x0 + px * (max_x0 - min_x0) / WIDTH) /
 		params->zoom + params->center_x;
-	c.y = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) /
+	c.i = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) /
 		params->zoom + params->center_y;
 	return (c);
 }
@@ -87,8 +87,8 @@ int						move_cx_cy(t_scene *scene, int mouse_x,
 		mouse_x, mouse_y);
 	while (i < THREADS)
 	{
-		scene->fractal_params[i]->cx = c.x;
-		scene->fractal_params[i]->cy = c.y;
+		scene->fractal_params[i]->cx = c.r;
+		scene->fractal_params[i]->cy = c.i;
 		i++;
 	}
 	return (1);

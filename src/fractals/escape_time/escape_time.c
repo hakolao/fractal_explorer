@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:10:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 16:10:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 14:33:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ double				mandelbrot_escape(t_complex z, t_complex c,
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->x + powers->y <= 16 && iter < params->max_iter)
+	while (powers->r + powers->i <= 16 && iter < params->max_iter)
 	{
-		z.x = powers->x - powers->y + c.x;
-		z.y = z_sqr - powers->x - powers->y + c.y;
-		powers->x = z.x * z.x;
-		powers->y = z.y * z.y;
-		z_sqr = (z.x + z.y) * (z.x + z.y);
+		z.r = powers->r - powers->i + c.r;
+		z.i = z_sqr - powers->r - powers->i + c.i;
+		powers->r = z.r * z.r;
+		powers->i = z.i * z.i;
+		z_sqr = (z.r + z.i) * (z.r + z.i);
 		iter++;
 	}
 	return (iter);
@@ -48,17 +48,17 @@ double				multibrot_escape(t_complex z, t_complex c,
 
 	iter = 0.0;
 	z = c;
-	while (z.x * z.x + z.y * z.y <= 16 && iter < params->max_iter)
+	while (z.r * z.r + z.i * z.i <= 16 && iter < params->max_iter)
 	{
-		xtemp = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
-			cos(params->pow_n * atan2(z.y, z.x)) + c.x;
-		z.y = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
-			sin(params->pow_n * atan2(z.y, z.x)) + c.y;
-		z.x = xtemp;
+		xtemp = powl(z.r * z.r + z.i * z.i, (params->pow_n / 2.0)) *
+			cos(params->pow_n * atan2(z.i, z.r)) + c.r;
+		z.i = powl(z.r * z.r + z.i * z.i, (params->pow_n / 2.0)) *
+			sin(params->pow_n * atan2(z.i, z.r)) + c.i;
+		z.r = xtemp;
 		iter++;
 	}
-	powers->x = powl(z.x, params->pow_n);
-	powers->y = powl(z.y, params->pow_n);
+	powers->r = powl(z.r, params->pow_n);
+	powers->i = powl(z.i, params->pow_n);
 	return (iter);
 }
 
@@ -72,13 +72,13 @@ double				julia_escape(t_complex z, t_complex c,
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->x + powers->y <=
+	while (powers->r + powers->i <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		z.y = 2 * (z.y * z.x) + c.y;
-		z.x = powers->x - powers->y + c.x;
-		powers->x = z.x * z.x;
-		powers->y = z.y * z.y;
+		z.i = 2 * (z.i * z.r) + c.i;
+		z.r = powers->r - powers->i + c.r;
+		powers->r = z.r * z.r;
+		powers->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);
@@ -95,18 +95,18 @@ double				julia_n_escape(t_complex z, t_complex c,
 	long double				xtemp;
 
 	iter = 0.0;
-	while (z.x * z.x + z.y * z.y <=
+	while (z.r * z.r + z.i * z.i <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		xtemp = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
-			cos(params->pow_n * atan2(z.y, z.x)) + c.x;
-		z.y = powl(z.x * z.x + z.y * z.y, (params->pow_n / 2.0)) *
-			sin(params->pow_n * atan2(z.y, z.x)) + c.y;
-		z.x = xtemp;
+		xtemp = powl(z.r * z.r + z.i * z.i, (params->pow_n / 2.0)) *
+			cos(params->pow_n * atan2(z.i, z.r)) + c.r;
+		z.i = powl(z.r * z.r + z.i * z.i, (params->pow_n / 2.0)) *
+			sin(params->pow_n * atan2(z.i, z.r)) + c.i;
+		z.r = xtemp;
 		iter++;
 	}
-	powers->x = z.x * z.x;
-	powers->y = z.y * z.y;
+	powers->r = z.r * z.r;
+	powers->i = z.i * z.i;
 	return (iter);
 }
 
@@ -124,15 +124,15 @@ double				julia_mod_escape(t_complex z, t_complex c,
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->x + powers->y <=
+	while (powers->r + powers->i <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		z.y = 2 * ft_abs_long_double(z.y * z.x) +
-			params->cx_sign * c.y;
-		z.x = ft_abs_long_double(powers->x - powers->y) +
-			params->cy_sign * c.x;
-		powers->x = z.x * z.x;
-		powers->y = z.y * z.y;
+		z.i = 2 * ft_abs_long_double(z.i * z.r) +
+			params->cx_sign * c.i;
+		z.r = ft_abs_long_double(powers->r - powers->i) +
+			params->cy_sign * c.r;
+		powers->r = z.r * z.r;
+		powers->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);
