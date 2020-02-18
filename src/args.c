@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 13:40:15 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:41:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int				is_valid_arg(char *arg)
 			ft_strequ(arg, "julia_n") ||
 			ft_strequ(arg, "julia_mod") ||
 			ft_strequ(arg, "phoenix") ||
-			ft_strequ(arg, "nova") ||
 			ft_strequ(arg, "burning_julia") ||
 			ft_strequ(arg, "mandelbrot_n"));
 }
@@ -50,7 +49,5 @@ int				check_args(char *arg, int *size, int *fractal)
 		*fractal = phoenix;
 	else if (ft_strequ(arg, "burning_julia"))
 		*fractal = burning_julia;
-	else if (ft_strequ(arg, "nova"))
-		*fractal = nova;
 	return (res);
 }

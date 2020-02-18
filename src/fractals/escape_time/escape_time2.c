@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 15:40:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:39:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,22 +108,6 @@ double				burning_julia_escape(t_complex z, t_complex c,
 	{
 		z.i = ft_abs_long_double(2 * (z.i * z.r) + c.i);
 		z.r = ft_abs_long_double(powers->r - powers->i - c.r);
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
-		iter++;
-	}
-	return (iter);
-}
-
-double				nova_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
-{
-	long double				iter;
-
-	iter = 0.0;
-	while (powers->r + powers->i <= 16 && iter < params->max_iter)
-	{
-		z = c_add(c_multiply(z, z), c);
 		powers->r = z.r * z.r;
 		powers->i = z.i * z.i;
 		iter++;

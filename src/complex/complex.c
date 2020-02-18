@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/18 15:16:39 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 15:27:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:42:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 t_complex			c_multiply(t_complex a, t_complex b)
 {
 	t_complex new;
-	
+
 	new.r = a.r * b.r - a.i * b.i;
 	new.i = a.i * b.r + a.r * b.i;
-	return (new);	
+	return (new);
 }
 
 t_complex			c_pow_int(t_complex c, int pow)
@@ -27,8 +27,8 @@ t_complex			c_pow_int(t_complex c, int pow)
 	t_complex	new;
 
 	i = 0;
-	new = c;
-	while (i < pow - 1)
+	new = (t_complex){1, 1};
+	while (i < pow)
 	{
 		new = c_multiply(new, c);
 		i++;
@@ -39,9 +39,13 @@ t_complex			c_pow_int(t_complex c, int pow)
 t_complex			c_divide(t_complex a, t_complex b)
 {
 	t_complex	new;
+	long double	divider;
 
-	new.r = (a.r * b.r + a.i * b.i) / (b.r * a.i + b.i * b.i);
-    new.i = (a.i * b.r - a.r * b.i) / (b.r * b.r + b.i * b.i);
+	divider = (b.r * b.r + b.i * b.i);
+	if (divider == 0.0)
+		divider = 0.000001;
+	new.r = (a.r * b.r + a.i * b.i) / divider;
+	new.i = (a.i * b.r - a.r * b.i) / divider;
 	return (new);
 }
 
