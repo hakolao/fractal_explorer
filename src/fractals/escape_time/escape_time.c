@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:10:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 16:04:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 18:07:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 */
 
 double				mandelbrot_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				z_sqr;
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->r + powers->i <= 16 && iter < params->max_iter)
+	while (squares->r + squares->i <= 16 && iter < params->max_iter)
 	{
-		z.r = powers->r - powers->i + c.r;
-		z.i = z_sqr - powers->r - powers->i + c.i;
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		z.r = squares->r - squares->i + c.r;
+		z.i = z_sqr - squares->r - squares->i + c.i;
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		z_sqr = (z.r + z.i) * (z.r + z.i);
 		iter++;
 	}
@@ -41,7 +41,7 @@ double				mandelbrot_escape(t_complex z, t_complex c,
 */
 
 double				multibrot_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 	long double				xtemp;
@@ -57,8 +57,8 @@ double				multibrot_escape(t_complex z, t_complex c,
 		z.r = xtemp;
 		iter++;
 	}
-	powers->r = powl(z.r, params->pow_n);
-	powers->i = powl(z.i, params->pow_n);
+	squares->r = z.r * z.r;
+	squares->i = z.i * z.i;
 	return (iter);
 }
 
@@ -67,18 +67,18 @@ double				multibrot_escape(t_complex z, t_complex c,
 */
 
 double				julia_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->r + powers->i <=
+	while (squares->r + squares->i <=
 		params->r * params->r && iter < params->max_iter)
 	{
 		z.i = 2 * (z.i * z.r) + c.i;
-		z.r = powers->r - powers->i + c.r;
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		z.r = squares->r - squares->i + c.r;
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);
@@ -89,7 +89,7 @@ double				julia_escape(t_complex z, t_complex c,
 */
 
 double				julia_n_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 	long double				xtemp;
@@ -105,8 +105,8 @@ double				julia_n_escape(t_complex z, t_complex c,
 		z.r = xtemp;
 		iter++;
 	}
-	powers->r = z.r * z.r;
-	powers->i = z.i * z.i;
+	squares->r = z.r * z.r;
+	squares->i = z.i * z.i;
 	return (iter);
 }
 
@@ -119,20 +119,20 @@ double				julia_n_escape(t_complex z, t_complex c,
 */
 
 double				julia_mod_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->r + powers->i <=
+	while (squares->r + squares->i <=
 		params->r * params->r && iter < params->max_iter)
 	{
 		z.i = 2 * ft_abs_long_double(z.i * z.r) +
 			params->cx_sign * c.i;
-		z.r = ft_abs_long_double(powers->r - powers->i) +
+		z.r = ft_abs_long_double(squares->r - squares->i) +
 			params->cy_sign * c.r;
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);

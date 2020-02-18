@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 17:39:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:54:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,18 @@
 */
 
 double				burning_ship_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				z_sqr;
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->r + powers->i <= 16 && iter < params->max_iter)
+	while (squares->r + squares->i <= 16 && iter < params->max_iter)
 	{
-		z.r = ft_abs_long_double(powers->r - powers->i + c.r);
-		z.i = ft_abs_long_double(z_sqr - powers->r - powers->i + c.i);
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		z.r = ft_abs_long_double(squares->r - squares->i + c.r);
+		z.i = ft_abs_long_double(z_sqr - squares->r - squares->i + c.i);
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		z_sqr = (z.r + z.i) * (z.r + z.i);
 		iter++;
 	}
@@ -40,19 +40,19 @@ double				burning_ship_escape(t_complex z, t_complex c,
 */
 
 double				bird_of_prey_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->r + powers->i <= 16 && iter < params->max_iter)
+	while (squares->r + squares->i <= 16 && iter < params->max_iter)
 	{
-		z.r = (powers->r - powers->i * 3) *
+		z.r = (squares->r - squares->i * 3) *
 			ft_abs_long_double(z.r) + c.r;
-		z.i = (powers->r * 3 - powers->i) *
+		z.i = (squares->r * 3 - squares->i) *
 			ft_abs_long_double(z.i) + c.i;
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);
@@ -65,7 +65,7 @@ double				bird_of_prey_escape(t_complex z, t_complex c,
 */
 
 double				phoenix_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 	long double				xold;
@@ -86,8 +86,8 @@ double				phoenix_escape(t_complex z, t_complex c,
 		yold = z.i;
 		z.r = xtemp;
 		z.i = ytemp;
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);
@@ -98,18 +98,18 @@ double				phoenix_escape(t_complex z, t_complex c,
 */
 
 double				burning_julia_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params)
+					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
 
 	iter = 0.0;
-	while (powers->r + powers->i <=
+	while (squares->r + squares->i <=
 		params->r * params->r && iter < params->max_iter)
 	{
 		z.i = ft_abs_long_double(2 * (z.i * z.r) + c.i);
-		z.r = ft_abs_long_double(powers->r - powers->i - c.r);
-		powers->r = z.r * z.r;
-		powers->i = z.i * z.i;
+		z.r = ft_abs_long_double(squares->r - squares->i - c.r);
+		squares->r = z.r * z.r;
+		squares->i = z.i * z.i;
 		iter++;
 	}
 	return (iter);

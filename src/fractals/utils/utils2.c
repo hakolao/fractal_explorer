@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:23:33 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 14:34:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 18:10:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,14 @@ int				increment_pow_n(t_scene *scene, int incr)
 	return (0);
 }
 
-void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
+/*
+** https://linas.org/art-gallery/escape/smooth.html
+*/
+
+void			smooth_color_pixel(t_pixel *pixel, long double iter,
 				t_complex squares, t_fractal_params *params)
 {
-	iter = iter + 1.0 - log(log(squares.r + squares.i) /
-		2.0 / log(2.0)) / log(2.0);
+	iter = iter + 1.0 - log(log(squares.r + squares.i)) / log(params->pow_n);
 	pixel->color = lerp_rgb(params->color_palette[
 			(int)floor(iter) % params->palette_size],
 		params->color_palette[
@@ -44,35 +47,48 @@ void			color_mandelbrot_pixel(t_pixel *pixel, long double iter,
 		iter - floor(iter));
 }
 
-void			color_julia_pixel(t_pixel *pixel, long double iter,
-				t_complex squares, t_fractal_params *params)
+int				flip_cx_sign(t_scene *scene)
 {
-	iter = iter + 2.0 - log(log(squares.r + squares.i)) / log(2.0);
-	pixel->color = lerp_rgb(params->color_palette[
-			(int)floor(iter) % params->palette_size],
-		params->color_palette[
-			(int)((floor(iter)) + 1) % params->palette_size],
-		iter - floor(iter));
+	int		i;
+
+	i = 0;
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->cx_sign = -1 *
+			scene->fractal_params[i]->cx_sign;
+		i++;
+	}
+	return (0);
 }
 
-void			color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
-				t_complex powers, t_fractal_params *params)
+int				flip_cy_sign(t_scene *scene)
 {
-	if ((int)params->pow_n == 2)
+	int		i;
+
+	i = 0;
+	while (i < THREADS)
 	{
-		color_mandelbrot_pixel(pixel, iter, powers, params);
-		return ;
+		scene->fractal_params[i]->cy_sign = -1 *
+			scene->fractal_params[i]->cy_sign;
+		i++;
 	}
-	pixel->color = params->color_palette[(int)iter];
+	return (0);
 }
 
-void			color_julia_n_pixel(t_pixel *pixel, long double iter,
-				t_complex powers, t_fractal_params *params)
+int				move_px_py(t_scene *scene, int mouse_x,
+				int mouse_y)
 {
-	if ((int)params->pow_n == 2)
+	int			i;
+	t_complex	p;
+
+	i = 0;
+	p = scaled_xy((t_complex){0.0, 0.0}, scene->fractal_params[i],
+		mouse_x, mouse_y);
+	while (i < THREADS)
 	{
-		color_julia_pixel(pixel, iter, powers, params);
-		return ;
+		scene->fractal_params[i]->px = p.r;
+		scene->fractal_params[i]->py = p.i;
+		i++;
 	}
-	pixel->color = params->color_palette[(int)iter];
+	return (1);
 }

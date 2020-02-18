@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 13:12:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 17:58:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
-	t_complex				powers;
+	t_complex				squares;
 	t_complex				c;
 	t_complex				z;
 	long double				iter;
 	t_fractal_params		*params;
 
 	params = (t_fractal_params*)args;
-	powers = (t_complex){0.0, 0.0};
+	squares = (t_complex){0.0, 0.0};
 	z = (t_complex){0.0, 0.0};
 	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	iter = mandelbrot_escape((t_complex){0.0, 0.0}, c, &powers, params);
+	iter = mandelbrot_escape((t_complex){0.0, 0.0}, c, &squares, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
-		color_mandelbrot_pixel(params->pixels[pixel_i], iter, powers, params);
+		smooth_color_pixel(params->pixels[pixel_i], iter, squares, params);
 	plot_pixel_on_thread_frame(params, params->pixels[pixel_i]);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 17:41:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/18 18:09:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,23 +258,23 @@ int					phoenix_params(t_fractal_params
 int					burning_julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 double				mandelbrot_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				multibrot_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				julia_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				julia_n_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				julia_mod_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				burning_ship_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				bird_of_prey_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				phoenix_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 double				burning_julia_escape(t_complex z, t_complex c,
-					t_complex *powers, t_fractal_params *params);
+					t_complex *squares, t_fractal_params *params);
 
 /*
 ** Fractal utils (functionality)
@@ -291,14 +291,8 @@ int					move_cx_cy(t_scene *scene, int mouse_x,
 int					center_to(t_scene *scene, long double mouse_x,
 					long double mouse_y);
 int					increment_pow_n(t_scene *scene, int incr);
-void				color_mandelbrot_pixel(t_pixel *pixel, long double iter,
+void				smooth_color_pixel(t_pixel *pixel, long double iter,
 					t_complex squares, t_fractal_params *params);
-void				color_julia_pixel(t_pixel *pixel, long double iter,
-					t_complex squares, t_fractal_params *params);
-void				color_julia_n_pixel(t_pixel *pixel, long double iter,
-					t_complex powers, t_fractal_params *params);
-void				color_mandelbrot_n_pixel(t_pixel *pixel, long double iter,
-					t_complex powers, t_fractal_params *params);
 int					flip_cy_sign(t_scene *scene);
 int					flip_cx_sign(t_scene *scene);
 int					move_px_py(t_scene *scene, int mouse_x,

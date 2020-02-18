@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/18 17:40:31 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/18 18:09:46 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,6 @@ SOURCES = main.c \
 			fractals/mandelbrot_n.c \
 			fractals/utils/utils.c \
 			fractals/utils/utils2.c \
-			fractals/utils/utils3.c \
 			fractals/utils/colors.c \
 			fractals/params/params.c \
 			fractals/params/params2.c \
