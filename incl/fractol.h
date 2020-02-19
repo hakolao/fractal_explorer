@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:48:48 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 17:13:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,13 @@
 # define BURNING_CENTER_X 0.0
 # define BURNING_CENTER_Y 0.0
 
+/*
+** Screenshot
+*/
+# define FILE_HEADER_SIZE 14
+# define INFO_HEADER_SIZE 40
+# define BYTES_PER_PIXEL 4
+
 enum				e_fractal {
 	mandelbrot,
 	julia,
@@ -153,6 +160,8 @@ typedef struct		s_scene
 	int					id;
 	void				*mlx;
 	void				*mlx_wdw;
+	void				*screenshot;
+	char				*screenshot_buf;
 	int					pixel_bits;
 	int					line_bytes;
 	int					pixel_endian;
@@ -301,6 +310,7 @@ int					flip_cy_sign(t_scene *scene);
 int					flip_cx_sign(t_scene *scene);
 int					move_px_py(t_scene *scene, int mouse_x,
 					int mouse_y);
+int					save_image(t_scene *scene);
 
 /*
 ** Threads
