@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:12:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 22:11:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:53:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int							thread_render_params(t_fractal_params
 	if (!(fractal_params->pixel_bounds = pixel_bounds(0,
 			scene->screen_width, i * (scene->screen_height / THREADS),
 			(i + 1) * (scene->screen_height / THREADS))) ||
-		!(fractal_params->pixels = thread_pixels(PIXELS)) ||
+		!(fractal_params->pixels = thread_pixels(fractal_params->size)) ||
 		!(fractal_params->frame = mlx_new_image(scene->mlx,
 			scene->screen_width, scene->screen_height / THREADS)) ||
 		!(fractal_params->frame_buf = mlx_get_data_addr(fractal_params->frame,
@@ -76,8 +76,7 @@ t_fractal_params			**thread_fractal_params(t_scene *scene)
 	i = 0;
 	while (i < THREADS)
 	{
-		if (!(fractal_params[i] =
-				malloc(sizeof(**fractal_params) * PIXELS)) ||
+		if (!(fractal_params[i] = malloc(sizeof(**fractal_params))) ||
 			!select_params(scene->artist)(fractal_params[i], scene, i))
 			return (NULL);
 		i++;

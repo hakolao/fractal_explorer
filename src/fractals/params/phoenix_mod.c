@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:36:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:29:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int							phoenix_mod_params(t_fractal_params
 {
 	fractal_params->max_iter = MAX_ITER_INIT;
 	fractal_params->zoom = 1.0;
-	fractal_params->size = PIXELS;
+	fractal_params->size = scene->screen_width *
+		scene->screen_height / THREADS;
 	fractal_params->center_x = 0.0;
 	fractal_params->center_y = 0.0;
 	fractal_params->r = 2.0;
@@ -33,8 +34,8 @@ int							phoenix_mod_params(t_fractal_params
 	fractal_params->px = 0.56667;
 	fractal_params->py = -0.5;
 	fractal_params->thread_i = i;
-	fractal_params->width = WIDTH;
-	fractal_params->height = HEIGHT / THREADS;
+	fractal_params->width = scene->screen_width;
+	fractal_params->height = scene->screen_height / THREADS;
 	fractal_params->escape_time = phoenix_mod_escape;
 	return (color_palette(fractal_params, scene->colors, 6,
 			scene->palette_size) &&

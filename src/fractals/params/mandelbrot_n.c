@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:36:54 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:29:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int							mandelbrot_n_params(t_fractal_params
 {
 	fractal_params->max_iter = MAX_ITER_INIT;
 	fractal_params->zoom = 1.0;
-	fractal_params->size = PIXELS;
+	fractal_params->size = scene->screen_width *
+		scene->screen_height / THREADS;
 	fractal_params->center_x = 0.0;
 	fractal_params->center_y = 0.0;
 	fractal_params->min_x = -2.0;
@@ -25,8 +26,8 @@ int							mandelbrot_n_params(t_fractal_params
 	fractal_params->min_y = -2.0;
 	fractal_params->max_y = 2.0;
 	fractal_params->thread_i = i;
-	fractal_params->width = WIDTH;
-	fractal_params->height = HEIGHT / THREADS;
+	fractal_params->width = scene->screen_width;
+	fractal_params->height = scene->screen_height / THREADS;
 	fractal_params->pow_n = 3.0;
 	fractal_params->cx_sign = 1;
 	fractal_params->cy_sign = 1;

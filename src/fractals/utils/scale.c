@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:28:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:29:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 23:10:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ t_complex		scaled_xy(t_complex c,
 	max_x0 = params->max_y;
 	min_y0 = params->min_y;
 	max_y0 = params->max_y;
-	c.r = (min_x0 + px * (max_x0 - min_x0) / WIDTH) /
+	c.r = (min_x0 + px * (max_x0 - min_x0) / params->width) /
 		params->zoom + params->center_x;
-	c.i = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) /
+	c.i = (min_y0 + py * (max_y0 - min_y0) /
+		(params->height * THREADS)) /
 		params->zoom + params->center_y;
 	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 22:12:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 23:15:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,17 @@
 
 /*
 ** Initial settings. (Choose Height that where
-** HEIGHT % THREAD == 0)
+** HEIGHT % THREAD == 0).
+** The screen has been split to horizontal
+** slices (crucial to be aware if changes are
+** planned)
 */
 # define WIDTH 1080
 # define HEIGHT 1080
 # define MAX_WINDOWS 10
-# define ASPECT_RATIO WIDTH / HEIGHT
 # define MAX_ITER_INIT 30
 # define COLORS 50
 # define THREADS 8
-# define PIXELS (WIDTH * HEIGHT) / THREADS
 # define MANDEL_CENTER_X -0.7746806106269039
 # define MANDEL_CENTER_Y -0.1374168856037867
 # define JULIA_CENTER_X 0.0

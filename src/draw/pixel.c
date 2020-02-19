@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/08 13:18:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:24:10 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 23:01:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			plot_pixel_on_thread_frame(t_fractal_params *params,
 	int	size;
 
 	size = params->width * params->height;
-	pixel_i = (pixel->y * WIDTH * 4) +
+	pixel_i = (pixel->y * params->width * 4) +
 		(pixel->x * 4) - params->thread_i * size * 4;
 	if (pixel_i > 0 && pixel_i < size * 4)
 	{

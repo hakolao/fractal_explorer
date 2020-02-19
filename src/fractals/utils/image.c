@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:03:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 22:11:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 23:06:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ static void				copy_thread_imgs_to_screenshot(t_scene *scene)
 	int		i;
 	char	*buf;
 	int		row_len;
-	char	tmp_row[WIDTH * BYTES_PER_PIXEL];
+	char	tmp_row[IMG_WIDTH * BYTES_PER_PIXEL];
 
 	i = 0;
-	row_len = WIDTH * BYTES_PER_PIXEL;
+	row_len = IMG_WIDTH * BYTES_PER_PIXEL;
 	buf = scene->screenshot_buf;
 	while (i < THREADS)
 	{
@@ -36,12 +36,12 @@ static void				copy_thread_imgs_to_screenshot(t_scene *scene)
 		i++;
 	}
 	i = 0;
-	while (i < HEIGHT / 2)
+	while (i < IMG_HEIGHT / 2)
 	{
 		ft_memcpy(tmp_row, scene->screenshot_buf + (i * row_len), row_len);
 		ft_memcpy(scene->screenshot_buf + (i * row_len),
-			buf + (HEIGHT - i - 1) * row_len, row_len);
-		ft_memcpy(buf + (HEIGHT - i - 1) * row_len, tmp_row, row_len);
+			buf + (IMG_HEIGHT - i - 1) * row_len, row_len);
+		ft_memcpy(buf + (IMG_HEIGHT - i - 1) * row_len, tmp_row, row_len);
 		i++;
 	}
 }
@@ -52,7 +52,7 @@ static unsigned char	*create_bmp_file_header(int padding_size)
 	static unsigned char	file_header[INFO_HEADER_SIZE];
 
 	file_size = FILE_HEADER_SIZE + INFO_HEADER_SIZE +
-		(BYTES_PER_PIXEL * WIDTH + padding_size) * HEIGHT;
+		(BYTES_PER_PIXEL * IMG_WIDTH + padding_size) * IMG_HEIGHT;
 	ft_memset(file_header, 0, FILE_HEADER_SIZE);
 	file_header[0] = (unsigned char)('B');
 	file_header[1] = (unsigned char)('M');
@@ -70,14 +70,14 @@ unsigned char			*create_bmp_info_header(void)
 
 	ft_memset(info_header, 0, INFO_HEADER_SIZE);
 	info_header[0] = (unsigned char)(INFO_HEADER_SIZE);
-	info_header[4] = (unsigned char)(WIDTH);
-	info_header[5] = (unsigned char)(WIDTH >> 8);
-	info_header[6] = (unsigned char)(WIDTH >> 16);
-	info_header[7] = (unsigned char)(WIDTH >> 24);
-	info_header[8] = (unsigned char)(HEIGHT);
-	info_header[9] = (unsigned char)(HEIGHT >> 8);
-	info_header[10] = (unsigned char)(HEIGHT >> 16);
-	info_header[11] = (unsigned char)(HEIGHT >> 24);
+	info_header[4] = (unsigned char)(IMG_WIDTH);
+	info_header[5] = (unsigned char)(IMG_WIDTH >> 8);
+	info_header[6] = (unsigned char)(IMG_WIDTH >> 16);
+	info_header[7] = (unsigned char)(IMG_WIDTH >> 24);
+	info_header[8] = (unsigned char)(IMG_HEIGHT);
+	info_header[9] = (unsigned char)(IMG_HEIGHT >> 8);
+	info_header[10] = (unsigned char)(IMG_HEIGHT >> 16);
+	info_header[11] = (unsigned char)(IMG_HEIGHT >> 24);
 	info_header[12] = (unsigned char)(1);
 	info_header[14] = (unsigned char)(BYTES_PER_PIXEL * 8);
 	return (info_header);
@@ -96,17 +96,17 @@ static void				generate_bmp_image(unsigned char *image, char *filename)
 	FILE			*image_file;
 	int				i;
 
-	padding_size = (4 - (WIDTH * BYTES_PER_PIXEL) % 4) % 4;
+	padding_size = (4 - (IMG_WIDTH * BYTES_PER_PIXEL) % 4) % 4;
 	file_header = create_bmp_file_header(padding_size);
 	info_header = create_bmp_info_header();
 	image_file = fopen(filename, "wb");
 	fwrite(file_header, 1, FILE_HEADER_SIZE, image_file);
 	fwrite(info_header, 1, INFO_HEADER_SIZE, image_file);
 	i = 0;
-	while (i < HEIGHT)
+	while (i < IMG_HEIGHT)
 	{
-		fwrite(image + (i * WIDTH * BYTES_PER_PIXEL),
-			BYTES_PER_PIXEL, WIDTH, image_file);
+		fwrite(image + (i * IMG_WIDTH * BYTES_PER_PIXEL),
+			BYTES_PER_PIXEL, IMG_WIDTH, image_file);
 		fwrite((unsigned char[3]){0, 0, 0}, 1, padding_size, image_file);
 		i++;
 	}
@@ -120,21 +120,23 @@ int						save_image(t_scene *scene)
 	char	*img_name;
 	char	*randstr;
 	char	*tmp;
-	// t_scene	*tmp_scene;
+	t_scene	*tmp_scene;
 
+	ft_putstr("Begin rendering image...\n");
 	if (!(randstr = ft_itoa(rand())) ||
 		!(tmp = ft_strjoin("img/render_", randstr)) ||
 		!(img_name = ft_strjoin(tmp, ".bmp")))
 		return (0);
 	ft_strdel(&randstr);
 	ft_strdel(&tmp);
-	// if (!(tmp_scene = new_scene(scene->mlx, scene->artist)) &&
-	// 		log_err("Failed to create scene.", strerror(5)))
-	// 	return (NULL);
-	// artist_draw(scene->artist)(scene);
-	copy_thread_imgs_to_screenshot(scene);
-
-	generate_bmp_image((unsigned char*)scene->screenshot_buf, img_name);
+	if (!(tmp_scene = new_scene(scene->mlx, scene->artist, IMG_WIDTH,
+		IMG_HEIGHT)) && log_err("Failed to create scene.", strerror(5)))
+		return (0);
+	mlx_destroy_window(tmp_scene->mlx, tmp_scene->mlx_wdw);
+	artist_draw(tmp_scene->artist)(tmp_scene);
+	copy_thread_imgs_to_screenshot(tmp_scene);
+	generate_bmp_image((unsigned char*)tmp_scene->screenshot_buf,
+		img_name);
 	ft_strdel(&img_name);
 	return (0);
 }
