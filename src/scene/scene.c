@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:46:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:47:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,33 +22,6 @@ static int					scene_render_params(t_scene *scene,
 	scene->pixel_endian = TRUE;
 	scene->redraw = TRUE;
 	return (TRUE);
-}
-
-static char					*artist_name(enum e_fractal artist)
-{
-	char	*name;
-
-	if (artist == mandelbrot)
-		name = ft_strdup("Mandelbrot");
-	else if (artist == julia)
-		name = ft_strdup("Julia");
-	else if (artist == burning_ship)
-		name = ft_strdup("Burning ship");
-	else if (artist == mandelbrot_n)
-		name = ft_strdup("Mandelbrot n");
-	else if (artist == julia_n)
-		name = ft_strdup("Julia n");
-	else if (artist == bird_of_prey)
-		name = ft_strdup("Bird of Prey");
-	else if (artist == julia_mod)
-		name = ft_strdup("Julia Mod");
-	else if (artist == phoenix_mod)
-		name = ft_strdup("Phoenix Mod");
-	else if (artist == burning_julia)
-		name = ft_strdup("Burning Julia");
-	else
-		name = ft_strdup("Fractol");
-	return (name);
 }
 
 t_scene						*new_scene(void *mlx, enum e_fractal artist)

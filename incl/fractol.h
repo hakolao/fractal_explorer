@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:23:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:48:48 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -243,13 +243,6 @@ void				mandelbrot_pixel(int pixel_i, int px,
 					int py, void *args);
 void				draw_mandelbrot(t_scene *scene);
 void				draw_julia(t_scene *scene);
-void				draw_burning_ship(t_scene *scene);
-void				draw_mandelbrot_n(t_scene *scene);
-void				draw_julia_n(t_scene *scene);
-void				draw_bird_of_prey(t_scene *scene);
-void				draw_julia_mod(t_scene *scene);
-void				draw_phoenix_mod(t_scene *scene);
-void				draw_burning_julia(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					mandelbrot_n_params(t_fractal_params
@@ -332,6 +325,7 @@ int					randomize_palette(t_scene *scene);
 */
 t_fractal_artist	artist_draw(enum e_fractal type);
 t_fractal_param_f	select_params(enum e_fractal type);
+char				*artist_name(enum e_fractal artist);
 
 /*
 ** Complex number functions

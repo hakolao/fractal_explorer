@@ -6,11 +6,38 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 18:01:41 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:16:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:48:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+char						*artist_name(enum e_fractal artist)
+{
+	char	*name;
+
+	if (artist == mandelbrot)
+		name = ft_strdup("Mandelbrot");
+	else if (artist == julia)
+		name = ft_strdup("Julia");
+	else if (artist == burning_ship)
+		name = ft_strdup("Burning ship");
+	else if (artist == mandelbrot_n)
+		name = ft_strdup("Mandelbrot n");
+	else if (artist == julia_n)
+		name = ft_strdup("Julia n");
+	else if (artist == bird_of_prey)
+		name = ft_strdup("Bird of Prey");
+	else if (artist == julia_mod)
+		name = ft_strdup("Julia Mod");
+	else if (artist == phoenix_mod)
+		name = ft_strdup("Phoenix Mod");
+	else if (artist == burning_julia)
+		name = ft_strdup("Burning Julia");
+	else
+		name = ft_strdup("Fractol");
+	return (name);
+}
 
 /*
 ** Convenience selector for fractal specific parameters
