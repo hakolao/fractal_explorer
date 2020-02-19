@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:23:19 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ typedef struct		s_complex
 	long double		i;
 }					t_complex;
 
-typedef struct		s_fractal_params t_fractal_params;
+typedef struct s_fractal_params	t_fractal_params;
 
-typedef long double	(*escape_time)(t_complex z,
+typedef long double	(*t_escape_time)(t_complex z,
 							t_complex c, t_complex *squares,
 							t_fractal_params *params);
 
@@ -142,7 +142,7 @@ struct				s_fractal_params
 	int					height;
 	int					thread_i;
 	int					palette_size;
-	escape_time			escape_time;
+	t_escape_time		escape_time;
 };
 
 /*
