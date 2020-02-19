@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 23:15:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 00:09:11 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@
 /*
 ** Image Render
 */
-# define IMG_WIDTH 5808
+# define IMG_WIDTH 4096
 # define IMG_HEIGHT 4096
 # define FILE_HEADER_SIZE 14
 # define INFO_HEADER_SIZE 40
@@ -205,6 +205,8 @@ int					check_args(char *arg, int *size, int *fractal);
 int					init_scene(t_scene *scene);
 t_scene				*new_scene(void *mlx, enum e_fractal artist,
 					int width, int height);
+void				delete_scene(t_scene *scene);
+t_scene				*image_render_scene(t_scene *scene);
 
 /*
 ** UI
@@ -317,6 +319,8 @@ int					flip_cx_sign(t_scene *scene);
 int					move_px_py(t_scene *scene, int mouse_x,
 					int mouse_y);
 int					save_image(t_scene *scene);
+void				copy_scene_fractal_positions(t_fractal_params **dst,
+					t_fractal_params **src);
 
 /*
 ** Threads

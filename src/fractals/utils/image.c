@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:03:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 23:06:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 00:04:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,21 +122,20 @@ int						save_image(t_scene *scene)
 	char	*tmp;
 	t_scene	*tmp_scene;
 
-	ft_putstr("Begin rendering image...\n");
+	ft_putstr("Rendering image...\n");
 	if (!(randstr = ft_itoa(rand())) ||
 		!(tmp = ft_strjoin("img/render_", randstr)) ||
 		!(img_name = ft_strjoin(tmp, ".bmp")))
 		return (0);
 	ft_strdel(&randstr);
 	ft_strdel(&tmp);
-	if (!(tmp_scene = new_scene(scene->mlx, scene->artist, IMG_WIDTH,
-		IMG_HEIGHT)) && log_err("Failed to create scene.", strerror(5)))
+	if (!(tmp_scene = image_render_scene(scene)))
 		return (0);
-	mlx_destroy_window(tmp_scene->mlx, tmp_scene->mlx_wdw);
 	artist_draw(tmp_scene->artist)(tmp_scene);
 	copy_thread_imgs_to_screenshot(tmp_scene);
 	generate_bmp_image((unsigned char*)tmp_scene->screenshot_buf,
 		img_name);
+	delete_scene(tmp_scene);
 	ft_strdel(&img_name);
 	return (0);
 }
