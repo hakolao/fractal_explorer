@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 12:13:05 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 14:41:20 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:03:24 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ int							mandelbrot_params(t_fractal_params
 	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
-	if (!color_palette(fractal_params, scene->colors, 6,
-			scene->palette_size) ||
-		!thread_render_params(fractal_params, scene, i))
-		return (FALSE);
-	return (TRUE);
+	fractal_params->escape_time = mandelbrot_escape;
+	return (color_palette(fractal_params, scene->colors, 6,
+			scene->palette_size) &&
+		thread_render_params(fractal_params, scene, i));
 }
 
 int							mandelbrot_n_params(t_fractal_params
@@ -55,11 +54,10 @@ int							mandelbrot_n_params(t_fractal_params
 	fractal_params->pow_n = 3.0;
 	fractal_params->cx_sign = 1;
 	fractal_params->cy_sign = 1;
-	if (!color_palette(fractal_params, scene->colors, 6,
-			scene->palette_size) ||
-		!thread_render_params(fractal_params, scene, i))
-		return (FALSE);
-	return (TRUE);
+	fractal_params->escape_time = multibrot_escape;
+	return (color_palette(fractal_params, scene->colors, 6,
+			scene->palette_size) &&
+		thread_render_params(fractal_params, scene, i));
 }
 
 int							julia_params(t_fractal_params
@@ -83,11 +81,10 @@ int							julia_params(t_fractal_params
 	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
-	if (!color_palette(fractal_params, scene->colors, 6,
-			scene->palette_size) ||
-		!thread_render_params(fractal_params, scene, i))
-		return (FALSE);
-	return (TRUE);
+	fractal_params->escape_time = julia_escape;
+	return (color_palette(fractal_params, scene->colors, 6,
+			scene->palette_size) &&
+		thread_render_params(fractal_params, scene, i));
 }
 
 int							julia_n_params(t_fractal_params
@@ -111,11 +108,10 @@ int							julia_n_params(t_fractal_params
 	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
-	if (!color_palette(fractal_params, scene->colors, 6,
-			scene->palette_size) ||
-		!thread_render_params(fractal_params, scene, i))
-		return (FALSE);
-	return (TRUE);
+	fractal_params->escape_time = julia_n_escape;
+	return (color_palette(fractal_params, scene->colors, 6,
+			scene->palette_size) &&
+		thread_render_params(fractal_params, scene, i));
 }
 
 int							burning_ship_params(t_fractal_params
@@ -136,9 +132,8 @@ int							burning_ship_params(t_fractal_params
 	fractal_params->cy_sign = 1;
 	fractal_params->width = WIDTH;
 	fractal_params->height = HEIGHT / THREADS;
-	if (!color_palette(fractal_params, scene->colors, 6,
-			scene->palette_size) ||
-		!thread_render_params(fractal_params, scene, i))
-		return (FALSE);
-	return (TRUE);
+	fractal_params->escape_time = burning_ship_escape;
+	return (color_palette(fractal_params, scene->colors, 6,
+			scene->palette_size) &&
+		thread_render_params(fractal_params, scene, i));
 }

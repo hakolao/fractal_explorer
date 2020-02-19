@@ -6,13 +6,13 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 17:58:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:07:58 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
+void				mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 {
 	t_complex				squares;
 	t_complex				c;
@@ -24,7 +24,7 @@ static void			mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	squares = (t_complex){0.0, 0.0};
 	z = (t_complex){0.0, 0.0};
 	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
-	iter = mandelbrot_escape((t_complex){0.0, 0.0}, c, &squares, params);
+	iter = params->escape_time((t_complex){0.0, 0.0}, c, &squares, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
 		smooth_color_pixel(params->pixels[pixel_i], iter, squares, params);

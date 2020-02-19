@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 18:01:41 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 17:40:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:16:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,21 @@ t_fractal_param_f			select_params(enum e_fractal type)
 		julia_n_params,
 		bird_of_prey_params,
 		julia_mod_params,
-		phoenix_params,
+		phoenix_mod_params,
 		burning_julia_params
 	}[type]);
 }
 
 /*
 ** Convenience selector for fractal algorithms ("Artist draws")
+** Basically each fractal in this project is either julia
+** or mandelbrot type.
 */
 
 t_fractal_artist			artist_draw(enum e_fractal type)
 {
-	return ((t_fractal_artist[9]){
-		draw_mandelbrot,
-		draw_julia,
-		draw_burning_ship,
-		draw_mandelbrot_n,
-		draw_julia_n,
-		draw_bird_of_prey,
-		draw_julia_mod,
-		draw_phoenix,
-		draw_burning_julia
-	}[type]);
+	if (type == mandelbrot || type == burning_ship ||
+		type == mandelbrot_n || type == bird_of_prey)
+		return (draw_mandelbrot);
+	return (draw_julia);
 }

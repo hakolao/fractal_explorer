@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:48:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 17:09:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void			draw_power_info(t_scene *scene, int x, int y)
 	if ((scene->artist == mandelbrot_n || scene->artist == julia_n) &&
 		(n_pow = ft_itoa(scene->fractal_params[0]->pow_n)))
 	{
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 40,
+		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 80,
 			UI_COLOR, "Pow n: ");
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 40, UI_COLOR,
+		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 80, UI_COLOR,
 		n_pow);
 		ft_strdel(&n_pow);
 	}
@@ -77,7 +77,7 @@ void			draw_px_py_info(t_scene *scene, int x, int y)
 
 	if ((px = ft_ftoa(scene->fractal_params[0]->px, 15)) &&
 		(py = ft_ftoa(scene->fractal_params[0]->py, 15)) &&
-		scene->artist == phoenix)
+		scene->artist == phoenix_mod)
 	{
 		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 80,
 			UI_COLOR, "Px: ");

@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/18 18:09:46 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/19 15:13:14 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,13 +37,6 @@ SOURCES = main.c \
 			fractals/escape_time/escape_time2.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
-			fractals/phoenix.c \
-			fractals/julia_mod.c \
-			fractals/julia_n.c \
-			fractals/burning_julia.c \
-			fractals/burning_ship.c \
-			fractals/bird_of_prey.c \
-			fractals/mandelbrot_n.c \
 			fractals/utils/utils.c \
 			fractals/utils/utils2.c \
 			fractals/utils/colors.c \

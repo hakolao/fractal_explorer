@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:10:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 18:17:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 14:48:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@
 ** be also written:
 ** while (z.r * z.r + z.i * z.i) < 16 && iter < max_iter
 ** 		z  = c_add(c_pow(z, 2), c);
+** Note that 16 is better for colors although 2 would be
+** enough.
 */
 
-double				mandelbrot_escape(t_complex z, t_complex c,
+long double			mandelbrot_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				z_sqr;
@@ -44,7 +46,7 @@ double				mandelbrot_escape(t_complex z, t_complex c,
 ** https://en.wikipedia.org/wiki/Multibrot_set
 */
 
-double				multibrot_escape(t_complex z, t_complex c,
+long double			multibrot_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
@@ -70,7 +72,7 @@ double				multibrot_escape(t_complex z, t_complex c,
 ** https://en.wikipedia.org/wiki/Julia_set
 */
 
-double				julia_escape(t_complex z, t_complex c,
+long double			julia_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
@@ -92,7 +94,7 @@ double				julia_escape(t_complex z, t_complex c,
 ** https://en.wikipedia.org/wiki/Julia_set
 */
 
-double				julia_n_escape(t_complex z, t_complex c,
+long double			julia_n_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
@@ -122,7 +124,7 @@ double				julia_n_escape(t_complex z, t_complex c,
 ** http://usefuljs.net/fractals/docs/mandelvariants.html
 */
 
-double				julia_mod_escape(t_complex z, t_complex c,
+long double			julia_mod_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;

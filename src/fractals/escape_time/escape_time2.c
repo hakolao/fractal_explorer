@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/17 13:19:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 17:54:55 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:12:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** https://en.wikipedia.org/wiki/Burning_Ship_fractal
 */
 
-double				burning_ship_escape(t_complex z, t_complex c,
+long double			burning_ship_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				z_sqr;
@@ -39,7 +39,7 @@ double				burning_ship_escape(t_complex z, t_complex c,
 ** https://www.app13x.com/MacShipTrek.html
 */
 
-double				bird_of_prey_escape(t_complex z, t_complex c,
+long double			bird_of_prey_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
@@ -64,7 +64,7 @@ double				bird_of_prey_escape(t_complex z, t_complex c,
 ** Nevertheless it's pretty.
 */
 
-double				phoenix_escape(t_complex z, t_complex c,
+long double			phoenix_mod_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;
@@ -97,7 +97,7 @@ double				phoenix_escape(t_complex z, t_complex c,
 ** http://usefuljs.net/fractals/docs/mandelvariants.html
 */
 
-double				burning_julia_escape(t_complex z, t_complex c,
+long double			burning_julia_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params)
 {
 	long double				iter;

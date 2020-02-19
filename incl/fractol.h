@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 18:09:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,23 @@ enum				e_fractal {
 	julia_n,
 	bird_of_prey,
 	julia_mod,
-	phoenix,
+	phoenix_mod,
 	burning_julia
 };
 
-typedef struct		s_fractal_params
+typedef struct		s_complex
+{
+	long double		r;
+	long double		i;
+}					t_complex;
+
+typedef struct		s_fractal_params t_fractal_params;
+
+typedef long double	(*escape_time)(t_complex z,
+							t_complex c, t_complex *squares,
+							t_fractal_params *params);
+
+struct				s_fractal_params
 {
 	t_pixel_bounds		*pixel_bounds;
 	t_pixel				**pixels;
@@ -130,7 +142,8 @@ typedef struct		s_fractal_params
 	int					height;
 	int					thread_i;
 	int					palette_size;
-}					t_fractal_params;
+	escape_time			escape_time;
+};
 
 /*
 ** Scene contains all data the application needs inside its loop
@@ -148,7 +161,7 @@ typedef struct		s_scene
 	int					mouse_y;
 	int					stop_julia;
 	int					show_guide;
-	int					stop_phoenix;
+	int					stop_phoenix_mod;
 	int					redraw;
 	enum e_fractal		artist;
 	t_rgb				**colors;
@@ -162,12 +175,6 @@ typedef struct		s_scenes
 	void			*mlx;
 	t_scene			**scenes;
 }					t_scenes;
-
-typedef struct		s_complex
-{
-	long double		r;
-	long double		i;
-}					t_complex;
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
@@ -230,6 +237,10 @@ int					log_guide(void);
 /*
 ** Fractals
 */
+void				julia_pixel(int pixel_i, int px,
+					int py, void *args);
+void				mandelbrot_pixel(int pixel_i, int px,
+					int py, void *args);
 void				draw_mandelbrot(t_scene *scene);
 void				draw_julia(t_scene *scene);
 void				draw_burning_ship(t_scene *scene);
@@ -237,7 +248,7 @@ void				draw_mandelbrot_n(t_scene *scene);
 void				draw_julia_n(t_scene *scene);
 void				draw_bird_of_prey(t_scene *scene);
 void				draw_julia_mod(t_scene *scene);
-void				draw_phoenix(t_scene *scene);
+void				draw_phoenix_mod(t_scene *scene);
 void				draw_burning_julia(t_scene *scene);
 int					mandelbrot_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
@@ -253,27 +264,27 @@ int					bird_of_prey_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					julia_mod_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
-int					phoenix_params(t_fractal_params
+int					phoenix_mod_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
 int					burning_julia_params(t_fractal_params
 					*fractal_params, t_scene *scene, int i);
-double				mandelbrot_escape(t_complex z, t_complex c,
+long double			mandelbrot_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				multibrot_escape(t_complex z, t_complex c,
+long double			multibrot_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				julia_escape(t_complex z, t_complex c,
+long double			julia_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				julia_n_escape(t_complex z, t_complex c,
+long double			julia_n_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				julia_mod_escape(t_complex z, t_complex c,
+long double			julia_mod_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				burning_ship_escape(t_complex z, t_complex c,
+long double			burning_ship_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				bird_of_prey_escape(t_complex z, t_complex c,
+long double			bird_of_prey_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				phoenix_escape(t_complex z, t_complex c,
+long double			phoenix_mod_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
-double				burning_julia_escape(t_complex z, t_complex c,
+long double			burning_julia_escape(t_complex z, t_complex c,
 					t_complex *squares, t_fractal_params *params);
 
 /*
