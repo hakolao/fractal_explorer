@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 17:13:45 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:12:14 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,29 @@ static int					scene_render_params(t_scene *scene,
 	scene->mlx = mlx;
 	scene->mlx_wdw = mlx_wdw;
 	scene->pixel_bits = 32;
-	scene->line_bytes = WIDTH * 4;
+	scene->line_bytes = scene->screen_width * 4;
 	scene->pixel_endian = TRUE;
 	scene->redraw = TRUE;
-	if (!(scene->screenshot = mlx_new_image(scene->mlx, WIDTH, HEIGHT)) ||
+	if (!(scene->screenshot = mlx_new_image(scene->mlx, scene->screen_width,
+			scene->screen_height)) ||
 		!(scene->screenshot_buf = mlx_get_data_addr(scene->screenshot,
 			&scene->pixel_bits, &scene->line_bytes, &scene->pixel_endian)))
 		return (FALSE);
 	return (TRUE);
 }
 
-t_scene						*new_scene(void *mlx, enum e_fractal artist)
+t_scene						*new_scene(void *mlx, enum e_fractal artist,
+							int width, int height)
 {
 	t_scene		*scene;
 	char		*name;
 
 	if (!(name = artist_name(artist)) ||
-		!(scene = (t_scene*)malloc(sizeof(*scene))) ||
-		!(scene->mlx_wdw = mlx_new_window(mlx, WIDTH, HEIGHT, name)) ||
+		!(scene = (t_scene*)malloc(sizeof(*scene))))
+		return (NULL);
+	scene->screen_width = width;
+	scene->screen_height = height;
+	if (!(scene->mlx_wdw = mlx_new_window(mlx, width, height, name)) ||
 		!scene_render_params(scene, mlx, scene->mlx_wdw))
 		return (NULL);
 	scene->mlx = mlx;

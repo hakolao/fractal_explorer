@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:03:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 18:03:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:11:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,14 +120,20 @@ int						save_image(t_scene *scene)
 	char	*img_name;
 	char	*randstr;
 	char	*tmp;
+	// t_scene	*tmp_scene;
 
 	if (!(randstr = ft_itoa(rand())) ||
-		!(tmp = ft_strjoin("img/screenshot_", randstr)) ||
+		!(tmp = ft_strjoin("img/render_", randstr)) ||
 		!(img_name = ft_strjoin(tmp, ".bmp")))
 		return (0);
 	ft_strdel(&randstr);
 	ft_strdel(&tmp);
+	// if (!(tmp_scene = new_scene(scene->mlx, scene->artist)) &&
+	// 		log_err("Failed to create scene.", strerror(5)))
+	// 	return (NULL);
+	// artist_draw(scene->artist)(scene);
 	copy_thread_imgs_to_screenshot(scene);
+
 	generate_bmp_image((unsigned char*)scene->screenshot_buf, img_name);
 	ft_strdel(&img_name);
 	return (0);

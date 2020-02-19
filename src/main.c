@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 15:54:18 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:09:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_scene			*mlx_init_scene(void *mlx, t_scene *scene,
 				int scene_id, enum e_fractal artist)
 {
-	if (!(scene = new_scene(mlx, artist)) &&
+	if (!(scene = new_scene(mlx, artist, WIDTH, HEIGHT)) &&
 			log_err("Failed to create scene.", strerror(5)))
 		return (NULL);
 	scene->id = scene_id;

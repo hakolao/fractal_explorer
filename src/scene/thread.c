@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 14:12:03 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:46:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:11:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,12 @@ static t_pixel				**thread_pixels(int size)
 int							thread_render_params(t_fractal_params
 							*fractal_params, t_scene *scene, int i)
 {
-	if (!(fractal_params->pixel_bounds = pixel_bounds(0, WIDTH,
-			i * (HEIGHT / THREADS), (i + 1) * (HEIGHT / THREADS))) ||
+	if (!(fractal_params->pixel_bounds = pixel_bounds(0,
+			scene->screen_width, i * (scene->screen_height / THREADS),
+			(i + 1) * (scene->screen_height / THREADS))) ||
 		!(fractal_params->pixels = thread_pixels(PIXELS)) ||
 		!(fractal_params->frame = mlx_new_image(scene->mlx,
-			WIDTH, HEIGHT / THREADS)) ||
+			scene->screen_width, scene->screen_height / THREADS)) ||
 		!(fractal_params->frame_buf = mlx_get_data_addr(fractal_params->frame,
 			&scene->pixel_bits, &scene->line_bytes, &scene->pixel_endian)))
 		return (FALSE);
@@ -69,7 +70,8 @@ t_fractal_params			**thread_fractal_params(t_scene *scene)
 	int						i;
 
 	if (!(fractal_params = malloc(sizeof(*fractal_params) * THREADS)) ||
-		(HEIGHT % THREADS != 0 && log_err("HEIGHT % THREADS != 0", "Headers")))
+		(scene->screen_height % THREADS != 0 &&
+			log_err("HEIGHT % THREADS != 0", "Headers")))
 		return (NULL);
 	i = 0;
 	while (i < THREADS)

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 17:13:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 22:12:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,10 @@
 # define BURNING_CENTER_Y 0.0
 
 /*
-** Screenshot
+** Image Render
 */
+# define IMG_WIDTH 5808
+# define IMG_HEIGHT 4096
 # define FILE_HEADER_SIZE 14
 # define INFO_HEADER_SIZE 40
 # define BYTES_PER_PIXEL 4
@@ -162,6 +164,8 @@ typedef struct		s_scene
 	void				*mlx_wdw;
 	void				*screenshot;
 	char				*screenshot_buf;
+	int					screen_width;
+	int					screen_height;
 	int					pixel_bits;
 	int					line_bytes;
 	int					pixel_endian;
@@ -198,7 +202,8 @@ int					check_args(char *arg, int *size, int *fractal);
 ** Scene
 */
 int					init_scene(t_scene *scene);
-t_scene				*new_scene(void *mlx, enum e_fractal artist);
+t_scene				*new_scene(void *mlx, enum e_fractal artist,
+					int width, int height);
 
 /*
 ** UI
