@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/13 23:21:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:46:54 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,19 @@ int					change_palette_size(t_scene *scene, int amount)
 		i++;
 	}
 	return (0);
+}
+
+/*
+** https://linas.org/art-gallery/escape/smooth.html
+*/
+
+void				smooth_color_pixel(t_pixel *pixel, long double iter,
+					t_complex squares, t_fractal_params *params)
+{
+	iter = iter + 1.0 - log(log(squares.r + squares.i)) / log(params->pow_n);
+	pixel->color = lerp_rgb(params->color_palette[
+			(int)floor(iter) % params->palette_size],
+		params->color_palette[
+			(int)((floor(iter)) + 1) % params->palette_size],
+		iter - floor(iter));
 }

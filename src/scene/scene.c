@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:46:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ static char					*artist_name(enum e_fractal artist)
 		name = ft_strdup("Mandelbrot n");
 	else if (artist == julia_n)
 		name = ft_strdup("Julia n");
+	else if (artist == bird_of_prey)
+		name = ft_strdup("Bird of Prey");
+	else if (artist == julia_mod)
+		name = ft_strdup("Julia Mod");
+	else if (artist == phoenix_mod)
+		name = ft_strdup("Phoenix Mod");
+	else if (artist == burning_julia)
+		name = ft_strdup("Burning Julia");
 	else
 		name = ft_strdup("Fractol");
 	return (name);

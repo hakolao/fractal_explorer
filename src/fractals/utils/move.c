@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/18 14:34:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 15:31:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+
+/*
+** Zoom in the fractal. This also increments iteration count
+** Starting from lower iterations is initially more performant
+*/
 
 int						zoom(t_scene *scene, long double amount)
 {
@@ -44,37 +49,9 @@ int						center_to(t_scene *scene, long double mouse_x,
 	return (0);
 }
 
-int						change_iters(t_scene *scene, long double amount)
-{
-	int		i;
-
-	i = 0;
-	while (i < THREADS)
-	{
-		scene->fractal_params[i]->max_iter += amount;
-		i++;
-	}
-	return (0);
-}
-
-t_complex				scaled_xy(t_complex c,
-						t_fractal_params *params, int px, int py)
-{
-	long double	min_x0;
-	long double	min_y0;
-	long double	max_x0;
-	long double	max_y0;
-
-	min_x0 = params->min_x;
-	max_x0 = params->max_y;
-	min_y0 = params->min_y;
-	max_y0 = params->max_y;
-	c.r = (min_x0 + px * (max_x0 - min_x0) / WIDTH) /
-		params->zoom + params->center_x;
-	c.i = (min_y0 + py * (max_y0 - min_y0) / HEIGHT) /
-		params->zoom + params->center_y;
-	return (c);
-}
+/*
+** Change julia type fractal param c based on mouse position
+*/
 
 int						move_cx_cy(t_scene *scene, int mouse_x,
 						int mouse_y)
@@ -89,6 +66,28 @@ int						move_cx_cy(t_scene *scene, int mouse_x,
 	{
 		scene->fractal_params[i]->cx = c.r;
 		scene->fractal_params[i]->cy = c.i;
+		i++;
+	}
+	return (1);
+}
+
+/*
+** Change phoenix fractal's param p based on mouse position
+*/
+
+int						move_px_py(t_scene *scene, int mouse_x,
+						int mouse_y)
+{
+	int			i;
+	t_complex	p;
+
+	i = 0;
+	p = scaled_xy((t_complex){0.0, 0.0}, scene->fractal_params[i],
+		mouse_x, mouse_y);
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->px = p.r;
+		scene->fractal_params[i]->py = p.i;
 		i++;
 	}
 	return (1);

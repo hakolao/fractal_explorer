@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/19 15:13:14 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/19 15:42:44 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,15 +33,30 @@ SOURCES = main.c \
 			events/mouse.c \
 			events/loop.c \
 			events/exit.c \
-			fractals/escape_time/escape_time.c \
-			fractals/escape_time/escape_time2.c \
+			fractals/escape_time/mandelbrot.c \
+			fractals/escape_time/julia.c \
+			fractals/escape_time/burning_ship.c \
+			fractals/escape_time/mandelbrot_n.c \
+			fractals/escape_time/julia_n.c \
+			fractals/escape_time/bird_of_prey.c \
+			fractals/escape_time/julia_mod.c \
+			fractals/escape_time/phoenix_mod.c \
+			fractals/escape_time/burning_julia.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
-			fractals/utils/utils.c \
-			fractals/utils/utils2.c \
+			fractals/utils/interact.c \
+			fractals/utils/move.c \
+			fractals/utils/scale.c \
 			fractals/utils/colors.c \
-			fractals/params/params.c \
-			fractals/params/params2.c \
+			fractals/params/mandelbrot.c \
+			fractals/params/julia.c \
+			fractals/params/burning_ship.c \
+			fractals/params/mandelbrot_n.c \
+			fractals/params/julia_n.c \
+			fractals/params/bird_of_prey.c \
+			fractals/params/julia_mod.c \
+			fractals/params/phoenix_mod.c \
+			fractals/params/burning_julia.c \
 			complex/complex.c \
 			ui/ui.c \
 			ui/utils.c \
