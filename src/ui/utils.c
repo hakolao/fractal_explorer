@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:48:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 01:06:56 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void			draw_px_py_info(t_scene *scene, int x, int y)
 	char	*px;
 	char	*py;
 
-	if ((px = ft_ftoa(scene->fractal_params[0]->px, 15)) &&
-		(py = ft_ftoa(scene->fractal_params[0]->py, 15)) &&
-		scene->artist == phoenix_mod)
+	if (scene->artist == phoenix_mod &&
+		(px = ft_ftoa(scene->fractal_params[0]->px, 15)) &&
+		(py = ft_ftoa(scene->fractal_params[0]->py, 15)))
 	{
 		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 80,
 			UI_COLOR, "Px: ");
