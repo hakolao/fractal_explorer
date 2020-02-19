@@ -6,27 +6,42 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:03:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 17:19:00 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/19 18:03:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
+/*
+** Copies images from thread image to scene's screenshot buffer.
+** Flips the image vertically so it corresponds to the app's view.
+*/
+
 static void				copy_thread_imgs_to_screenshot(t_scene *scene)
 {
 	int		i;
-	int		j;
+	char	*buf;
+	int		row_len;
+	char	tmp_row[WIDTH * BYTES_PER_PIXEL];
 
 	i = 0;
+	row_len = WIDTH * BYTES_PER_PIXEL;
+	buf = scene->screenshot_buf;
 	while (i < THREADS)
 	{
-		j = 0;
-		while (j < scene->fractal_params[i]->size)
-		{
-			scene->screenshot_buf[i + j] =
-				scene->fractal_params[i]->frame_buf[j];
-			j++;
-		}
+		ft_memcpy(buf +
+				i * scene->fractal_params[i]->size * BYTES_PER_PIXEL,
+			scene->fractal_params[i]->frame_buf,
+			scene->fractal_params[i]->size * BYTES_PER_PIXEL);
+		i++;
+	}
+	i = 0;
+	while (i < HEIGHT / 2)
+	{
+		ft_memcpy(tmp_row, scene->screenshot_buf + (i * row_len), row_len);
+		ft_memcpy(scene->screenshot_buf + (i * row_len),
+			buf + (HEIGHT - i - 1) * row_len, row_len);
+		ft_memcpy(buf + (HEIGHT - i - 1) * row_len, tmp_row, row_len);
 		i++;
 	}
 }
@@ -68,6 +83,11 @@ unsigned char			*create_bmp_info_header(void)
 	return (info_header);
 }
 
+/*
+** https://stackoverflow.com/questions/2654480/
+** writing-bmp-image-in-pure-c-c-without-other-libraries
+*/
+
 static void				generate_bmp_image(unsigned char *image, char *filename)
 {
 	int				padding_size;
@@ -91,7 +111,7 @@ static void				generate_bmp_image(unsigned char *image, char *filename)
 		i++;
 	}
 	ft_putstr(filename);
-	ft_putstr(" image generated!");
+	ft_putstr(" image generated!\n");
 	fclose(image_file);
 }
 
