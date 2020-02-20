@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 19:56:35 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 20:04:38 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,37 +41,33 @@ t_colors			*default_colors(void)
 }
 
 int					color_palette(t_fractal_params *params,
-					t_rgb **colors, int colors_size, int palette_size)
+					t_rgb **colors, int col_size, int size)
 {
 	int		i;
 	int		j;
 	int		lim;
 	double	mul;
 
-	if (!(params->color_palette =
-			malloc(sizeof(*params->color_palette) * palette_size)))
+	if (!(params->palette = malloc(sizeof(*params->palette) * size)))
 		return (FALSE);
 	i = -1;
 	j = -1;
-	lim = ceil((double)palette_size /
-		(colors_size > 1 ? colors_size - 1 : colors_size));
-	while (++i < palette_size)
+	lim = ceil((double)size / (col_size > 1 ? col_size - 1 : col_size));
+	while (++i < size)
 	{
 		if (i % lim == 0)
 			j++;
 		mul = (double)(i % lim) / lim;
-		if (j == colors_size - 1)
+		if (j == col_size - 1)
 			j--;
-		if (colors_size > 1)
-			params->color_palette[i] = lerp_rgb(COLOR(colors[j]->r, colors[j]->g,
+		params->palette[i] = COLOR(colors[0]->r, colors[0]->g,
+			colors[0]->b, 0);
+		if (col_size > 1)
+			params->palette[i] = lerp_rgb(COLOR(colors[j]->r, colors[j]->g,
 			colors[j]->b, 0), COLOR(colors[j + 1]->r, colors[j + 1]->g,
 			colors[j + 1]->b, 0), mul);
-		else
-			params->color_palette[i] = COLOR(colors[0]->r, colors[0]->g,
-			colors[0]->b, 0);
 	}
-	params->palette_size = palette_size;
-	return (TRUE);
+	return (!!(params->palette_size = size));
 }
 
 int					randomize_palette(t_scene *scene)
@@ -94,7 +90,7 @@ int					randomize_palette(t_scene *scene)
 	i = -1;
 	while (++i < THREADS)
 	{
-		free(scene->fractal_params[i]->color_palette);
+		free(scene->fractal_params[i]->palette);
 		if (!color_palette(scene->fractal_params[i], scene->colors,
 			scene->colors_size, scene->palette_size))
 			return (FALSE);
@@ -112,7 +108,7 @@ int					change_palette_size(t_scene *scene, int amount)
 	i = 0;
 	while (i < THREADS)
 	{
-		free(scene->fractal_params[i]->color_palette);
+		free(scene->fractal_params[i]->palette);
 		if (!color_palette(scene->fractal_params[i], scene->colors, 6,
 			scene->palette_size))
 			return (FALSE);

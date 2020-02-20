@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 18:50:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 20:01:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void						delete_scene(t_scene *scene)
 	while (++i < THREADS)
 	{
 		free(scene->fractal_params[i]->pixel_bounds);
-		free(scene->fractal_params[i]->color_palette);
+		free(scene->fractal_params[i]->palette);
 		j = -1;
 		while (++j < scene->fractal_params[i]->size)
 			free(scene->fractal_params[i]->pixels[j]);
