@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 18:53:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 19:56:35 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ int					color_palette(t_fractal_params *params,
 		return (FALSE);
 	i = -1;
 	j = -1;
-	lim = ceil((double)palette_size / (colors_size - 1));
+	lim = ceil((double)palette_size /
+		(colors_size > 1 ? colors_size - 1 : colors_size));
 	while (++i < palette_size)
 	{
 		if (i % lim == 0)
@@ -61,10 +62,13 @@ int					color_palette(t_fractal_params *params,
 		mul = (double)(i % lim) / lim;
 		if (j == colors_size - 1)
 			j--;
-		params->color_palette[i] = lerp_rgb(
-			COLOR(colors[j]->r, colors[j]->g, colors[j]->b, 0),
-			COLOR(colors[j + 1]->r, colors[j + 1]->g, colors[j + 1]->b, 0),
-			mul);
+		if (colors_size > 1)
+			params->color_palette[i] = lerp_rgb(COLOR(colors[j]->r, colors[j]->g,
+			colors[j]->b, 0), COLOR(colors[j + 1]->r, colors[j + 1]->g,
+			colors[j + 1]->b, 0), mul);
+		else
+			params->color_palette[i] = COLOR(colors[0]->r, colors[0]->g,
+			colors[0]->b, 0);
 	}
 	params->palette_size = palette_size;
 	return (TRUE);
@@ -115,19 +119,4 @@ int					change_palette_size(t_scene *scene, int amount)
 		i++;
 	}
 	return (0);
-}
-
-/*
-** https://linas.org/art-gallery/escape/smooth.html
-*/
-
-void				smooth_color_pixel(t_pixel *pixel, long double iter,
-					t_complex squares, t_fractal_params *params)
-{
-	iter = iter + 1.0 - log(log(squares.r + squares.i)) / log(params->pow_n);
-	pixel->color = lerp_rgb(params->color_palette[
-			(int)floor(iter) % params->palette_size],
-		params->color_palette[
-			(int)((floor(iter)) + 1) % params->palette_size],
-		iter - floor(iter));
 }

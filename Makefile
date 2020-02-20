@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/20 00:02:25 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/20 19:51:00 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SOURCES = main.c \
 			fractals/mandelbrot.c \
 			fractals/julia.c \
 			fractals/utils/interact.c \
+			fractals/utils/smooth_color.c \
 			fractals/utils/move.c \
 			fractals/utils/scale.c \
 			fractals/utils/image.c \
