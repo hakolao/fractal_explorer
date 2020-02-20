@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:57:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ int				log_guide(void)
 {
 	ft_putstr("Default fractal: Mandelbrot\n"
 			"Press key G for guide / info on screen.\n"
-			"Allowed arguments: [mandelbrot, julia, "
+			"Allowed arguments: [all (for all available fractals),\n"
+			"mandelbrot, julia, "
 			"burning_ship, mandelbrot_n, julia_n, bird_of_prey, "
 			"julia_mod, phoenix_mod, burning_julia]\n");
 	return (1);

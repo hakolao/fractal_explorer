@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 15:09:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:01:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,12 @@ int				parse_args(int argc, char **argv)
 	while (++i < argc - 1)
 	{
 		fractals[i] = -1;
+		if (ft_strequ(argv[i + 1], "all"))
+		{
+			return (init_fractol((int[9]){mandelbrot, julia, burning_ship,
+				mandelbrot_n, julia_n, bird_of_prey, julia_mod,
+				phoenix_mod, burning_julia}, 9));
+		}
 		if (!check_args(argv[i + 1], &size, &fractals[i]))
 			return (log_guide() && FALSE);
 	}
