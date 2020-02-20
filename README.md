@@ -31,7 +31,7 @@ git clone https://github.com/hakolao/ft_fractol.git && make
 ./fractol julia -colors=255,0,0\|0,255,0\|0,0,255
 ```
 
-![Mandelbrot gif](mandel.gif)
+![Mandelbrot gif](img/mandel.gif)
 
 ### Argument options
 ```
@@ -83,4 +83,4 @@ Only existing C functions `exit`, `open`, `close`, `write`, `read`, `malloc`, `f
 
 ![Multibrot](img/multibrot.bmp)
 
-![Mandelbrot2](mandelbrot2.bmp)
+![Mandelbrot2](img/mandelbrot2.bmp)
