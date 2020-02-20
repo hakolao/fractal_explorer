@@ -11,9 +11,13 @@ A multi-threaded fractal explorer with image export & adjustable colors.
 - Mouse movement controls for Julia fractals
 - Adjustable color palette & color palette size
 - Adjustable colors via command line arguments
+- Random colors though in the range of currently used colors
+- Smooth colors
 - Adjustable max iteration limit
+- Adjustable powers (`z^pow`) on `mandelbrot_n` & `julia_n`
 - High resolution `.bmp` image export
 - Debugging UI displaying positional info & color palette (Toggle with `G`)
+- Multiple windows, can open all fractals simultaneously
 
 ![Julia gif](img/julia.gif)
 
@@ -74,3 +78,4 @@ Therefore the code follows 42's strict norms:
 
 Only existing C functions `exit`, `open`, `close`, `write`, `read`, `malloc`, `free`, and the functions of `minilibx (libmlx)` and `math.h` are allowed. Although other functions may be used in bonus features. Image export in this project's case used `fopen`, `fwrite` & `fclose`.
 
+![Multibrot](img/multibrot.bmp)
