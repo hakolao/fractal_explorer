@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 14:42:13 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/14 12:40:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 16:06:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,6 @@ long double		ft_abs_long_double(long double nb);
 long double		ft_powl(double nb, int pow);
 char			*ft_ftoa(long double nb, int precision);
 void			ft_str_rev(char *str);
+int				ft_match(char *s1, char *s2);
 
 #endif

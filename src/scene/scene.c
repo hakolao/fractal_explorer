@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 15:38:07 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:47:08 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int					scene_render_params(t_scene *scene,
 	return (TRUE);
 }
 
-t_scene						*new_scene(void *mlx, enum e_fractal artist,
+t_scene						*new_scene(t_scenes *data, enum e_fractal artist,
 							int width, int height)
 {
 	t_scene		*scene;
@@ -40,10 +40,10 @@ t_scene						*new_scene(void *mlx, enum e_fractal artist,
 		return (NULL);
 	scene->screen_width = width;
 	scene->screen_height = height;
-	if (!(scene->mlx_wdw = mlx_new_window(mlx, width, height, name)) ||
-		!scene_render_params(scene, mlx, scene->mlx_wdw))
+	if (!(scene->mlx_wdw = mlx_new_window(data->mlx, width, height, name)) ||
+		!scene_render_params(scene, data->mlx, scene->mlx_wdw))
 		return (NULL);
-	scene->mlx = mlx;
+	scene->mlx = data->mlx;
 	scene->mouse_left_pressed = FALSE;
 	scene->mouse_x = FALSE;
 	scene->mouse_y = FALSE;
@@ -52,8 +52,10 @@ t_scene						*new_scene(void *mlx, enum e_fractal artist,
 	scene->artist = artist;
 	scene->stop_julia = FALSE;
 	scene->stop_phoenix_mod = FALSE;
-	if (!scene_colors(scene) ||
-		!(scene->fractal_params = thread_fractal_params(scene)))
+	scene->data = data;
+	scene->colors = data->color_data->colors;
+	scene->colors_size = data->color_data->size;
+	if (!(scene->fractal_params = thread_fractal_params(scene)))
 		return (NULL);
 	ft_strdel(&name);
 	return (scene);
@@ -65,10 +67,6 @@ void						delete_scene(t_scene *scene)
 	int		j;
 
 	mlx_destroy_image(scene->mlx, scene->screenshot);
-	i = -1;
-	while (++i < 6)
-		free(scene->colors[i]);
-	free(scene->colors);
 	i = -1;
 	while (++i < THREADS)
 	{
@@ -96,12 +94,6 @@ t_scene						*image_render_scene(t_scene *scene)
 		return (NULL);
 	mlx_destroy_window(tmp_scene->mlx, tmp_scene->mlx_wdw);
 	i = -1;
-	while (++i < 6)
-	{
-		tmp_scene->colors[i]->r = scene->colors[i]->r;
-		tmp_scene->colors[i]->g = scene->colors[i]->g;
-		tmp_scene->colors[i]->b = scene->colors[i]->b;
-	}
 	change_palette_size(tmp_scene, scene->palette_size -
 		tmp_scene->palette_size);
 	copy_scene_fractal_positions(tmp_scene->fractal_params,

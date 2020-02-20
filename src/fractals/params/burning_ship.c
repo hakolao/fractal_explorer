@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 22:30:25 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:14:51 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int							burning_ship_params(t_fractal_params
 	fractal_params->width = scene->screen_width;
 	fractal_params->height = scene->screen_height / THREADS;
 	fractal_params->escape_time = burning_ship_escape;
-	return (color_palette(fractal_params, scene->colors, 6,
-			scene->palette_size) &&
+	return (color_palette(fractal_params, scene->colors,
+		scene->colors_size, scene->palette_size) &&
 		thread_render_params(fractal_params, scene, i));
 }

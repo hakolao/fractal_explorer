@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/17 17:09:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:38:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void			draw_palette(t_scene *scene, int x, int y)
 		return ;
 	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 250, y, UI_COLOR, nbstr);
 	i = -1;
-	while (++i < 6)
+	while (++i < scene->colors_size)
 	{
 		color = COLOR(scene->colors[i]->r,
 			scene->colors[i]->g, scene->colors[i]->b, 0);

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:46:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,86 @@ int				check_args(char *arg, int *size, int *fractal)
 	else if (ft_strequ(arg, "burning_julia"))
 		*fractal = burning_julia;
 	return (res);
+}
+
+static int		parse_rgb(char *colorstr, int *r, int *g, int *b)
+{
+	int		i;
+
+	i = 0;
+	while (*colorstr)
+	{
+		if (!ft_isdigit(*colorstr) && *colorstr != ',')
+			return (FALSE);
+		if (ft_isdigit(*colorstr))
+		{
+			if (i == 0)
+				*r = ft_atoi(colorstr);
+			if (i == 1)
+				*g = ft_atoi(colorstr);
+			if (i == 2)	
+				*b = ft_atoi(colorstr);
+			i++;
+		}
+		while (*colorstr && (ft_isdigit(*colorstr) || *colorstr == ','))
+			colorstr++;
+		colorstr++;
+	}
+	if (i == 3)
+		return (TRUE);
+	return (FALSE);
+}
+
+static t_rgb	*parse_rgb_str(char *colorstr)
+{
+	int		r;
+	int		g;
+	int		b;
+	int		i;
+	t_rgb	*rgb;
+
+	i = 0;
+	if (!(rgb = malloc(sizeof(*rgb))))
+		return (NULL);
+	if (!parse_rgb(colorstr, &r, &g, &b))
+		return (NULL);
+	rgb->r = r;
+	rgb->g = g;
+	rgb->b = b;
+	return (rgb);
+}
+
+/*
+** Parse colors from format:
+** -colors=235,222,111|22,222,33
+** arg + 10 to skip to first digit.
+*/
+
+t_colors		*parse_colors(char *arg)
+{
+	char		**color_strs;
+	t_rgb		**colors;
+	t_colors	*color_data;
+	int			i;
+	int			size;
+
+	if ((!(color_data = malloc(sizeof(*color_data))) ||
+		!(color_strs = ft_strsplit(arg + 10, '|'))) &&
+		log_err("Failed to parse colors", strerror(5)))
+		return (NULL);
+	i = 0;
+	while (color_strs[i])
+		i++;
+	size = i;
+	if (!(colors = malloc(sizeof(*colors) * size)) &&
+		log_err("Invalid color", strerror(5)))
+		return (NULL);
+	i = -1;
+	while (++i < size)
+		if (!(colors[i] = parse_rgb_str(color_strs[i])) &&
+			log_err("Failed to parse rgb", strerror(5)))
+			return (NULL);
+	color_data->colors = colors;
+	color_data->size = size;
+	return (color_data);
 }

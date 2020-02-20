@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 15:37:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:56:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,17 +181,27 @@ typedef struct		s_scene
 	int					redraw;
 	enum e_fractal		artist;
 	t_rgb				**colors;
+	int					colors_size;
 	int					palette_size;
 	t_fractal_params	**fractal_params;
 	t_scenes			*data;
 }					t_scene;
 
+typedef struct		s_colors
+{
+	t_rgb			**colors;
+	int				size;
+}					t_colors;
+
 struct				s_scenes
 {
 	int				size;
 	void			*mlx;
+	t_colors		*color_data;
 	t_scene			**scenes;
 };
+
+
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
@@ -201,12 +211,13 @@ typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
 ** Args
 */
 int					check_args(char *arg, int *size, int *fractal);
+t_colors			*parse_colors(char *arg);
 
 /*
 ** Scene
 */
 int					init_scene(t_scene *scene);
-t_scene				*new_scene(void *mlx, enum e_fractal artist,
+t_scene				*new_scene(t_scenes *data, enum e_fractal artist,
 					int width, int height);
 void				delete_scene(t_scene *scene);
 t_scene				*image_render_scene(t_scene *scene);
@@ -337,7 +348,7 @@ int					thread_render_params(t_fractal_params
 /*
 ** Colors
 */
-int					scene_colors(t_scene *scene);
+t_colors			*default_colors(void);
 int					color_palette(t_fractal_params *params,
 					t_rgb **colors, int colors_size, int palette_size);
 int					change_palette_size(t_scene *scene, int amount);

@@ -6,32 +6,38 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 17:08:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 17:57:16 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int					scene_colors(t_scene *scene)
+t_colors				*default_colors(void)
 {
-	t_rgb	*colors;
+	t_colors	*color_data;
+	t_rgb		*color_input;
+	t_rgb		**colors;
 	int		i;
 
-	colors = (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
+	color_input = (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
 		{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}};
-	if (!(scene->colors = malloc(sizeof(t_rgb*) * 6)))
-		return (FALSE);
+	if (!(color_data = malloc(sizeof(*color_data))))
+		return (NULL);
+	if (!(colors = malloc(sizeof(t_rgb*) * 6)))
+		return (NULL);
 	i = 0;
 	while (i < 6)
 	{
-		if (!(scene->colors[i] = malloc(sizeof(t_rgb))))
-			return (FALSE);
-		scene->colors[i]->r = colors[i].r;
-		scene->colors[i]->g = colors[i].g;
-		scene->colors[i]->b = colors[i].b;
+		if (!(colors[i] = malloc(sizeof(t_rgb*))))
+			return (NULL);
+		colors[i]->r = color_input[i].r;
+		colors[i]->g = color_input[i].g;
+		colors[i]->b = color_input[i].b;
 		i++;
 	}
-	return (TRUE);
+	color_data->colors = colors;
+	color_data->size = 6;
+	return (color_data);
 }
 
 int					color_palette(t_fractal_params *params,
@@ -67,25 +73,28 @@ int					color_palette(t_fractal_params *params,
 int					randomize_palette(t_scene *scene)
 {
 	int		i;
-	t_rgb	*colors;
+	t_rgb	**colors;
+	int		r;
+	int		g;
+	int		b;
 
-	colors = (t_rgb[6]){
-			{rand() % 255, 0, 0}, {rand() % 255, rand() % 255, 0},
-			{0, rand() % 255, 0}, {0, rand() % 255, rand() % 255},
-			{0, 0, rand() % 255}, {rand() % 255, 0, rand() % 255}};
+	colors = scene->data->color_data->colors;
 	i = -1;
-	while (++i < 6)
+	while (++i < scene->colors_size)
 	{
-		scene->colors[i]->r = colors[i].r;
-		scene->colors[i]->g = colors[i].g;
-		scene->colors[i]->b = colors[i].b;
+		r = rand() % 255;
+		g = rand() % 255;
+		b = rand() % 255;
+		colors[i]->r = colors[i]->r > 0 && r > 0 ? r : 0;
+		colors[i]->g = colors[i]->g > 0 && g > 0 ? g : 0;
+		colors[i]->b = colors[i]->b > 0 && b > 0 ? b : 0;
 	}
 	i = -1;
 	while (++i < THREADS)
 	{
 		free(scene->fractal_params[i]->color_palette);
-		if (!color_palette(scene->fractal_params[i], scene->colors, 6,
-			scene->palette_size))
+		if (!color_palette(scene->fractal_params[i], scene->colors,
+			scene->colors_size, scene->palette_size))
 			return (FALSE);
 	}
 	return (0);
