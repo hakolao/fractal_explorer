@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 20:01:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:32:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,14 @@ t_scene						*image_render_scene(t_scene *scene)
 	t_scene		*tmp_scene;
 	int			i;
 
-	if (!(tmp_scene = new_scene(scene->mlx, scene->artist, IMG_WIDTH,
+	if (!(tmp_scene = new_scene(scene->data, scene->artist, IMG_WIDTH,
 		IMG_HEIGHT)) && log_err("Failed to create scene.", strerror(5)))
 		return (NULL);
 	mlx_destroy_window(tmp_scene->mlx, tmp_scene->mlx_wdw);
 	i = -1;
+	printf("Palette size change: %d. From %d to %d\n", scene->palette_size -
+		tmp_scene->palette_size, tmp_scene->palette_size, tmp_scene->palette_size +
+			scene->palette_size - tmp_scene->palette_size);
 	change_palette_size(tmp_scene, scene->palette_size -
 		tmp_scene->palette_size);
 	copy_scene_fractal_positions(tmp_scene->fractal_params,

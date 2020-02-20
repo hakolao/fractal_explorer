@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 20:09:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:31:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@
 # define WIDTH 1080
 # define HEIGHT 1080
 # define MAX_WINDOWS 10
-# define MAX_ITER_INIT 30
+# define MAX_ITER_INIT 40
 # define COLORS 50
 # define THREADS 8
 # define MANDEL_CENTER_X -0.7746806106269039

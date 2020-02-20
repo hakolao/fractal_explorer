@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 19:22:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:24:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int				log_guide(void)
 			" and numbers between "
 			"0 and 255. Backslash must be escaped\n"
 			"Example: ./fractol mandelbrot julia "
-			"-colors=255,0,0\\|0,255,0\\|0,0,255");
+			"-colors=255,0,0\\|0,255,0\\|0,0,255\n");
 	return (1);
 }

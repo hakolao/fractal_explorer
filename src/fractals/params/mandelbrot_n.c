@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:15:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:08:55 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int							mandelbrot_n_params(t_fractal_params
 	fractal_params->pow_n = 3.0;
 	fractal_params->cx_sign = 1;
 	fractal_params->cy_sign = 1;
+	fractal_params->cx = 0;
+	fractal_params->cy = 0;
 	fractal_params->escape_time = multibrot_escape;
 	return (color_palette(fractal_params, scene->colors,
 		scene->colors_size, scene->palette_size) &&

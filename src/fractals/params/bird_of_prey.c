@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:14:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 21:09:31 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int							bird_of_prey_params(t_fractal_params
 	fractal_params->thread_i = i;
 	fractal_params->cx_sign = 1;
 	fractal_params->cy_sign = 1;
+	fractal_params->cx = 0;
+	fractal_params->cy = 0;
 	fractal_params->width = scene->screen_width;
 	fractal_params->height = scene->screen_height / THREADS;
 	fractal_params->escape_time = bird_of_prey_escape;
