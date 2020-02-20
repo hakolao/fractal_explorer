@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:46:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 19:18:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ static int		parse_rgb(char *colorstr, int *r, int *g, int *b)
 				*r = ft_atoi(colorstr);
 			if (i == 1)
 				*g = ft_atoi(colorstr);
-			if (i == 2)	
+			if (i == 2)
 				*b = ft_atoi(colorstr);
 			i++;
 		}
-		while (*colorstr && (ft_isdigit(*colorstr) || *colorstr == ','))
+		while (*colorstr && (ft_isdigit(*colorstr)))
 			colorstr++;
-		colorstr++;
+		if (*colorstr == ',')
+			colorstr++;
 	}
 	if (i == 3)
 		return (TRUE);
@@ -93,6 +94,14 @@ static t_rgb	*parse_rgb_str(char *colorstr)
 		return (NULL);
 	if (!parse_rgb(colorstr, &r, &g, &b))
 		return (NULL);
+	if (!(r <= 255 && r >= 0 &&
+		g <= 255 && g >= 0 &&
+		b <= 255 && b >= 0))
+	{
+		log_err("RGB values must be between or equal to 0 & 255",
+			strerror(5));
+		return (NULL);
+	}
 	rgb->r = r;
 	rgb->g = g;
 	rgb->b = b;
@@ -101,8 +110,11 @@ static t_rgb	*parse_rgb_str(char *colorstr)
 
 /*
 ** Parse colors from format:
-** -colors=235,222,111|22,222,33
-** arg + 10 to skip to first digit.
+** -colors=244\,20\,33\|22\,30\,150
+** arg + 8 to skip to first digit.
+** The parser is quite lenient on commas,
+** -colors=244\,20\,33\|22\,30\,150,,, will work too
+** or -colors=244\,,,,20\,,,33\|22\,,,,30\,150
 */
 
 t_colors		*parse_colors(char *arg)
@@ -114,7 +126,7 @@ t_colors		*parse_colors(char *arg)
 	int			size;
 
 	if ((!(color_data = malloc(sizeof(*color_data))) ||
-		!(color_strs = ft_strsplit(arg + 10, '|'))) &&
+		!(color_strs = ft_strsplit(arg + 8, '|'))) &&
 		log_err("Failed to parse colors", strerror(5)))
 		return (NULL);
 	i = 0;

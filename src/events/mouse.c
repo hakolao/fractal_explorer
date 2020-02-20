@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:12:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:54:42 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int				handle_mouse_button_press(int button, int x, int y, void *param)
 	if (button == MOUSE_BUTTON_LEFT)
 	{
 		scene->mouse_left_pressed = TRUE;
-		scene->mouse_x = x;
-		scene->mouse_y = y;
 		center_to(scene, x, y);
 	}
 	if ((scene->artist == julia || scene->artist == julia_n ||
@@ -53,14 +51,8 @@ int				handle_mouse_button_release(int button, int x, int y,
 int				handle_mouse_move(int x, int y, void *param)
 {
 	t_scene	*scene;
-	int		x_diff;
-	int		y_diff;
-	int		diff_lim;
 
 	scene = (t_scene *)param;
-	x_diff = x - scene->mouse_x;
-	y_diff = y - scene->mouse_y;
-	diff_lim = 10;
 	if ((scene->artist == julia || scene->artist == julia_n ||
 		scene->artist == julia_mod || scene->artist == phoenix_mod ||
 		scene->artist == burning_julia)

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 15:57:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 19:17:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,19 @@ int				log_perr(char *str)
 
 int				log_guide(void)
 {
-	ft_putstr("Default fractal: Mandelbrot\n"
-			"Press key G for guide / info on screen.\n"
-			"Allowed arguments: [all (for all available fractals),\n"
-			"mandelbrot, julia, "
-			"burning_ship, mandelbrot_n, julia_n, bird_of_prey, "
-			"julia_mod, phoenix_mod, burning_julia]\n");
+	ft_putstr("FRACTOL\n"
+			"-----------\n"
+			"Press key G for guide on screen.\n"
+			"Press Esc to exit\n\n"
+			"Allowed arguments:\n\nall\n"
+			"mandelbrot (Default)\njulia"
+			"\nburning_ship\nmandelbrot_n\njulia_n\nbird_of_prey"
+			"\njulia_mod\nphoenix_mod\nburning_julia\n"
+			"-colors=255,22,22\\|20,20,33\n\n"
+			"Colors: RGBs (as many as you'd like) split by '|'"
+			" and numbers between "
+			"0 and 255 Backslash must be escaped\n"
+			"Example: ./fractol mandelbrot julia "
+			"-colors=255,0,0\\|0,255,0\\|0,0,255");
 	return (1);
 }

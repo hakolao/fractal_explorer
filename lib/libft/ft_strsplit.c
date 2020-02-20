@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ohakola <ohakola@student.helsinki.fi>      +#+  +:+       +#+        */
+/*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 20:51:20 by ohakola           #+#    #+#             */
-/*   Updated: 2019/10/29 14:32:28 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:47:21 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char				**ft_strsplit(char const *str, char c)
 	size_t			i;
 	size_t			str_len;
 
-	if (!str)
+	if (!str || *str == '\0')
 		return (NULL);
 	if (!(arr = (char**)ft_memalloc(sizeof(char*) *
 				(split_len((char*)str, c) + 1))))

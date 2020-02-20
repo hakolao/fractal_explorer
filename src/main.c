@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:59:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 19:20:52 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int				init_fractol(int *artists, int size, t_colors *color_data)
 		return (FALSE);
 	data->size = size;
 	data->color_data = color_data;
-	printf("%p\n", data->color_data);
 	i = -1;
 	while (++i < size)
 	{
@@ -63,25 +62,22 @@ static t_colors	*get_colors(int argc, char **argv)
 
 	i = -1;
 	has_colors = FALSE;
+	color_data = NULL;
 	while (++i < argc - 1)
 	{
-		if (ft_match(argv[i + 1], "-colors=*") && (color_i = i + 1))
+		if (ft_match(argv[i + 1], "-colors=*"))
 		{
+			color_i = i + 1;
 			has_colors = TRUE;
 			break ;
 		}
 	}
-	if (has_colors)
-	{
-		if (!(color_data = parse_colors(argv[color_i])) &&
-			log_err("Defaulting back to default color palette", strerror(5)))
-			if (!(color_data = default_colors()) &&
-				log_err("Failed to create any colors", strerror(5)))
-				return (NULL);
-	}
-	else if (!(color_data = default_colors()) &&
-				log_err("Failed to create any colors", strerror(5)))
-				return (NULL);
+	if (has_colors && !(color_data = parse_colors(argv[color_i])) &&
+		log_err("Defaulting back to default color palette", strerror(5)))
+		;
+	if (color_data == NULL && !(color_data = default_colors()) &&
+		log_err("Failed to create any colors", strerror(5)))
+		return (NULL);
 	return (color_data);
 }
 
@@ -92,31 +88,37 @@ int				parse_args(int argc, char **argv)
 	int			size;
 	t_colors	*color_data;
 
-	i = -1;
 	size = 0;
-	color_data = NULL;
 	if (!(color_data = get_colors(argc, argv)))
 		return (FALSE);
-	if (argc <= 1)
-		return (log_guide() && init_fractol((int[1]){mandelbrot}, 1, color_data));
+	i = -1;
 	while (++i < argc - 1)
 	{
 		fractals[i] = -1;
+		if (ft_match(argv[i + 1], "-colors=*"))
+			continue ;
 		if (ft_strequ(argv[i + 1], "all"))
-			return (init_fractol((int[9]){mandelbrot, julia, burning_ship,
-				mandelbrot_n, julia_n, bird_of_prey, julia_mod,
-				phoenix_mod, burning_julia}, 9, color_data));
-		if (!check_args(argv[i + 1], &size, &fractals[i]))
+			return (log_guide() && init_fractol((int[9]){mandelbrot, julia,
+			burning_ship, mandelbrot_n, julia_n, bird_of_prey, julia_mod,
+			phoenix_mod, burning_julia}, 9, color_data));
+		else if (!check_args(argv[i + 1], &size, &fractals[i]))
 			return (log_guide() && FALSE);
 	}
 	if (size > MAX_WINDOWS)
 		return (log_err("Too many windows: max 10", strerror(5)));
 	ft_sort_int_tab(fractals, argc - 1, -1);
-	return (init_fractol(fractals, size, color_data));
+	return (log_guide() && init_fractol(fractals, size, color_data));
 }
 
 int				main(int argc, char **argv)
 {
-	parse_args(argc, argv);
+	t_colors	*color_data;
+
+	if (!(color_data = get_colors(argc, argv)))
+		return (FALSE);
+	if (argc < 2)
+		log_guide() && init_fractol((int[1]){mandelbrot}, 1, color_data);
+	else
+		parse_args(argc, argv);
 	return (0);
 }

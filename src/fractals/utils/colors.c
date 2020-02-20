@@ -6,18 +6,18 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:57:16 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:53:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-t_colors				*default_colors(void)
+t_colors			*default_colors(void)
 {
 	t_colors	*color_data;
 	t_rgb		*color_input;
 	t_rgb		**colors;
-	int		i;
+	int			i;
 
 	color_input = (t_rgb[6]){{255, 0, 0}, {255, 255, 0},
 		{0, 255, 0}, {0, 255, 255}, {0, 0, 255}, {255, 0, 255}};
@@ -73,21 +73,19 @@ int					color_palette(t_fractal_params *params,
 int					randomize_palette(t_scene *scene)
 {
 	int		i;
-	t_rgb	**colors;
 	int		r;
 	int		g;
 	int		b;
 
-	colors = scene->data->color_data->colors;
 	i = -1;
 	while (++i < scene->colors_size)
 	{
 		r = rand() % 255;
 		g = rand() % 255;
 		b = rand() % 255;
-		colors[i]->r = colors[i]->r > 0 && r > 0 ? r : 0;
-		colors[i]->g = colors[i]->g > 0 && g > 0 ? g : 0;
-		colors[i]->b = colors[i]->b > 0 && b > 0 ? b : 0;
+		scene->colors[i]->r = scene->colors[i]->r > 0 && r > 0 ? r : 0;
+		scene->colors[i]->g = scene->colors[i]->g > 0 && g > 0 ? g : 0;
+		scene->colors[i]->b = scene->colors[i]->b > 0 && b > 0 ? b : 0;
 	}
 	i = -1;
 	while (++i < THREADS)
@@ -97,7 +95,7 @@ int					randomize_palette(t_scene *scene)
 			scene->colors_size, scene->palette_size))
 			return (FALSE);
 	}
-	return (0);
+	return (FALSE);
 }
 
 int					change_palette_size(t_scene *scene, int amount)

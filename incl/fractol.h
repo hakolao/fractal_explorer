@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:56:42 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:50:43 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,8 +173,6 @@ typedef struct		s_scene
 	int					line_bytes;
 	int					pixel_endian;
 	int					mouse_left_pressed;
-	int					mouse_x;
-	int					mouse_y;
 	int					stop_julia;
 	int					show_guide;
 	int					stop_phoenix_mod;
@@ -200,8 +198,6 @@ struct				s_scenes
 	t_colors		*color_data;
 	t_scene			**scenes;
 };
-
-
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,

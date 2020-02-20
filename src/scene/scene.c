@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:47:08 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 18:50:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ t_scene						*new_scene(t_scenes *data, enum e_fractal artist,
 		return (NULL);
 	scene->mlx = data->mlx;
 	scene->mouse_left_pressed = FALSE;
-	scene->mouse_x = FALSE;
-	scene->mouse_y = FALSE;
 	scene->show_guide = FALSE;
 	scene->palette_size = COLORS;
 	scene->artist = artist;
