@@ -1,4 +1,4 @@
-# Fractol
+# Fractal explorer (Fractol)
 A multi-threaded fractal explorer with image export & adjustable colors.
 
 ![Title img](img/mandelbrot.bmp)
@@ -23,7 +23,7 @@ A multi-threaded fractal explorer with image export & adjustable colors.
 
 ## Usage
 ```sh
-git clone https://github.com/hakolao/ft_fractol.git && make
+git clone https://github.com/hakolao/fractal_explorer.git && make
 # Default usage
 ./fractol
 
