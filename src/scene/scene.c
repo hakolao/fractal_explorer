@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 00:07:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:38:07 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void						delete_scene(t_scene *scene)
 	}
 	free(scene->fractal_params);
 	free(scene);
+	scene = NULL;
 }
 
 t_scene						*image_render_scene(t_scene *scene)

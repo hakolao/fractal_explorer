@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 16:33:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 14:56:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				handle_key_press(int key, void *param)
 
 	scene = (t_scene *)param;
 	if (key == KEY_ESC)
-		exit(0);
+		handle_exit_event(scene);
 	if (key == KEY_G)
 		scene->show_guide = !scene->show_guide;
 	if (key == KEY_C)

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 00:09:11 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 15:37:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ struct				s_fractal_params
 /*
 ** Scene contains all data the application needs inside its loop
 */
+typedef struct s_scenes	t_scenes;
+
 typedef struct		s_scene
 {
 	int					id;
@@ -181,14 +183,15 @@ typedef struct		s_scene
 	t_rgb				**colors;
 	int					palette_size;
 	t_fractal_params	**fractal_params;
+	t_scenes			*data;
 }					t_scene;
 
-typedef struct		s_scenes
+struct				s_scenes
 {
 	int				size;
 	void			*mlx;
 	t_scene			**scenes;
-}					t_scenes;
+};
 
 typedef	void		(*t_fractal_artist)(t_scene *scene);
 typedef	int			(*t_fractal_param_f)(t_fractal_params *fractal_params,
