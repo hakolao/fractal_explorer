@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 19:17:29 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 19:22:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int				log_guide(void)
 			"-colors=255,22,22\\|20,20,33\n\n"
 			"Colors: RGBs (as many as you'd like) split by '|'"
 			" and numbers between "
-			"0 and 255 Backslash must be escaped\n"
+			"0 and 255. Backslash must be escaped\n"
 			"Example: ./fractol mandelbrot julia "
 			"-colors=255,0,0\\|0,255,0\\|0,0,255");
 	return (1);
