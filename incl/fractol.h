@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 21:31:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 22:53:44 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@
 ** slices (crucial to be aware if changes are
 ** planned)
 */
-# define WIDTH 1080
-# define HEIGHT 1080
+# define WIDTH 1024
+# define HEIGHT 1024
 # define MAX_WINDOWS 10
 # define MAX_ITER_INIT 40
 # define COLORS 50
-# define THREADS 8
+# define THREADS 16
 # define MANDEL_CENTER_X -0.7746806106269039
 # define MANDEL_CENTER_Y -0.1374168856037867
 # define JULIA_CENTER_X 0.0

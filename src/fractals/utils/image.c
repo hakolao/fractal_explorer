@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:03:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 21:23:58 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/20 22:46:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,6 @@ unsigned char			*create_bmp_info_header(void)
 	info_header[14] = (unsigned char)(BYTES_PER_PIXEL * 8);
 	return (info_header);
 }
-
-/*
-** https://stackoverflow.com/questions/2654480/
-** writing-bmp-image-in-pure-c-c-without-other-libraries
-*/
 
 static void				generate_bmp_image(unsigned char *image, char *filename)
 {
