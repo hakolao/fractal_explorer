@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 19:06:19 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:09:50 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			print_mandelbrot_header(void)
 	{
 		x = -1;
 		while (++x < max_x)
-			ft_putchar((char[3]){'.', ',', ' '}[
+			ft_putchar((char[3]){'.', '*', ' '}[
 				(int)mandelbrot_escape((t_complex){0.0, 0.0},
 					(t_complex){(par.min_x + x * (par.max_x - par.min_x)
 					/ par.width) / par.zoom + par.center_x,
