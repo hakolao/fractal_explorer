@@ -35,6 +35,7 @@ usage:
  ./fractol [fractal_name] [-colors=[r,g,b\|r,g,b\|+]
 
 fractals:
+ all (opens all)
  mandelbrot (Default)
  julia
  burning_ship
