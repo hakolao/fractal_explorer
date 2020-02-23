@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 23:28:44 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 15:59:46 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -356,14 +356,5 @@ int					randomize_palette(t_scene *scene);
 t_fractal_artist	artist_draw(enum e_fractal type);
 t_fractal_param_f	select_params(enum e_fractal type);
 char				*artist_name(enum e_fractal artist);
-
-/*
-** Complex number functions
-*/
-t_complex			c_multiply(t_complex a, t_complex b);
-t_complex			c_pow_int(t_complex c, int pow);
-t_complex			c_divide(t_complex a, t_complex b);
-t_complex			c_add(t_complex a, t_complex b);
-t_complex			c_minus(t_complex a, t_complex b);
 
 #endif

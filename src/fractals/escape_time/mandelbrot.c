@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/21 00:09:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:00:18 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 /*
 ** https://en.wikipedia.org/wiki/Plotting_
 ** algorithms_for_the_Mandelbrot_set
-** Having added complex functionality this could
-** be also written:
-** while (z.r * z.r + z.i * z.i) < 16 && iter < max_iter
-** 		z  = c_add(c_pow(z, 2), c);
 ** Note that 16 is better for colors although 2 would be
 ** enough.
 */

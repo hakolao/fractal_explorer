@@ -6,7 +6,7 @@
 #    By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/01 15:58:30 by ohakola           #+#    #+#              #
-#    Updated: 2020/02/20 19:51:00 by ohakola          ###   ########.fr        #
+#    Updated: 2020/02/23 15:59:22 by ohakola          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,7 +60,6 @@ SOURCES = main.c \
 			fractals/params/phoenix_mod.c \
 			fractals/params/burning_julia.c \
 			fractals/params/copy.c \
-			complex/complex.c \
 			ui/ui.c \
 			ui/utils.c \
 			ui/guide.c
