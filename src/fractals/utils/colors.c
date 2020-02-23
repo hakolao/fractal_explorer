@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 17:27:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:21:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,15 @@ int					change_palette_size(t_scene *scene, int amount)
 		i++;
 	}
 	return (0);
+}
+
+int					free_colors_str(char **color_strs, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		ft_strdel(&color_strs[i]);
+	free(color_strs);
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 19:01:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:21:04 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,5 @@ t_colors		*parse_colors(char *arg)
 			return (NULL);
 	color_data->colors = colors;
 	color_data->size = size;
-	return (color_data);
+	return (free_colors_str(color_strs, size) ? color_data : NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 16:35:20 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:19:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -351,6 +351,7 @@ int					color_palette(t_fractal_params *params,
 					t_rgb **colors, int colors_size, int palette_size);
 int					change_palette_size(t_scene *scene, int amount);
 int					randomize_palette(t_scene *scene);
+int					free_colors_str(char **color_strs, int size);
 
 /*
 ** Selectors
