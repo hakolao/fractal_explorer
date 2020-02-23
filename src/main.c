@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 17:07:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:07:33 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static t_colors	*parse_color_arg(int argc, char **argv)
 int				parse_args(int argc, char **argv)
 {
 	int			i;
-	int			fractals[argc - 1];
+	int			artists[argc - 1];
 	int			size;
 	t_colors	*color_data;
 
@@ -93,20 +93,20 @@ int				parse_args(int argc, char **argv)
 	i = -1;
 	while (++i < argc - 1)
 	{
-		fractals[i] = -1;
+		artists[i] = -1;
 		if (ft_match(argv[i + 1], "-colors=*"))
 			continue ;
 		if (ft_strequ(argv[i + 1], "all"))
 			return (log_guide() && init_fractol((int[9]){mandelbrot, julia,
 			burning_ship, mandelbrot_n, julia_n, bird_of_prey, julia_mod,
 			phoenix_mod, burning_julia}, 9, color_data));
-		else if (!check_args(argv[i + 1], &size, &fractals[i]))
+		else if (!check_args(argv[i + 1], &size, &artists[i]))
 			return (log_guide() && FALSE);
 	}
-	if (size > MAX_WINDOWS)
-		return (log_err("Too many windows: max 10", strerror(5)));
-	ft_sort_int_tab(fractals, argc - 1, -1);
-	return (log_guide() && init_fractol(fractals, size, color_data));
+	ft_sort_int_tab(artists, argc - 1, -1);
+	return ((size > MAX_WINDOWS && log_err("Max 10 fractals", strerror(5))) ||
+			(log_guide() && size > 0 ? init_fractol(artists, size, color_data) :
+			init_fractol((int[1]){mandelbrot}, 1, color_data)));
 }
 
 int				main(int argc, char **argv)

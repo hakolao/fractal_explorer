@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 16:12:49 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 19:01:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int				is_valid_arg(char *arg)
 {
-	return (ft_strequ(arg, "mandelbrot") ||
+	int	res;
+
+	res = ft_strequ(arg, "mandelbrot") ||
 			ft_strequ(arg, "julia") ||
 			ft_strequ(arg, "burning_ship") ||
 			ft_strequ(arg, "bird_of_prey") ||
@@ -22,7 +24,10 @@ int				is_valid_arg(char *arg)
 			ft_strequ(arg, "julia_mod") ||
 			ft_strequ(arg, "phoenix_mod") ||
 			ft_strequ(arg, "burning_julia") ||
-			ft_strequ(arg, "mandelbrot_n"));
+			ft_strequ(arg, "mandelbrot_n");
+	if (!res)
+		log_err("Invalid argument, see usage guide", strerror(5));
+	return (res);
 }
 
 int				check_args(char *arg, int *size, int *fractal)
