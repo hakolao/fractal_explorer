@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 14:10:51 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 23:04:47 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 17:27:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,12 @@ int					randomize_palette(t_scene *scene)
 	i = -1;
 	while (++i < scene->colors_size)
 	{
-		r = rand() % 255;
-		g = rand() % 255;
-		b = rand() % 255;
-		scene->colors[i]->r =
-			scene->colors[i]->r > 0 && r > 0 ? r : scene->colors[i]->r;
-		scene->colors[i]->g =
-			scene->colors[i]->g > 0 && g > 0 ? g : scene->colors[i]->g;
-		scene->colors[i]->b =
-			scene->colors[i]->b > 0 && b > 0 ? b : scene->colors[i]->b;
+		scene->colors[i]->r = scene->colors[i]->r > 0 &&
+			(r = rand() % 255) > 0 ? r : scene->colors[i]->r;
+		scene->colors[i]->g = scene->colors[i]->g > 0 &&
+			(g = rand() % 255) > 0 ? g : scene->colors[i]->g;
+		scene->colors[i]->b = scene->colors[i]->b > 0 &&
+			(b = rand() % 255) > 0 ? b : scene->colors[i]->b;
 	}
 	i = -1;
 	while (++i < THREADS)
