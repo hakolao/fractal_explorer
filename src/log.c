@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 12:21:55 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 22:53:12 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:15:10 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 int				log_err(char *str, char *strerror)
 {
+	ft_putstr("\033[0;31m");
 	ft_putstr_fd(strerror, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd(str, 2);
+	ft_putstr("\033[0m");
 	return (1);
 }
 
 int				log_perr(char *str)
 {
+	ft_putstr("\033[0;31m");
 	perror(str);
+	ft_putstr("\033[0m");
 	return (1);
 }
 
 int				log_guide(void)
 {
-	ft_putstr("FRACTOL\n"
+	ft_putstr("-----------\nFRACTOL\n"
 			"-----------\n"
 			"Press key G for guide on screen.\n"
 			"Press Esc to exit\n\n"

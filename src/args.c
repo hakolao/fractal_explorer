@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 19:18:40 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:12:49 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static int		parse_rgb(char *colorstr, int *r, int *g, int *b)
 		if (*colorstr == ',')
 			colorstr++;
 	}
-	if (i == 3)
-		return (TRUE);
-	return (FALSE);
+	if (i != 3)
+		log_err("Wrong number of RGB ints", strerror(5));
+	return (i == 3);
 }
 
 static t_rgb	*parse_rgb_str(char *colorstr)
@@ -134,12 +134,12 @@ t_colors		*parse_colors(char *arg)
 		i++;
 	size = i;
 	if (!(colors = malloc(sizeof(*colors) * size)) &&
-		log_err("Invalid color", strerror(5)))
+		log_err("Failed to malloc colors", strerror(5)))
 		return (NULL);
 	i = -1;
 	while (++i < size)
 		if (!(colors[i] = parse_rgb_str(color_strs[i])) &&
-			log_err("Failed to parse rgb", strerror(5)))
+			log_err("Failed to parse rgb values", strerror(5)))
 			return (NULL);
 	color_data->colors = colors;
 	color_data->size = size;

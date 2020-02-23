@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 19:39:30 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:07:36 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int				init_fractol(int *artists, int size, t_colors *color_data)
 	return (FALSE);
 }
 
-static t_colors	*get_colors(int argc, char **argv)
+static t_colors	*parse_color_arg(int argc, char **argv)
 {
 	int			i;
 	int			color_i;
@@ -72,10 +72,9 @@ static t_colors	*get_colors(int argc, char **argv)
 			break ;
 		}
 	}
-	if (has_colors && !(color_data = parse_colors(argv[color_i])) &&
-		log_err("Defaulting back to default color palette", strerror(5)))
-		;
-	if (color_data == NULL && !(color_data = default_colors()) &&
+	if (has_colors && !(color_data = parse_colors(argv[color_i])))
+		log_err("Defaulting back to default color palette", strerror(5));
+	if (!color_data && !(color_data = default_colors()) &&
 		log_err("Failed to create any colors", strerror(5)))
 		return (NULL);
 	return (color_data);
@@ -89,7 +88,7 @@ int				parse_args(int argc, char **argv)
 	t_colors	*color_data;
 
 	size = 0;
-	if (!(color_data = get_colors(argc, argv)))
+	if (!(color_data = parse_color_arg(argc, argv)))
 		return (FALSE);
 	i = -1;
 	while (++i < argc - 1)
@@ -115,12 +114,7 @@ int				main(int argc, char **argv)
 	t_colors	*color_data;
 
 	if (argc < 2)
-	{
-		if (!(color_data = get_colors(argc, argv)))
-			return (FALSE);
-		log_guide() && init_fractol((int[1]){mandelbrot}, 1, color_data);
-	}
-	else
-		parse_args(argc, argv);
-	return (0);
+	 return ((color_data = default_colors()) && log_guide() &&
+	 	init_fractol((int[1]){mandelbrot}, 1, color_data));
+	return (parse_args(argc, argv));
 }
