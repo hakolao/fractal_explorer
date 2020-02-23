@@ -26,26 +26,31 @@ A multi-threaded fractal explorer with image export & adjustable colors.
 git clone https://github.com/hakolao/fractal_explorer.git && make
 # Default usage
 ./fractol
-
-# With arguments:
-./fractol julia -colors=255,0,0\|0,255,0\|0,0,255
 ```
 
 ![Mandelbrot gif](img/mandel.gif)
 
-### Argument options
-```
-all
-mandelbrot (Default)
-julia
-burning_ship
-mandelbrot_n
-julia_n
-bird_of_prey
-julia_mod
-phoenix_mod
-burning_julia
--colors=255,22,22\|20,20,33
+```sh
+usage:
+ ./fractol [fractal_name] [-colors=[r,g,b\|r,g,b\|+]
+
+fractals:
+ mandelbrot (Default)
+ julia
+ burning_ship
+ mandelbrot_n
+ julia_n
+ bird_of_prey
+ julia_mod
+ phoenix_mod
+ burning_julia
+
+example:
+ ./fractol mandelbrot julia -colors=255,0,0\|0,255,0\|0,0,255
+
+more options:
+ ESC to exit
+ G for guide & further actions on screen.
 ```
 
 ### Headers

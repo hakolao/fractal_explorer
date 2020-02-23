@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 23:14:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:31:59 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char			*guide(void)
 			"Scroll/W/S: Zoom in/out (increases max iters)\n"
 			"Mouse 1: Center to point\n"
 			"C: Change color palette\n"
+			"Tab: Change UI color\n"
 			"P: Render an image of size (IMG_WIDTH, IMG_HEIGHT)\n"
 			"Left/Right: Change palette size\n"
 			"Mouse 2: Stop Julia cx cy\n"
@@ -44,7 +45,7 @@ void			draw_paragraph(t_scene *scene, char *text, int xpos,
 	while (split_text[i])
 	{
 		mlx_string_put(scene->mlx, scene->mlx_wdw, xpos,
-			ypos + i * 20, UI_COLOR, split_text[i]);
+			ypos + i * 20, scene->ui_color, split_text[i]);
 		ft_strdel(&split_text[i++]);
 	}
 	free(split_text);

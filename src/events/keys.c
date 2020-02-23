@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 14:56:27 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:35:27 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int				handle_key_press(int key, void *param)
 			(key == KEY_DOWN && increment_pow_n(scene, -1)) ||
 			(key == KEY_Q && flip_cx_sign(scene)) ||
 			(key == KEY_E && flip_cy_sign(scene)) ||
-			(key == KEY_P && save_image(scene));
+			(key == KEY_P && save_image(scene)) ||
+			(key == KEY_TAB && change_ui_colors(scene));
 	scene->redraw = TRUE;
 	return (ret);
 }

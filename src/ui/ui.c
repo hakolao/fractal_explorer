@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/21 15:03:35 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 20:07:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 17:13:30 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,20 @@ static void			draw_whole_palette(t_scene *scene, int x, int y)
 	}
 }
 
-static void			draw_palette(t_scene *scene, int x, int y)
+static void			draw_palette(t_scene *scene, int i, int x, int y)
 {
 	int		color;
 	char	*nbstr;
-	int		i;
 	int		px;
 	int		py;
 
 	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y,
-		UI_COLOR, "Palette, total colors: ");
+		scene->ui_color, "Palette, total colors: ");
 	if (!(nbstr = ft_itoa(scene->palette_size)))
 		return ;
-	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 250, y, UI_COLOR, nbstr);
-	i = -1;
-	while (++i < scene->colors_size)
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 250, y,
+		scene->ui_color, nbstr);
+	while (i < scene->colors_size)
 	{
 		color = COLOR(scene->colors[i]->r,
 			scene->colors[i]->g, scene->colors[i]->b, 0);
@@ -60,6 +59,7 @@ static void			draw_palette(t_scene *scene, int x, int y)
 			while (++px < x + i * 60 + 50)
 				mlx_pixel_put(scene->mlx, scene->mlx_wdw, px, py, color);
 		}
+		i++;
 	}
 	ft_strdel(&nbstr);
 }
@@ -72,12 +72,13 @@ static void			draw_center_info(t_scene *scene, int x, int y)
 	if (!(x_pos = ft_ftoa(scene->fractal_params[0]->center_x, 15)) ||
 		!(y_pos = ft_ftoa(scene->fractal_params[0]->center_y, 15)))
 		return ;
-	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y, UI_COLOR, "Center x: ");
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y,
+		scene->ui_color, "Center x: ");
 	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y,
-		UI_COLOR, x_pos);
-	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 20, UI_COLOR,
+		scene->ui_color, x_pos);
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 20, scene->ui_color,
 		"Center y: ");
-	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 20, UI_COLOR,
+	mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 20, scene->ui_color,
 		y_pos);
 	ft_strdel(&x_pos);
 	ft_strdel(&y_pos);
@@ -112,7 +113,7 @@ void				draw_ui(t_scene *scene)
 	draw_paragraph(scene, iterstr, WIDTH - 300, 30);
 	draw_paragraph(scene, zoomstr, WIDTH - 300, 50);
 	draw_info(scene, WIDTH - 300, 70);
-	draw_palette(scene, 10, HEIGHT - 120);
+	draw_palette(scene, 0, 10, HEIGHT - 120);
 	draw_whole_palette(scene, 0, HEIGHT - 30);
 	ft_strdel(&guidestr);
 	ft_strdel(&iterations);

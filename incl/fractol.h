@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 15:59:46 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 16:35:20 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ typedef struct		s_scene
 	int					show_guide;
 	int					stop_phoenix_mod;
 	int					redraw;
+	int					ui_color;
 	enum e_fractal		artist;
 	t_rgb				**colors;
 	int					colors_size;
@@ -229,6 +230,7 @@ void				draw_cx_cy_sign_info(t_scene *scene, int x, int y);
 void				draw_power_info(t_scene *scene, int x, int y);
 void				draw_cx_cy_info(t_scene *scene, int x, int y);
 void				draw_px_py_info(t_scene *scene, int x, int y);
+int					change_ui_colors(t_scene *scene);
 
 /*
 ** Draw

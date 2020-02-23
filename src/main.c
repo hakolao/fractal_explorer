@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 16:07:36 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/23 17:07:40 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,9 @@ int				main(int argc, char **argv)
 	t_colors	*color_data;
 
 	if (argc < 2)
-	 return ((color_data = default_colors()) && log_guide() &&
-	 	init_fractol((int[1]){mandelbrot}, 1, color_data));
+	{
+		return ((color_data = default_colors()) &&
+			log_guide() && init_fractol((int[1]){mandelbrot}, 1, color_data));
+	}
 	return (parse_args(argc, argv));
 }
