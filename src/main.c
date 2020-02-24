@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 13:59:45 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 19:07:33 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/24 16:41:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ static t_colors	*parse_color_arg(int argc, char **argv)
 			break ;
 		}
 	}
-	if (has_colors && !(color_data = parse_colors(argv[color_i])))
-		log_err("Defaulting back to default color palette", strerror(5));
-	if (!color_data && !(color_data = default_colors()) &&
+	if (has_colors && !(color_data = parse_colors(argv[color_i])) &&
+		log_err("Failed to parse colors", strerror(5)))
+		return (NULL);
+	else if (!color_data && !(color_data = default_colors()) &&
 		log_err("Failed to create any colors", strerror(5)))
 		return (NULL);
 	return (color_data);
@@ -89,7 +90,7 @@ int				parse_args(int argc, char **argv)
 
 	size = 0;
 	if (!(color_data = parse_color_arg(argc, argv)))
-		return (FALSE);
+		return (log_guide() && FALSE);
 	i = -1;
 	while (++i < argc - 1)
 	{

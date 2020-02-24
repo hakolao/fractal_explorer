@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 23:39:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 19:21:04 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/24 16:46:45 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,15 @@ static int		parse_rgb(char *colorstr, int *r, int *g, int *b)
 	return (i == 3);
 }
 
-static t_rgb	*parse_rgb_str(char *colorstr)
+static t_rgb	*parse_rgb_str(char *colorstr, int i)
 {
 	int		r;
 	int		g;
 	int		b;
-	int		i;
 	t_rgb	*rgb;
 
-	i = 0;
-	if (!(rgb = malloc(sizeof(*rgb))))
-		return (NULL);
+	if (i >= 12)
+		return (log_err("Max 12 colors", strerror(5)) ? NULL : NULL);
 	if (!parse_rgb(colorstr, &r, &g, &b))
 		return (NULL);
 	if (!(r <= 255 && r >= 0 &&
@@ -107,6 +105,8 @@ static t_rgb	*parse_rgb_str(char *colorstr)
 			strerror(5));
 		return (NULL);
 	}
+	if (!(rgb = malloc(sizeof(*rgb))))
+		return (NULL);
 	rgb->r = r;
 	rgb->g = g;
 	rgb->b = b;
@@ -143,7 +143,7 @@ t_colors		*parse_colors(char *arg)
 		return (NULL);
 	i = -1;
 	while (++i < size)
-		if (!(colors[i] = parse_rgb_str(color_strs[i])) &&
+		if (!(colors[i] = parse_rgb_str(color_strs[i], i)) &&
 			log_err("Failed to parse rgb values", strerror(5)))
 			return (NULL);
 	color_data->colors = colors;
