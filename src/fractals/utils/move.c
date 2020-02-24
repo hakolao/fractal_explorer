@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:31:38 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/24 17:20:28 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ int						center_to(t_scene *scene, long double mouse_x,
 	t_complex	new;
 
 	i = 0;
-	new = scaled_xy((t_complex){0.0, 0.0}, scene->fractal_params[i],
-		mouse_x, mouse_y);
+	new = scaled_xy(scene->fractal_params[i], mouse_x, mouse_y);
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->center_x = new.r;
@@ -60,8 +59,7 @@ int						move_cx_cy(t_scene *scene, int mouse_x,
 	t_complex	c;
 
 	i = 0;
-	c = scaled_xy((t_complex){0.0, 0.0}, scene->fractal_params[i],
-		mouse_x, mouse_y);
+	c = scaled_xy(scene->fractal_params[i], mouse_x, mouse_y);
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->cx = c.r;
@@ -82,8 +80,7 @@ int						move_px_py(t_scene *scene, int mouse_x,
 	t_complex	p;
 
 	i = 0;
-	p = scaled_xy((t_complex){0.0, 0.0}, scene->fractal_params[i],
-		mouse_x, mouse_y);
+	p = scaled_xy(scene->fractal_params[i], mouse_x, mouse_y);
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->px = p.r;

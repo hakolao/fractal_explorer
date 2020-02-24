@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:28:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 23:10:17 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/24 17:09:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 ** fractal complex plane range.
 */
 
-t_complex		scaled_xy(t_complex c,
-				t_fractal_params *params, int px, int py)
+t_complex		scaled_xy(t_fractal_params *params, int px, int py)
 {
 	long double	min_x0;
 	long double	min_y0;
 	long double	max_x0;
 	long double	max_y0;
+	t_complex	c;
 
 	min_x0 = params->min_x;
 	max_x0 = params->max_y;

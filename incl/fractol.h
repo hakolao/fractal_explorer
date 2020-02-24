@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 19:19:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/24 17:18:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,8 +317,7 @@ int					zoom(t_scene *scene, long double amount);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
 int					change_iters(t_scene *scene, long double amount);
-t_complex			scaled_xy(t_complex c,
-					t_fractal_params *params, int px, int py);
+t_complex			scaled_xy(t_fractal_params *params, int px, int py);
 int					move_cx_cy(t_scene *scene, int mouse_x,
 					int mouse_y);
 int					center_to(t_scene *scene, long double mouse_x,

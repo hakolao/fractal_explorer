@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 17:20:06 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 18:08:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/24 17:10:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void				mandelbrot_pixel(int pixel_i, int px, int py, void *args)
 	params = (t_fractal_params*)args;
 	squares = (t_complex){0.0, 0.0};
 	z = (t_complex){0.0, 0.0};
-	c = scaled_xy((t_complex){0.0, 0.0}, params, px, py);
+	c = scaled_xy(params, px, py);
 	iter = params->escape_time(z, c, &squares, params);
 	set_pixel(params->pixels[pixel_i], px, py, 0);
 	if (iter < params->max_iter)
