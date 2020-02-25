@@ -6,6 +6,8 @@ A multi-threaded fractal explorer with image export & adjustable colors.
 ## Features
 - Multithreaded
 - Zooming in with mouse scroll
+- Moving towards mouse when zooming
+- Panning with arrows
 - Centering to mouse position on click
 - Multiple Julia & Mandelbrot style fractals (9 in total)
 - Mouse movement controls for Julia fractals
@@ -54,6 +56,19 @@ more options:
  G for guide & further actions on screen.
 --------------------------------------------------------------------------------
 ```
+
+Some favorites:
+```
+./fractol phoenix_mod -colors=255,255,255\|255,0,0\|0,0,255
+./fractol phoenix_mod -colors=0,0,0\|255,0,0\|0,0,255
+```
+Three colors work quite well & randomizing given values with button `C` makes it quite nice.
+The randomizer only randomizes colors of given inputs that were larger than 0. So it keeps
+the palette similar to what it was in the beginning. E.g.`255,255,255` will be totally random after clicking `C`, but
+`255,0,0` will be `rand() % 255, 0, 0`.
+Remember to increase the iterations on especially Julia type fractals with `2` & `1` to increase definition.
+
+![Phoenix mod zoom](img/phoenix_mod_zoom.bmp)
 
 ### Headers
 Edit following macros in the `fractol.h` header file.
