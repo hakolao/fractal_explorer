@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 16:03:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 22:46:23 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:46:06 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ static void				generate_bmp_image(unsigned char *image, char *filename)
 	padding_size = (4 - (IMG_WIDTH * BYTES_PER_PIXEL) % 4) % 4;
 	file_header = create_bmp_file_header(padding_size);
 	info_header = create_bmp_info_header();
-	image_file = fopen(filename, "wb");
+	if (!(image_file = fopen(filename, "wb")))
+		return ((void)log_perr("Could not open file"));
 	fwrite(file_header, 1, FILE_HEADER_SIZE, image_file);
 	fwrite(info_header, 1, INFO_HEADER_SIZE, image_file);
 	i = 0;
