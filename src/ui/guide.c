@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 13:34:22 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:17:13 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ char			*guide(void)
 			"Left/Right: Change palette size\n"
 			"Mouse 2: Stop Julia cx cy\n"
 			"Mouse Middle: Stop phoenix_mod px, py\n"
-			"Q/E: Flip cx, cy signs (in julia_mod)\n"
 			"Up/Down: Increment pow_n (only [fractal]_n])\n")) == NULL)
 		return (NULL);
 	return (guide);

@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/19 15:39:06 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:16:23 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 /*
 ** Modified version of julia set with abs values &
-** flippable cx, cy signs (flipping doesn't do much
-** just flips the axes) :). Creates quite fancy
-** fractals. Similar to burning ship julia
+** Creates quite fancy fractals. Similar to burning ship julia
 ** http://usefuljs.net/fractals/docs/mandelvariants.html
 */
 
@@ -29,10 +27,8 @@ long double			julia_mod_escape(t_complex z, t_complex c,
 	while (squares->r + squares->i <=
 		params->r * params->r && iter < params->max_iter)
 	{
-		z.i = 2 * ft_abs_long_double(z.i * z.r) +
-			params->cx_sign * c.i;
-		z.r = ft_abs_long_double(squares->r - squares->i) +
-			params->cy_sign * c.r;
+		z.i = 2 * ft_abs_long_double(z.i * z.r) + c.i;
+		z.r = ft_abs_long_double(squares->r - squares->i) + c.r;
 		squares->r = z.r * z.r;
 		squares->i = z.i * z.i;
 		iter++;

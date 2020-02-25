@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 14:48:25 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/23 17:09:24 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:14:00 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,6 @@ void			draw_power_info(t_scene *scene, int x, int y)
 		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 80,
 			scene->ui_color, n_pow);
 		ft_strdel(&n_pow);
-	}
-}
-
-void			draw_cx_cy_sign_info(t_scene *scene, int x, int y)
-{
-	char	*cx_sign;
-	char	*cy_sign;
-
-	if ((scene->artist == julia_mod) &&
-		(cx_sign = ft_itoa(scene->fractal_params[0]->cx_sign)) &&
-		(cy_sign = ft_itoa(scene->fractal_params[0]->cy_sign)))
-	{
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 80,
-			scene->ui_color, "Cx sign: ");
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 80,
-			scene->ui_color, cx_sign);
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x, y + 100,
-			scene->ui_color, "Cy sign: ");
-		mlx_string_put(scene->mlx, scene->mlx_wdw, x + 100, y + 100,
-			scene->ui_color, cy_sign);
-		ft_strdel(&cx_sign);
-		ft_strdel(&cy_sign);
 	}
 }
 

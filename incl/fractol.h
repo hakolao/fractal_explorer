@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 14:11:01 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:16:34 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,6 @@ struct				s_fractal_params
 	long double			cy;
 	long double			px;
 	long double			py;
-	int					cx_sign;
-	int					cy_sign;
 	long double			pow_n;
 	void				*frame;
 	char				*frame_buf;
@@ -227,7 +225,6 @@ void				draw_paragraph(t_scene *scene, char *text, int xpos,
 					int ypos);
 void				draw_ui(t_scene *scene);
 char				*guide(void);
-void				draw_cx_cy_sign_info(t_scene *scene, int x, int y);
 void				draw_power_info(t_scene *scene, int x, int y);
 void				draw_cx_cy_info(t_scene *scene, int x, int y);
 void				draw_px_py_info(t_scene *scene, int x, int y);
@@ -327,8 +324,6 @@ int					center_to(t_scene *scene, long double mouse_x,
 int					increment_pow_n(t_scene *scene, int incr);
 void				smooth_color_pixel(t_pixel *pixel, long double iter,
 					t_complex squares, t_fractal_params *params);
-int					flip_cy_sign(t_scene *scene);
-int					flip_cx_sign(t_scene *scene);
 int					move_px_py(t_scene *scene, int mouse_x,
 					int mouse_y);
 int					save_image(t_scene *scene);

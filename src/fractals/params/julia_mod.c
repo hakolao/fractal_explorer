@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/19 15:34:24 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/20 17:14:59 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:15:37 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int							julia_mod_params(t_fractal_params
 	fractal_params->cx = -0.7;
 	fractal_params->cy = 0.27015;
 	fractal_params->pow_n = 2.0;
-	fractal_params->cx_sign = 1;
-	fractal_params->cy_sign = -1;
 	fractal_params->thread_i = i;
 	fractal_params->width = scene->screen_width;
 	fractal_params->height = scene->screen_height / THREADS;
