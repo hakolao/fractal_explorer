@@ -1,5 +1,5 @@
 # Fractal explorer (Fractol)
-A multi-threaded fractal explorer with image export & adjustable colors.
+A multi-threaded fractal explorer with image export & adjustable smooth colors.
 
 ![Title img](img/mandelbrot.bmp)
 
