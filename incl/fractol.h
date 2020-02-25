@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 14:16:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:21:05 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,6 +329,7 @@ int					move_px_py(t_scene *scene, int mouse_x,
 int					save_image(t_scene *scene);
 void				copy_scene_fractal_positions(t_fractal_params **dst,
 					t_fractal_params **src);
+int					move_x_y(t_scene *scene, int x_amount, int y_amount);
 
 /*
 ** Threads

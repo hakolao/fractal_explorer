@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 13:13:53 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 13:37:51 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:31:17 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int					scene_render_params(t_scene *scene,
 					scene->data->color_data->colors[i], sizeof(t_rgb))))
 			return (FALSE);
 	scene->ui_color = UI_COLOR;
-	scene->toggle_zoom_center = FALSE;
+	scene->toggle_zoom_center = TRUE;
 	return (TRUE);
 }
 

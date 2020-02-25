@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 14:10:32 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:28:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,27 @@ int						move_px_py(t_scene *scene, int mouse_x,
 	{
 		scene->fractal_params[i]->px = p.r;
 		scene->fractal_params[i]->py = p.i;
+		i++;
+	}
+	return (1);
+}
+
+/*
+** Move with arrow keys
+*/
+
+int						move_x_y(t_scene *scene, int x_amount, int y_amount)
+{
+	int			i;
+	t_complex	c;
+
+	i = 0;
+	c = scaled_xy(scene->fractal_params[i],
+		WIDTH / 2 + x_amount * 10, HEIGHT / 2 + y_amount * 10);
+	while (i < THREADS)
+	{
+		scene->fractal_params[i]->center_x = c.r;
+		scene->fractal_params[i]->center_y = c.i;
 		i++;
 	}
 	return (1);
