@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:18 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/24 17:20:14 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:11:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ int				handle_key_press(int key, void *param)
 	scene = (t_scene *)param;
 	if (key == KEY_G)
 		scene->show_guide = !scene->show_guide;
-	ret = (key == KEY_W && zoom(scene, 1.03)) ||
-			(key == KEY_S && zoom(scene, 1 / 1.03)) ||
+	if (key == KEY_SHIFT)
+		scene->toggle_zoom_center = !scene->toggle_zoom_center;
+	ret = (key == KEY_W && zoom(scene, 1.03, WIDTH / 2, HEIGHT / 2)) ||
+			(key == KEY_S && zoom(scene, 1 / 1.03, WIDTH / 2, HEIGHT / 2)) ||
 			(key == KEY_2 && change_iters(scene, 1)) ||
 			(key == KEY_1 && change_iters(scene, -1)) ||
 			(key == KEY_LEFT && change_palette_size(scene, -1)) ||

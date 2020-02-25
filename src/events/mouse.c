@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/27 18:22:48 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/24 17:18:21 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 13:37:02 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int				handle_mouse_button_press(int button, int x, int y, void *param)
 	if (scene->artist == phoenix_mod && button == MOUSE_BUTTON_MIDDLE)
 		scene->stop_phoenix_mod = !scene->stop_phoenix_mod;
 	scene->redraw = TRUE;
-	return ((button == SCROLL_UP && zoom(scene, 1.03)) ||
-			(button == SCROLL_DOWN && zoom(scene, 1 / 1.03)));
+	return ((button == SCROLL_UP && zoom(scene, 1.03, x, y)) ||
+			(button == SCROLL_DOWN && zoom(scene, 1 / 1.03, x, y)));
 }
 
 int				handle_mouse_button_release(int button, int x, int y,

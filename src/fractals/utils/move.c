@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/06 12:29:37 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/24 17:20:28 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:10:32 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,26 @@
 ** Starting from lower iterations is initially more performant
 */
 
-int						zoom(t_scene *scene, long double amount)
+int						zoom(t_scene *scene, long double amount,
+						int x, int y)
 {
-	int	i;
+	int			i;
+	t_complex	mouse;
+	t_complex	diff;
 
 	i = 0;
+	mouse = scaled_xy(scene->fractal_params[i], x, y);
+	diff.r = mouse.r - scene->fractal_params[0]->center_x;
+	diff.i = mouse.i - scene->fractal_params[0]->center_y;
 	while (i < THREADS)
 	{
 		scene->fractal_params[i]->zoom *= amount;
 		scene->fractal_params[i]->max_iter += amount > 1 ? 1 : -1;
+		if (scene->toggle_zoom_center && amount > 1)
+		{
+			scene->fractal_params[i]->center_x += diff.r * 0.20;
+			scene->fractal_params[i]->center_y += diff.i * 0.20;
+		}
 		i++;
 	}
 	return (0);

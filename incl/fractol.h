@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/24 17:18:34 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/25 14:11:01 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ typedef struct		s_scene
 	int					stop_julia;
 	int					show_guide;
 	int					stop_phoenix_mod;
+	int					toggle_zoom_center;
 	int					redraw;
 	int					ui_color;
 	enum e_fractal		artist;
@@ -313,7 +314,8 @@ long double			burning_julia_escape(t_complex z, t_complex c,
 ** Fractal utils (functionality)
 */
 
-int					zoom(t_scene *scene, long double amount);
+int					zoom(t_scene *scene, long double amount,
+					int x, int y);
 int					move_by(t_scene *scene, long double x_amount,
 					long double y_amount);
 int					change_iters(t_scene *scene, long double amount);
