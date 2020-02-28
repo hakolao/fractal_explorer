@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 14:22:26 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 17:12:57 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char			*guide(void)
 			"Left/Right: Change palette size\n"
 			"Mouse 2: Stop Julia cx cy\n"
 			"Mouse Middle: Stop phoenix_mod px, py\n"
-			"NUM +/ NUM -: Increment pow_n (only [fractal]_n])\n")) == NULL)
+			"+/-: Increment pow_n (only [fractal]_n])\n")) == NULL)
 		return (NULL);
 	return (guide);
 }

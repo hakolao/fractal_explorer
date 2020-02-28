@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/25 14:21:05 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/02/28 17:12:29 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
 # define MOUSE_BUTTON_LEFT 1
 # define MOUSE_BUTTON_MIDDLE 3
 # define KEY_R 15
-# define KEY_NUM_PLUS 69
-# define KEY_NUM_MINUS 78
+# define KEY_PLUS 24
+# define KEY_MINUS 27
 # define KEY_G 5
 # define KEY_C 8
 # define KEY_B 11
