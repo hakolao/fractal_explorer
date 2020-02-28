@@ -1,7 +1,7 @@
 # Fractal explorer (Fractol)
 A multi-threaded fractal explorer with image export & adjustable smooth colors.
 
-![Title img](img/mandelbrot.bmp)
+![Julia printable 2](img/julia_printable2.bmp)
 
 ## Features
 - Multithreaded
@@ -106,3 +106,11 @@ Only existing C functions `exit`, `open`, `close`, `write`, `read`, `malloc`, `f
 ![Multibrot](img/multibrot.bmp)
 
 ![Mandelbrot2](img/mandelbrot2.bmp)
+
+![Mandelbrot](img/mandelbrot.bmp)
+
+![Phoenix printable](img/phoenix_printable.bmp)
+
+![Julia blue printable](img/julia_blue_printable.bmp)
+
+![Julia printable](img/julia_printable.bmp)
