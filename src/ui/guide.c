@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 22:09:12 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 17:12:57 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/03/09 16:59:22 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char			*guide(void)
 			"Tab: Change UI color\n"
 			"Shift: Toggle zooming on mouse point\n"
 			"P: Render an image of size (IMG_WIDTH, IMG_HEIGHT)\n"
-			"Left/Right: Change palette size\n"
+			"Q/E: Change palette size\n"
 			"Mouse 2: Stop Julia cx cy\n"
 			"Mouse Middle: Stop phoenix_mod px, py\n"
 			"+/-: Increment pow_n (only [fractal]_n])\n")) == NULL)

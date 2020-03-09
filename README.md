@@ -25,7 +25,7 @@ A multi-threaded fractal explorer with image export & adjustable smooth colors.
 
 ## Usage
 ```sh
-git clone https://github.com/hakolao/fractal_explorer.git && make
+git clone https://github.com/hakolao/fractal_explorer.git && cd fractal_explorer && make
 # Default usage
 ./fractol
 ```
