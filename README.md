@@ -34,7 +34,7 @@ git clone https://github.com/hakolao/fractal_explorer.git && cd fractal_explorer
 
 ```sh
 usage:
- ./fractol [fractal_name] [-colors=[r,g,b\|r,g,b\|+]
+ ./fractol [fractal_name] -colors=[r,g,b\|r,g,b\|+]
 
 fractals:
  all (opens all)
