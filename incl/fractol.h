@@ -6,7 +6,7 @@
 /*   By: ohakola <ohakola@student.hive.fi>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 14:07:11 by ohakola           #+#    #+#             */
-/*   Updated: 2020/02/28 18:24:31 by ohakola          ###   ########.fr       */
+/*   Updated: 2020/10/07 12:53:47 by ohakola          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@
 ** Color helpers
 */
 # define CLAMP_0_255(color) (color > 255 ? 255 : color < 0 ? 0 : color)
-# define ALPHA(a) ((a >> 24) & 255)
-# define RED(r) ((r >> 16) & 255)
-# define GREEN(g) ((g >> 8) & 255)
-# define BLUE(b) (b & 255)
-# define R(r) (CLAMP_0_255(r) & 255) << 16
-# define G(g) (CLAMP_0_255(g) & 255) << 8
-# define B(b) CLAMP_0_255(b) & 255
-# define A(a) (CLAMP_0_255(a) & 255) << 24
+# define RED(r) ((r >> 24) & 255)
+# define GREEN(g) ((g >> 16) & 255)
+# define BLUE(b) ((b >> 8) & 255)
+# define ALPHA(a) (a & 255)
+# define R(r) (CLAMP_0_255(r) & 255) << 24
+# define G(g) (CLAMP_0_255(g) & 255) << 16
+# define B(a) (CLAMP_0_255(a) & 255) << 8
+# define A(b) CLAMP_0_255(b) & 255
 # define COLOR(r, g, b, a) A(a) | R(r) | G(g) | B(b)
 # define UI_COLOR COLOR(255, 255, 0, 255)
 # define BACKGROUND_COLOR COLOR(0, 0, 0, 0)
@@ -94,8 +94,8 @@
 /*
 ** Image Render
 */
-# define IMG_WIDTH 4096
-# define IMG_HEIGHT 4096
+# define IMG_WIDTH 1024
+# define IMG_HEIGHT 1024
 # define FILE_HEADER_SIZE 14
 # define INFO_HEADER_SIZE 40
 # define BYTES_PER_PIXEL 4
